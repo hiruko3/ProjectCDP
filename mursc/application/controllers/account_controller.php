@@ -7,6 +7,7 @@ class Account_controller extends CI_Controller {
             $this->load->view('header');
             $this->load->view('account');
             $this->load->view('footer');
-            
 	}
 }
+
+?>
