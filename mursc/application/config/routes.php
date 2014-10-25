@@ -42,6 +42,11 @@ $route['default_controller'] = "welcome";
 
 $route['account/index'] = "account_controller/index";
 
+$route['project/index'] = "project_controller/index";
+$route['project/new_project'] = "project_controller/new_project";
+
+$route['user/index'] = "user_controller/index";
+
 $route['404_override'] = '';
 
 

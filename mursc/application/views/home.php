@@ -6,7 +6,9 @@
 
         <h3><?php echo $home_message; ?></h3>
 
-        <?php echo anchor('account/index', 'Create an account', 'class="link-class"') ?>
+        <?php echo anchor('project/index', 'Projects list', 'class="link-class"') ?>
+        <br/>
+        <?php echo anchor('user/index', 'User index', 'class="link-class"') ?>
 
     </div>
 

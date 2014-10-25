@@ -7,7 +7,7 @@
  */
 
 $config['prefix'] = 'mursc_';
-$config['join_prefix'] = '';
+$config['join_prefix'] = 'mursc_join_';
 $config['error_prefix'] = '<p>';
 $config['error_suffix'] = '</p>';
 $config['created_field'] = 'created';
