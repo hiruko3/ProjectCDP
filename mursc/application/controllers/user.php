@@ -9,6 +9,28 @@ class User extends CI_Controller
 	private $_c_invitations = array(); /** contient les contributor invitations : *C_Invitation */
 	private $_w_invitations = array(); /** contient les watcher invitations : *W_Invitation */
 
+	
+	/**
+	* @brief : constructeur
+	*/
+/*	public function __construct()
+	{
+		echo("constructeur de la classe User");
+	}*/	
+	
+	
+	public function index()
+	{
+		$data = array();
+		$data['projects'] = $this->_list_projects();
+		$data['invitations'] = $this->_list_invitations();
+		
+		$this->load->view('header');
+		$this->load->view('user', $data);
+		$this->load->view('footer');
+	}
+	
+	
 	/**
 	* @brief : cree un nouvel user (inscription)
 	*/
@@ -30,35 +52,50 @@ class User extends CI_Controller
 	* @brief : modifie le pseudo
 	* @param pseudo (string) : nouveau pseudo
 	*/
-	public function set_pseudo($pseudo)
+	public function _set_pseudo($pseudo)
 	{
-		/** @todo */
+		$_pseudo = $pseudo;
 	}
 	
 	/**
 	* @brief : retourne l id
 	* @return (int) : l id
 	*/
-	public function get_id()
+	public function _get_id()
 	{
-		/** @todo */
+		return $_id;
 	}
 	
 	/**
 	* @brief : retourne le pseudo
 	* @return (string) : le pseudo
 	*/	
-	public function get_pseudo()
+	public function _get_pseudo()
 	{
-		/** @todo */
+		return $_pseudo;
 	}
 	
 	/**
-	* @brief : afficher la liste des projets (vue projects)
+	* @brief : renvoie la liste des projets auquel l user contribue et ses statuts (vue projects)
+	* @return : un tableau de projects (id). Chaque instance contient un tableau de parametres. parametres : name, status
 	*/
-	public function list_projects()
+	public function _list_projects()
 	{
-		/** @todo (creer une vue)*/
+	/////////////////////////////////////////
+		$projects = array();
+		
+		$projects[0]['name'] = 'mursc';
+		$projects[0]['status'] = 'scrum master';
+		$projects[1]['name'] = 'cdp';
+		$projects[1]['status'] = 'developpeur';
+		$projects[2]['name'] = 'truc';
+		$projects[2]['status'] = 'watcher';
+		$projects[3]['name'] = 'machin';
+		$projects[3]['status']= 'product owner';
+		$projects[4]['name'] = 'chose';
+		$projects[4]['status'] = 'project administrator';
+		
+		return $projects;
 	}
 	
 	/**
@@ -72,9 +109,19 @@ class User extends CI_Controller
 	/**
 	* @brief : liste les invitations
 	*/
-	public function list_invitations()
+	public function _list_invitations()
 	{
-		/** @todo (creer une vue) */
+	/////////////////////////////////////////
+		$invit = array();
+		
+		$invit[5]['p_name'] = 'p1';
+		$invit[5]['proposed_status'] = 'scrum master';
+		$invit[6]['p_name'] = 'p2';
+		$invit[6]['proposed_status'] = 'developpeur';
+		$invit[7]['p_name'] = 'p3';
+		$invit[7]['proposed_status'] = 'watcher';
+		
+		return $invit;
 	}
 	
 	/**
