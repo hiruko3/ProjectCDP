@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://127.0.0.1/cdp_site/mursc/';
+$config['base_url']	= 'http://127.0.0.1/CDP/Project/ProjectCDP/mursc/';
 
 /*
 |--------------------------------------------------------------------------
@@ -224,7 +224,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'HwS6bPeg079U3O5j5ex232XH27lZ9RTb';
 
 /*
 |--------------------------------------------------------------------------
