@@ -6,7 +6,13 @@
 
         <h3><?php echo $home_message; ?></h3>
 
+<<<<<<< HEAD
         <?php echo anchor('user/construct', 'Create an account', 'class="link-class"') ?>
+=======
+        <?php echo anchor('project/index', 'Projects list', 'class="link-class"') ?>
+        <br/>
+        <?php echo anchor('user/index', 'User index', 'class="link-class"') ?>
+>>>>>>> 2b9ce12aa37cd90824ec4a6b404f41ff0992f686
 
     </div>
 
