@@ -38,11 +38,20 @@
 |
 */
 
-$route['default_controller'] = "welcome";
-
-$route['account/index'] = "account_controller/index";
-
+// CONFIG GENERALE
+$route['default_controller'] = "login";
 $route['404_override'] = '';
+
+
+// PROJECT CONTROLLER
+$route['project/index'] = "project_controller/index";
+$route['project/new_project'] = "project_controller/new_project";
+
+
+// USER CONTROLLER
+$route['user/index'] = "user_controller/index";
+
+
 
 
 /* End of file routes.php */
