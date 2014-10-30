@@ -2,15 +2,14 @@
     <meta charset="utf-8">
     <div id="container">
 
-        <h1> New project </h1>
-
+        <h1> Edit Project </h1>
         <br/>
-        
+
         <?php
         echo anchor('project/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "');
         echo br(2);
         ?>
-        
+
         <?php
         foreach ($validMsg as $msg) {
             echo "<i class='fa fa-check-square text-success'" . $msg . "</i>";
@@ -35,13 +34,13 @@
 
         <?php
         //echo validation_errors();
-        echo form_open('project/new_project', "class='col-lg-6 form-horizontal'");
+        echo form_open("project/edit_project/" . $project->id, "class='col-lg-6 form-horizontal'");
         ?>
 
-        <label  class="col-lg-5" for="projectname">Project name * : </label>
+        <label  class="col-lg-5" for="projectname">Project name * :</label>
         <div class="col-lg-5">
             <p>
-                <input class="form-control" type="text" name="projectname" id="projectname" </input>
+                <input class="form-control" type="text" name="projectname" id="projectname" value="<?php echo $project->projectname; ?>"</input>
             </p>
         </div>
 
@@ -58,19 +57,19 @@
         <label  class="col-lg-5" for="giturl">Git url : </label>
         <div class="col-lg-5">
             <p>
-                <input class="form-control" type="text" name="giturl" id="giturl" </input>
+                <input class="form-control" type="text" name="giturl" id="giturl" value="<?php echo $project->giturl; ?>"</input>
             </p>
         </div>
 
         <label for="description"  class="col-lg-5" > Description * : </label>
-        <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ></textarea>
+        <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ><?php echo $project->description; ?></textarea>
 
         <br/>
         <br/>
 
         <?php
         echo "<p>";
-        echo form_submit("create", "Create", "class='btn btn-primary col-md-offset-7'");
+        echo form_submit("create", "Accept modifications", "class='btn btn-primary col-md-offset-7'");
         echo "</p>";
 
         echo form_close();

@@ -2,9 +2,57 @@
     <meta charset="utf-8">
     <div id="container">
 
-        <h1> Projects list </h1>
+        <h1> My Projects Lists </h1>
 
-        <?php echo anchor('project/new_project', 'Create a new project', 'class="link-class"') ?>
+        <br/>
+
+        <?php
+        echo anchor('project/new_project', ' Create a new project', 'class="btn btn-primary fa fa-plus"');
+        ?>
+
+        <h3> As a contributor: ( <?php echo $number_projects_as_contributor ?> )</h3>
+
+        <br/>
+
+        <fieldset class="col-lg-offset-1">
+            <div class="col-lg-11">
+                <?php
+                $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
+                $this->table->set_template($tmpl);
+                $this->table->set_heading('Projectname', 'Type', 'Description','Git Url','Actions');
+                foreach ($projects_list_as_contributor as $project) {
+                    $this->table->add_row($project['projectname'], ''.$project['type'].'', $project['description'], $project['giturl'],
+                            '<a class="btn btn-primary" href="index_project/'.$project['id'].'"><i class="fa icon-eye-open"></i> View </a> &nbsp;
+                             <a class="btn btn-primary" href="edit_project/'.$project['id'].'"><i class="fa fa-cog"></i> Edit </a> &nbsp;
+                             <a onclick="return confirm(\'Are you sure you want to delete the project '.$project['projectname'].' ?\');" class="btn btn-danger" href="delete_project/'.$project['id'].'" ><i class="icon-trash icon-large"></i> Supprimer </a> &nbsp;');
+                }
+                echo $this->table->generate();
+                ?>
+            </div>
+        </fieldset>
+
+
+        <h3> As a follower: ( <?php ?> )</h3>
+
+        <br/>
+
+        <fieldset class="col-lg-offset-1">
+            <div class="col-lg-11">
+                <?php
+                $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
+                $this->table->set_template($tmpl);
+                $this->table->set_heading('Projectname', 'Type', 'Description','Git Url','Actions');
+                foreach ($projects_list_as_follower as $project) {
+                    $this->table->add_row($project['projectname'], ''.$project['type'].'', $project['description'], $project['giturl'],
+                            '<a class="btn btn-primary" href="#"><i class="fa icon-eye-open"></i> View </a> &nbsp;
+                            <a class="btn btn-primary" href="#"><i class="fa fa-cog"></i> Edit </a> &nbsp;
+                            <a class="btn btn-danger" href="#"><i class="icon-trash icon-large"></i> Supprimer </a> &nbsp;');
+                }
+                echo $this->table->generate();
+                ?>
+            </div>
+        </fieldset>
+        </fieldset>
 
     </div>
 
