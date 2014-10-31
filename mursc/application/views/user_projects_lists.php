@@ -22,9 +22,9 @@
                 $this->table->set_heading('Projectname', 'Type', 'Description','Git Url','Actions');
                 foreach ($projects_list_as_contributor as $project) {
                     $this->table->add_row($project['projectname'], ''.$project['type'].'', $project['description'], $project['giturl'],
-                            '<a class="btn btn-primary" href="index_project/'.$project['id'].'"><i class="fa icon-eye-open"></i> View </a> &nbsp;
-                             <a class="btn btn-primary" href="edit_project/'.$project['id'].'"><i class="fa fa-cog"></i> Edit </a> &nbsp;
-                             <a onclick="return confirm(\'Are you sure you want to delete the project '.$project['projectname'].' ?\');" class="btn btn-danger" href="delete_project/'.$project['id'].'" ><i class="icon-trash icon-large"></i> Supprimer </a> &nbsp;');
+                            '<a class="btn btn-primary" href="'.base_url().'project/index_project/'.$project['id'].'"><i class="fa icon-eye-open"></i> View </a> &nbsp;
+                             <a class="btn btn-primary" href="'.base_url().'project/edit_project/'.$project['id'].'"><i class="fa fa-cog"></i> Edit </a> &nbsp;
+                             <a onclick="return confirm(\'Are you sure you want to delete the project '.$project['projectname'].' ?\');" class="btn btn-danger" href="'.base_url().'project/delete_project/'.$project['id'].'" ><i class="icon-trash icon-large"></i> Supprimer </a> &nbsp;');
                 }
                 echo $this->table->generate();
                 ?>

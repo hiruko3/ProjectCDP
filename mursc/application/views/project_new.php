@@ -7,7 +7,7 @@
         <br/>
         
         <?php
-        echo anchor('project/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "');
+        echo anchor('user/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "');
         echo br(2);
         ?>
         

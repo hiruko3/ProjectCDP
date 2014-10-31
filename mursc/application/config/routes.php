@@ -45,7 +45,6 @@ $route['404_override'] = '';
 
 // PROJECT CONTROLLER
 $route['project/new_project'] = "project_controller/new_project";
-$route['project/projectList'] = "project_controller/projectList";
 $route['project/index_project/(:num)'] = "project_controller/index_project/$1";
 $route['project/edit_project/(:num)'] = "project_controller/edit_project/$1";
 $route['project/delete_project/(:num)'] = "project_controller/delete_project/$1";
@@ -53,7 +52,7 @@ $route['project/delete_project/(:num)'] = "project_controller/delete_project/$1"
 
 // USER CONTROLLER
 $route['user/index'] = "user_controller/index";
-
+$route['user/projectList'] = "user_controller/projectList";
 
 
 

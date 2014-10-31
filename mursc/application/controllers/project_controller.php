@@ -113,42 +113,8 @@ class Project_controller extends CI_Controller {
         $this->load->view('footer');
     }
 
-///////////////////////// LIST PERSONAL OF PROJECTS ////////////////////////////
 
-    function projectList() {
-
-        // Il faudra recuperer l'id du compte user en session
-        $user = new User();
-        $user->where('id', '3')->get();
-
-        $projects_list_as_contributor = array();
-
-        $projects = $user->project->get_iterated();
-
-        $number_projects_as_contributor = $user->project->result_count();
-
-        foreach ($projects as $project) {
-
-            $project_in_table = array();
-            $project_in_table['id'] = $project->id;
-            $project_in_table['projectname'] = $project->projectname;
-            $project_in_table['type'] = $project->type;
-            $project_in_table['description'] = $project->description;
-            $project_in_table['giturl'] = $project->giturl;
-
-            array_push($projects_list_as_contributor, $project_in_table);
-        }
-
-        $data['projects_list_as_contributor'] = $projects_list_as_contributor;
-        $data['projects_list_as_follower'] = array();
-        $data['number_projects_as_contributor'] = $number_projects_as_contributor;
-
-        $this->load->view('header');
-        $this->load->view('project_list', $data);
-        $this->load->view('footer');
-    }
-
-///////////////////////// LIST PERSONAL OF PROJECTS ////////////////////////////
+///////////////////////// DELETE PROJECT ////////////////////////////
 
     function delete_project($id) {
 
@@ -171,7 +137,7 @@ class Project_controller extends CI_Controller {
             $data['errorMsg1'] = $errorMsg1;
         }
         
-        redirect('Project_controller/projectList');
+        redirect('user/projectList');
     }
 
 }
