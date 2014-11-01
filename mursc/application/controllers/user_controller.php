@@ -5,8 +5,26 @@ if (!defined('BASEPATH'))
 
 class User_controller extends CI_Controller {
 
+    private $_id; /** uniq user id : int */
+    private $_pseudo; /** uniq user name : string */
+    private $_pass; /** user password : string */
+    private $_email; /** user email : string */
+
+    
+    /**
+    * @brief : constructeur
+    */
     function __construct() {
         parent::__construct();
+        $this->_id = 3;////////////////////////////////
+
+        $this->load->model('user');
+        $u = new User();
+        $u->get_by_id($this->_id);
+
+        $this->_pseudo = $u->username;
+        $this->_pass = $u->password;
+        $this->_email = $u->email;
         $this->load->Library('form_validation');
         $this->load->library('table');
         $this->load->helper('form');
@@ -16,7 +34,7 @@ class User_controller extends CI_Controller {
     function index() {
 
         $user = new User();
-        $user->where('id', '3')->get();
+        $user->where('id', $this->$_id)->get();
 
         $projects_list = array();
 
@@ -40,33 +58,192 @@ class User_controller extends CI_Controller {
 
         // Il faudra recuperer l'id du compte user en session
         $user = new User();
-        $user->where('id', '3')->get();
+        $user->where('id', $this->_id)->get();
 
         $projects_list_as_contributor = array();
+        $projects_list_as_follower = array();
 
-        $projects = $user->project->get_iterated();
+        $projects = $user->project->include_join_fields()->where('invitation_accepted', 1)->get(); // seulement les projets dont l invitation n est pas en attente
 
-        $number_projects_as_contributor = $user->project->result_count();
+        $number_projects_as_contributor = 0;
+        $number_projects_as_follower = 0;
 
         foreach ($projects as $project) {
-
             $project_in_table = array();
             $project_in_table['id'] = $project->id;
             $project_in_table['projectname'] = $project->projectname;
+            $project_in_table['status'] = $project->join_user_status;
             $project_in_table['type'] = $project->type;
             $project_in_table['description'] = $project->description;
             $project_in_table['giturl'] = $project->giturl;
 
-            array_push($projects_list_as_contributor, $project_in_table);
+            if($project->join_user_status == 'watcher')
+            {
+                ++$number_projects_as_follower;
+                array_push($projects_list_as_follower, $project_in_table);
+            }
+            else
+            {
+                ++$number_projects_as_contributor;
+                array_push($projects_list_as_contributor, $project_in_table);
+            }
         }
 
         $data['projects_list_as_contributor'] = $projects_list_as_contributor;
-        $data['projects_list_as_follower'] = array();
+        $data['projects_list_as_follower'] = $projects_list_as_follower;
         $data['number_projects_as_contributor'] = $number_projects_as_contributor;
+        $data['number_projects_as_follower'] = $number_projects_as_follower;
+
+
+        $user->project->include_join_fields()->where('invitation_accepted', 0)->get_iterated(); // seulement les projets dont l invitation est en attente
+        $data['number_invitations'] = $user->project->result_count();
+
+        $invitations_list = array();
+        foreach($user->projects as $p)
+        {
+            $p_attributs = array();
+            $p_attributs['id'] = $p->id;
+            $p_attributs['projectname'] = $p->projectname;
+            $p_attributs['proposed_status'] = $p->join_user_status;
+            $p_attributs['type'] = $p->type;
+            $p_attributs['description'] = $p->description;
+            $p_attributs['giturl'] = $p->giturl;
+
+            array_push($invitations_list, $p_attributs);
+        }
+        $data['invitations_list'] = $invitations_list;
 
         $this->load->view('header');
         $this->load->view('user_projects_lists', $data);
         $this->load->view('footer');
     }
+    
+    /**
+    * @brief : detruit un user
+    */
+    public function delete()
+    {
+        /** @todo (confirmation / rediriger vers accueil visiteur a la fin)*/
+    }
+    
+    /**
+    * @brief : modifie le pseudo
+    * @param pseudo (string) : nouveau pseudo
+    */
+    public function _set_pseudo($pseudo)
+    {
+        $_pseudo = $pseudo;
+    }
+    
+    /**
+    * @brief : modifie l email
+    * @param email (string) : nouvel email
+    */
+    public function _set_email($email)
+    {
+        $_email = $email;
+    }
+    
+    /**
+    * @brief : retourne l id
+    * @return (int) : l id
+    */
+    public function _get_id()
+    {
+        return $_id;
+    }
+    
+    /**
+    * @brief : retourne le pseudo
+    * @return (string) : le pseudo
+    */  
+    public function _get_pseudo()
+    {
+        return $_pseudo;
+    }
+
+    /**
+    * @brief : retourne l email
+    * @return (string) : l email
+    */  
+    public function _get_email()
+    {
+        return $_email;
+    }
+    
+    /**
+    * @brief : ajoute un projet a la liste (a appeller lors de la creation de projet ou l acceptation d une invitation par exemple)
+    */
+    public function add_project()
+    {
+        /** @todo */
+    }
+    
+    /**
+    * @brief : ajoute une invitation a devenir contributeur
+    * @param project_id (int) : le projet auquel on est invite
+    * @param status (c_st) : le statut propose
+    */
+    public function add_c_invitation($project_id, $status)
+    {
+        /** @todo */
+    }
+    
+    /**
+    * @brief : ajoute une invitation a devenir watcher
+    * @param project_id (int) : le projet auquel on est invite
+    * @param status (w_st) : le statut propose
+    */
+    public function add_w_invitation($project_id, $status)
+    {
+        /** @todo */
+    }
+    
+    /**
+    * @brief : supprime une invitation a un projet
+    * @param project_id (int) : le projet auquel on etait invite
+    */
+    public function delete_invitation($project_id)
+    {
+        /** @todo (parcourir les 2 tableaux) */
+    }
+    
+    /**
+    * @brief : valide une invitation
+    * @param project_id (int) : le projet auquel on est invite
+    */
+    public function validate_invitation($project_id)
+    {
+        /** @todo (devenir contributeur ou watcher) */
+    }
+    
+    /**
+    * @brief : refuse une invitation
+    * @param project_id (int) : le projet auquel on est invite
+    */
+    public function reject_invitation($project_id)
+    {
+        /** @todo */
+    }
+    
+    /**
+    * @brief : envoie d une candidature pour rejoindre un projet (le statut sera decide par celui qui validera)
+    * @param project_id (int) : le projet auquel on candidate
+    */
+    public function send_candidacy($project_id)
+    {
+        /** @todo */
+    }
+    
+    /**
+    * @brief : quitter un projet auquel on contribue ou que l on suit
+    * @param project_id (int) : le projet que l on quitte
+    */
+    public function quit_project($project_id)
+    {
+        /** @todo */
+    }
+}
+?>
 
 }
