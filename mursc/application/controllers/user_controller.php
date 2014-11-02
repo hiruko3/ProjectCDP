@@ -32,9 +32,8 @@ class User_controller extends CI_Controller {
     }
 
     function index() {
-
         $user = new User();
-        $user->where('id', $this->$_id)->get();
+        $user->where('id', $this->_id)->get();
 
         $projects_list = array();
 
@@ -54,7 +53,7 @@ class User_controller extends CI_Controller {
 
 ///////////////////////// LIST PERSONAL OF PROJECTS ////////////////////////////
 
-    function projectList() {
+    function projectList($data=array()) {
 
         // Il faudra recuperer l'id du compte user en session
         $user = new User();
@@ -63,7 +62,7 @@ class User_controller extends CI_Controller {
         $projects_list_as_contributor = array();
         $projects_list_as_follower = array();
 
-        $projects = $user->project->include_join_fields()->where('invitation_accepted', 1)->get(); // seulement les projets dont l invitation n est pas en attente
+        $projects = $user->project->include_join_fields()->where('relationship_type', 'member')->get(); // seulement les projets dont je suis membre
 
         $number_projects_as_contributor = 0;
         $number_projects_as_follower = 0;
@@ -95,7 +94,7 @@ class User_controller extends CI_Controller {
         $data['number_projects_as_follower'] = $number_projects_as_follower;
 
 
-        $user->project->include_join_fields()->where('invitation_accepted', 0)->get_iterated(); // seulement les projets dont l invitation est en attente
+        $user->project->include_join_fields()->where('relationship_type', 'invitation')->get_iterated(); // seulement les projets dont l invitation est en attente
         $data['number_invitations'] = $user->project->result_count();
 
         $invitations_list = array();
@@ -112,6 +111,24 @@ class User_controller extends CI_Controller {
             array_push($invitations_list, $p_attributs);
         }
         $data['invitations_list'] = $invitations_list;
+
+
+        $user->project->include_join_fields()->where('relationship_type', 'candidacy')->get_iterated(); // seulement les candidatures
+        $data['number_candidacy'] = $user->project->result_count();
+
+        $candidacy_list = array();
+        foreach($user->projects as $p)
+        {
+            $p_attributs = array();
+            $p_attributs['id'] = $p->id;
+            $p_attributs['projectname'] = $p->projectname;
+            $p_attributs['type'] = $p->type;
+            $p_attributs['description'] = $p->description;
+            $p_attributs['giturl'] = $p->giturl;
+
+            array_push($candidacy_list, $p_attributs);
+        }
+        $data['candidacy_list'] = $candidacy_list;
 
         $this->load->view('header');
         $this->load->view('user_projects_lists', $data);
@@ -228,11 +245,37 @@ class User_controller extends CI_Controller {
     
     /**
     * @brief : envoie d une candidature pour rejoindre un projet (le statut sera decide par celui qui validera)
-    * @param project_id (int) : le projet auquel on candidate
     */
-    public function send_candidacy($project_id)
+    public function send_candidacy()
     {
-        /** @todo */
+        // exit if project does not exist
+        $this->load->model('project');
+        $p = new Project();
+        $p->where('projectname', $this->input->post('project_name'))->get();
+        if($p->result_count() < 1){$data['error'] = 'Project does not exist.';}
+        ////
+        else
+        {
+            $this->load->model('join_projects_user');
+            $j = new Join_Projects_User();
+            $j->user_id = $this->_id;
+            $j->project_id = $p->id;
+            $j->relationship_type = 'candidacy';
+
+            if($j->save()){$data['succes'] = 'Candidature envoy&eacute;e';}
+            else{$data['error'] = $j->error->string;}
+        }
+
+        $this->projectList($data);
+    }
+    
+    /**
+    * @brief : supprime une candidature a un projet
+    * @param id : l id du projet auquel on ne veut plus candidater
+    */
+    public function delete_candidacy($id)
+    {
+        // TODO
     }
     
     /**

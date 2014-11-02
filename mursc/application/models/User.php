@@ -2,7 +2,7 @@
 
 class User extends DataMapper {
 
-    var $has_many = array('project','contributor','watcher');
+    var $has_many = array('project','contributor','watcher', 'join_projects_user');
     
     var $validation = array(
         'username' => array(

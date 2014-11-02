@@ -3,12 +3,22 @@
     <div id="container">
 
         <h1> My Projects Lists </h1>
-
-        <br/>
-
         <?php
-        echo anchor('project/new_project', ' Create a new project', 'class="btn btn-primary fa fa-plus"');
+            if(ISSET($succes)){echo "<div class='succes'>" . $succes . "</div>";}
+            if(ISSET($error)){echo "<div class='error'>" . $error . "</div>";}
         ?>
+
+        <h3> Create or join </h3>
+
+        <?php echo form_open(base_url() . 'user_controller/send_candidacy/', array('name'=>'form_candidacy')); ?>
+        <div class='row'><div class='col-md-2'><?php echo form_input(array('name'=>'project_name', 'placeholder'=>'project')) ?></div></div>
+        <?php echo form_close();?>
+
+        <div class='row'>
+            <div class='col-md-2'><a class='btn btn-primary' href='#' onClick=form_candidacy.submit()><i class='fa fa-envelope-o'></i> Send a candidacy </a> &nbsp;</div>
+            <div class='col-md-1'>OR</div>
+            <div class='col-md-2'><a class='btn btn-primary' href='project/new_project'><i class='fa fa-plus'></i> Create a new project </a> &nbsp;</div>
+        </div>
 
         <h3> As a contributor: ( <?php echo $number_projects_as_contributor ?> )</h3>
 
@@ -69,6 +79,26 @@
                         '<a class="btn btn-primary" href="'.base_url().'project/index_project/'.$i['id'].'"><i class="fa icon-eye-open"></i> View </a> &nbsp;
                         <a class="btn btn-success" href="'.base_url().'user_controller/validate_invitation/'.$i['id'].'"><i class="fa fa-check"></i> Accept </a> &nbsp;
                         <a class="btn btn-danger" href="'.base_url().'user_controller/reject_invitation/'.$i['id'].'" ><i class="fa fa-close"></i> Reject </a> &nbsp;');
+                }
+                echo $this->table->generate();
+                ?>
+            </div>
+        </fieldset>
+
+        <h3> Candidatures: ( <?php echo $number_candidacy ?> )</h3>
+
+        <br/>
+
+        <fieldset class="col-lg-offset-1">
+            <div class="col-lg-11">
+                <?php
+                $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
+                $this->table->set_template($tmpl);
+                $this->table->set_heading('Projectname', 'Type', 'Description','Git Url','Actions');
+                foreach ($candidacy_list as $i)
+                {
+                    $this->table->add_row($i['projectname'], '' . $i['type'] . '', $i['description'], $i['giturl'],
+                        '<a class="btn btn-danger" href="'.base_url().'user_controller/delete_candidacy/'.$i['id'].'" ><i class="fa fa-close"></i> Delete </a> &nbsp;');
                 }
                 echo $this->table->generate();
                 ?>
