@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <div id="container">
 
-        <h1> My Projects Lists </h1>
+        <h1> My Projects List: ( <?php echo count($projects_list_as_contributor) + count($projects_list_as_follower) + count($invitations_list) + count($candidacy_list); ?> )</h1>
         <?php
             if(ISSET($succes)){echo "<div class='succes'>" . $succes . "</div>";}
             if(ISSET($error)){echo "<div class='error'>" . $error . "</div>";}
@@ -20,7 +20,7 @@
             <div class='col-md-2'><a class='btn btn-primary' href='project/new_project'><i class='fa fa-plus'></i> Create a new project </a> &nbsp;</div>
         </div>
 
-        <h3> As a contributor: ( <?php echo $number_projects_as_contributor ?> )</h3>
+        <h3> As a contributor: ( <?php echo count($projects_list_as_contributor); ?> )</h3>
 
         <br/>
 
@@ -42,7 +42,7 @@
         </fieldset>
 
 
-        <h3> As a follower: ( <?php echo $number_projects_as_follower ?> )</h3>
+        <h3> As a follower: ( <?php echo count($projects_list_as_follower); ?> )</h3>
 
         <br/>
 
@@ -63,7 +63,7 @@
         </fieldset>
         </fieldset>
 
-        <h3> Invitations: ( <?php echo $number_invitations ?> )</h3>
+        <h3> Invitations: ( <?php echo count($invitations_list); ?> )</h3>
 
         <br/>
 
@@ -85,7 +85,7 @@
             </div>
         </fieldset>
 
-        <h3> Candidatures: ( <?php echo $number_candidacy ?> )</h3>
+        <h3> Candidatures: ( <?php echo count($candidacy_list); ?> )</h3>
 
         <br/>
 

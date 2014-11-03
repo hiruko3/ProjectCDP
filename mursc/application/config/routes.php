@@ -52,7 +52,7 @@ $route['project/delete_project/(:num)'] = "project_controller/delete_project/$1"
 
 // USER CONTROLLER
 $route['user/index'] = "user_controller/index";
-$route['user/projectList'] = "user_controller/projectList";
+$route['user/projectList'] = "user_controller/index";
 
 
 

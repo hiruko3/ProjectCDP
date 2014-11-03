@@ -31,31 +31,26 @@ class User_controller extends CI_Controller {
         $this->load->helper('html');
     }
 
-    function index() {
-        $user = new User();
-        $user->where('id', $this->_id)->get();
-
-        $projects_list = array();
-
-        $user->project->get_iterated();
-
-        foreach ($user->project as $project) {
-            array_push($projects_list, $project->projectname);
-        }
-
-        $data['projects_list'] = $projects_list;
-        $data['username'] = $user->username;
+    function index($data = array()) {
+        $data = array_merge($data, $this->_projectList());
 
         $this->load->view('header');
-        $this->load->view('user_index', $data);
+        $this->load->view('user_projects_lists', $data);
         $this->load->view('footer');
     }
 
-///////////////////////// LIST PERSONAL OF PROJECTS ////////////////////////////
+///////////////////////// LISTS PERSONAL OF PROJECTS ////////////////////////////
 
-    function projectList($data=array()) {
+    /**
+    * @brief : la liste des project dont je suis membre
+    * @return : $data (tableau) contenant :
+    *           'projects_list_as_contributor' : la liste des projets dont je suis contributeur ('id', 'projectname', 'type', 'description', 'giturl')
+    *           'projects_list_as_follower' :  la liste des projets dont je suis contributeur ('id', 'projectname', 'type', 'description', 'giturl')
+    *           'invitations_list' : la liste des projets auquels on m'invite ('id', 'projectname', 'proposed_status', 'type', 'description', 'giturl')
+    *           'candidacy_list' : la liste des projets auquels je candidate ('id', 'projectname', 'type', 'description', 'giturl')
+    */
+    function _projectList() {
 
-        // Il faudra recuperer l'id du compte user en session
         $user = new User();
         $user->where('id', $this->_id)->get();
 
@@ -63,9 +58,6 @@ class User_controller extends CI_Controller {
         $projects_list_as_follower = array();
 
         $projects = $user->project->include_join_fields()->where('relationship_type', 'member')->get(); // seulement les projets dont je suis membre
-
-        $number_projects_as_contributor = 0;
-        $number_projects_as_follower = 0;
 
         foreach ($projects as $project) {
             $project_in_table = array();
@@ -76,26 +68,15 @@ class User_controller extends CI_Controller {
             $project_in_table['description'] = $project->description;
             $project_in_table['giturl'] = $project->giturl;
 
-            if($project->join_user_status == 'watcher')
-            {
-                ++$number_projects_as_follower;
-                array_push($projects_list_as_follower, $project_in_table);
-            }
-            else
-            {
-                ++$number_projects_as_contributor;
-                array_push($projects_list_as_contributor, $project_in_table);
-            }
+            if($project->join_user_status == 'watcher'){ array_push($projects_list_as_follower, $project_in_table); }
+            else{ array_push($projects_list_as_contributor, $project_in_table); }
         }
 
         $data['projects_list_as_contributor'] = $projects_list_as_contributor;
         $data['projects_list_as_follower'] = $projects_list_as_follower;
-        $data['number_projects_as_contributor'] = $number_projects_as_contributor;
-        $data['number_projects_as_follower'] = $number_projects_as_follower;
 
 
         $user->project->include_join_fields()->where('relationship_type', 'invitation')->get_iterated(); // seulement les projets dont l invitation est en attente
-        $data['number_invitations'] = $user->project->result_count();
 
         $invitations_list = array();
         foreach($user->projects as $p)
@@ -114,7 +95,6 @@ class User_controller extends CI_Controller {
 
 
         $user->project->include_join_fields()->where('relationship_type', 'candidacy')->get_iterated(); // seulement les candidatures
-        $data['number_candidacy'] = $user->project->result_count();
 
         $candidacy_list = array();
         foreach($user->projects as $p)
@@ -130,9 +110,7 @@ class User_controller extends CI_Controller {
         }
         $data['candidacy_list'] = $candidacy_list;
 
-        $this->load->view('header');
-        $this->load->view('user_projects_lists', $data);
-        $this->load->view('footer');
+        return $data;
     }
     
     /**
@@ -189,43 +167,6 @@ class User_controller extends CI_Controller {
     }
     
     /**
-    * @brief : ajoute un projet a la liste (a appeller lors de la creation de projet ou l acceptation d une invitation par exemple)
-    */
-    public function add_project()
-    {
-        /** @todo */
-    }
-    
-    /**
-    * @brief : ajoute une invitation a devenir contributeur
-    * @param project_id (int) : le projet auquel on est invite
-    * @param status (c_st) : le statut propose
-    */
-    public function add_c_invitation($project_id, $status)
-    {
-        /** @todo */
-    }
-    
-    /**
-    * @brief : ajoute une invitation a devenir watcher
-    * @param project_id (int) : le projet auquel on est invite
-    * @param status (w_st) : le statut propose
-    */
-    public function add_w_invitation($project_id, $status)
-    {
-        /** @todo */
-    }
-    
-    /**
-    * @brief : supprime une invitation a un projet
-    * @param project_id (int) : le projet auquel on etait invite
-    */
-    public function delete_invitation($project_id)
-    {
-        /** @todo (parcourir les 2 tableaux) */
-    }
-    
-    /**
     * @brief : valide une invitation
     * @param project_id (int) : le projet auquel on est invite
     */
@@ -262,11 +203,11 @@ class User_controller extends CI_Controller {
             $j->project_id = $p->id;
             $j->relationship_type = 'candidacy';
 
-            if($j->save()){$data['succes'] = 'Candidature envoy&eacute;e';}
+            if($j->save()){$data['succes'] = 'Candidacy sent.';}
             else{$data['error'] = $j->error->string;}
         }
 
-        $this->projectList($data);
+        $this->index($data);
     }
     
     /**
