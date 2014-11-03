@@ -32,11 +32,17 @@ class User_controller extends CI_Controller {
     }
 
     function index($data = array()) {
+        $this->display_project_list();
+    }
+
+    function display_project_list($data = array())
+    {
         $data = array_merge($data, $this->_projectList());
 
         $this->load->view('header');
         $this->load->view('user_projects_lists', $data);
         $this->load->view('footer');
+
     }
 
 ///////////////////////// LISTS PERSONAL OF PROJECTS ////////////////////////////
@@ -108,6 +114,7 @@ class User_controller extends CI_Controller {
 
             array_push($candidacy_list, $p_attributs);
         }
+
         $data['candidacy_list'] = $candidacy_list;
 
         return $data;
@@ -172,7 +179,23 @@ class User_controller extends CI_Controller {
     */
     public function validate_invitation($project_id)
     {
-        /** @todo (devenir contributeur ou watcher) */
+        $this->load->model('join_projects_user');
+        $j = new Join_projects_user();
+
+        $j->where('user_id', $this->_id)->where('project_id', $project_id)->where('relationship_type', 'invitation')->get();
+
+        if($j->result_count() < 1)
+        {
+            $data['error'] = 'This invitation does not exist.';
+        }
+        else
+        {
+            $j->relationship_type = 'member';
+            if($j->save()){ $data['succes'] = 'Invitation accepted.'; }
+            else{ $data['error'] = 'Acception error.'; }
+        }
+
+        $this->display_project_list($data);
     }
     
     /**
@@ -181,7 +204,22 @@ class User_controller extends CI_Controller {
     */
     public function reject_invitation($project_id)
     {
-        /** @todo */
+        $this->load->model('join_projects_user');
+        $j = new Join_projects_user();
+
+        $j->where('user_id', $this->_id)->where('project_id', $project_id)->where('relationship_type', 'invitation')->get();
+
+        if($j->result_count() < 1)
+        {
+            $data['error'] = 'This invitation does not exist.';
+        }
+        else
+        {
+            if($j->delete()){ $data['succes'] = 'Invitation deleted.'; }
+            else{ $data['error'] = 'Suppression error.'; }
+        }
+
+        $this->display_project_list($data);
     }
     
     /**
@@ -207,16 +245,31 @@ class User_controller extends CI_Controller {
             else{$data['error'] = $j->error->string;}
         }
 
-        $this->index($data);
+        $this->display_project_list($data);
     }
     
     /**
     * @brief : supprime une candidature a un projet
-    * @param id : l id du projet auquel on ne veut plus candidater
+    * @param project_id : l id du projet auquel on ne veut plus candidater
     */
-    public function delete_candidacy($id)
+    public function delete_candidacy($project_id)
     {
-        // TODO
+        $this->load->model('join_projects_user');
+        $j = new Join_projects_user();
+
+        $j->where('user_id', $this->_id)->where('project_id', $project_id)->where('relationship_type', 'candidacy')->get();
+
+        if($j->result_count() < 1)
+        {
+            $data['error'] = 'This candidacy does not exist.';
+        }
+        else
+        {
+            if($j->delete()){ $data['succes'] = 'Candidacy deleted.'; }
+            else{ $data['error'] = 'Suppression error.'; }
+        }
+
+        $this->display_project_list($data);
     }
     
     /**
@@ -225,7 +278,22 @@ class User_controller extends CI_Controller {
     */
     public function quit_project($project_id)
     {
-        /** @todo */
+        $this->load->model('join_projects_user');
+        $j = new Join_projects_user();
+
+        $j->where('user_id', $this->_id)->where('project_id', $project_id)->where('relationship_type', 'member')->get();
+
+        if($j->result_count() < 1)
+        {
+            $data['error'] = 'You are no member..';
+        }
+        else
+        {
+            if($j->delete()){ $data['succes'] = 'You are no longer member.'; }
+            else{ $data['error'] = 'Quit error.'; }
+        }
+
+        $this->display_project_list($data);
     }
 }
 ?>

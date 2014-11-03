@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 03 Novembre 2014 à 07:13
+-- Généré le :  Lun 03 Novembre 2014 à 11:16
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('3f4ed20b57fdefa5a48089a14e42803f', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', 1414968911, '');
+('a114ae56c30d5f26aedc43b2ece5f3ae', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', 1415009627, '');
 
 -- --------------------------------------------------------
 
@@ -58,25 +58,22 @@ CREATE TABLE IF NOT EXISTS `mursc_contributors` (
 --
 
 CREATE TABLE IF NOT EXISTS `mursc_join_projects_users` (
+`id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
   `user_status` set('contributor','watcher','product owner','scrum master','') NOT NULL,
   `relationship_type` set('member','invitation','candidacy') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
 
 --
 -- Contenu de la table `mursc_join_projects_users`
 --
 
-INSERT INTO `mursc_join_projects_users` (`user_id`, `project_id`, `user_status`, `relationship_type`) VALUES
-(2, 19, 'contributor', 'candidacy'),
-(2, 21, 'contributor', 'member'),
-(2, 22, 'contributor', 'member'),
-(3, 17, 'watcher', 'member'),
-(3, 18, 'product owner', 'invitation'),
-(3, 19, 'scrum master', 'member'),
-(3, 21, '', 'candidacy'),
-(3, 23, 'contributor', 'member');
+INSERT INTO `mursc_join_projects_users` (`id`, `user_id`, `project_id`, `user_status`, `relationship_type`) VALUES
+(1, 2, 19, 'contributor', 'member'),
+(2, 2, 21, 'contributor', 'member'),
+(3, 2, 22, 'contributor', 'member'),
+(64, 3, 20, 'product owner', 'member');
 
 -- --------------------------------------------------------
 
@@ -215,7 +212,7 @@ ALTER TABLE `mursc_contributors`
 -- Index pour la table `mursc_join_projects_users`
 --
 ALTER TABLE `mursc_join_projects_users`
- ADD PRIMARY KEY (`user_id`,`project_id`), ADD KEY `user_id` (`user_id`), ADD KEY `project_id` (`project_id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `user_id_2` (`user_id`,`project_id`), ADD KEY `user_id` (`user_id`), ADD KEY `project_id` (`project_id`);
 
 --
 -- Index pour la table `mursc_projects`
@@ -268,6 +265,11 @@ ALTER TABLE `mursc_watchers`
 --
 ALTER TABLE `mursc_contributors`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `mursc_join_projects_users`
+--
+ALTER TABLE `mursc_join_projects_users`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT pour la table `mursc_projects`
 --
