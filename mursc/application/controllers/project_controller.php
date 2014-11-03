@@ -16,7 +16,7 @@ class Project_controller extends CI_Controller {
     ////////////////////////// NEW PROJECT ////////////////////////////
 
     function new_project() {
-
+        $user_id = 3; //////////////////////////////////////////////////////// recup en session
         $validMsg = array();
         $errorMsg1 = array();
         $errorMsg2 = array();
@@ -30,23 +30,30 @@ class Project_controller extends CI_Controller {
             $p->type = $_POST['type'];
             $p->giturl = $_POST['giturl'];
 
-            // Il faudra recuperer l'id du compte user en session
-            $u = new User();
-            $u->where('id', '3')->get();
-
             // Save in bdd
-            if ($p->save($u)) {
-                $validMsg['project_created'] = "<p>New project created ! </p>";
-            } else {
-                if ($p->error->all != '') {
-                    array_push($errorMsg1, $p->error->all);
-                }
-                if ($u->error->all != '') {
-                    array_push($errorMsg2, $u->error->all);
-                }
+            if (!$p->save()) {
+                array_push($errorMsg1, $p->error->all);
                 $errorMsg1 = $errorMsg1['0'];
+            }
+
+            // jointure
+            $p = new Project();
+            $p->where('projectname', $_POST['projectname'])->get();
+
+            $this->load->model('join_projects_user');
+            $j = new Join_Projects_User();
+            $j->user_id = $user_id;
+            $j->project_id = $p->id;
+            $j->user_status = 'project manager';
+            $j->relationship_type = 'member';
+
+            if($j->save()){$validMsg['project_created'] = "<p>New project created ! </p>";}
+            else
+            {
+                array_push($errorMsg2, $j->error->all);
                 $errorMsg2 = $errorMsg2['0'];
             }
+            ////
         }
 
         $data['validMsg'] = $validMsg;

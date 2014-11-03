@@ -19,7 +19,7 @@ class Join_Projects_User extends DataMapper
 		'user_status' => array
 		(
 			'label' => 'User_status',
-			'rules' => array('trim', 'alpha_dash', 'min_length' => 3, 'max_length' => 20, 'enum_user_status'),
+			'rules' => array('trim', 'min_length' => 3, 'max_length' => 20, 'enum_user_status'),
 		),
 		'relationship_type' => array
 		(
@@ -30,7 +30,7 @@ class Join_Projects_User extends DataMapper
 
 	function _enum_user_status($field)
 	{
-		$enum_list = array('contributor', 'watcher', 'product owner', 'scrum master', '');
+		$enum_list = array('contributor', 'watcher', 'product owner', 'scrum master', 'project manager', '');
 		foreach($enum_list as $e)
 		{
 			if($this->{$field} === $e)

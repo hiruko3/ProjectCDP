@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 03 Novembre 2014 à 11:16
+-- Généré le :  Lun 03 Novembre 2014 à 14:44
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('a114ae56c30d5f26aedc43b2ece5f3ae', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', 1415009627, '');
+('2b0a3ebd916ba0807899bf4f80d5d628', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', 1415022177, '');
 
 -- --------------------------------------------------------
 
@@ -61,9 +61,9 @@ CREATE TABLE IF NOT EXISTS `mursc_join_projects_users` (
 `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
-  `user_status` set('contributor','watcher','product owner','scrum master','') NOT NULL,
+  `user_status` set('contributor','watcher','product owner','scrum master','project manager') NOT NULL,
   `relationship_type` set('member','invitation','candidacy') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
 
 --
 -- Contenu de la table `mursc_join_projects_users`
@@ -73,7 +73,10 @@ INSERT INTO `mursc_join_projects_users` (`id`, `user_id`, `project_id`, `user_st
 (1, 2, 19, 'contributor', 'member'),
 (2, 2, 21, 'contributor', 'member'),
 (3, 2, 22, 'contributor', 'member'),
-(64, 3, 20, 'product owner', 'member');
+(64, 3, 20, 'product owner', 'member'),
+(69, 3, 22, '', 'candidacy'),
+(70, 3, 17, '', 'candidacy'),
+(72, 3, 19, '', 'candidacy');
 
 -- --------------------------------------------------------
 
@@ -87,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `mursc_projects` (
   `description` text NOT NULL,
   `type` varchar(50) NOT NULL,
   `giturl` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Contenu de la table `mursc_projects`
@@ -100,7 +103,9 @@ INSERT INTO `mursc_projects` (`id`, `projectname`, `description`, `type`, `gitur
 (20, 'test', 'description', 'public', 'giturl/giturl/giturl'),
 (21, 'machin', 'description', 'public', 'giturl/giturl/giturl'),
 (22, 'projet', 'projet test', 'private', 'https://github.com/hiruko3/ProjectCDP/tree/master/'),
-(23, 'projet_test', 'un projet qui a une description', 'private', 'giturl.com');
+(23, 'projet_test', 'un projet qui a une description', 'private', 'giturl.com'),
+(24, 'plopplopplop', 'oijapeoiajepaoiejapoijapeoiajepaoiejapoijapeoiajepaoiejapoijapeoiajepaoiejapoijapeoiajepaoiejapoijapeoiajepaoiejap', 'private', 'oijapeoiajepaoiejap'),
+(25, 'jiopjdzapdjapdaioj', 'hsaiduhdoiauhdaopu', 'public', 'dahiudhadadnaiuda');
 
 -- --------------------------------------------------------
 
@@ -269,12 +274,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT pour la table `mursc_join_projects_users`
 --
 ALTER TABLE `mursc_join_projects_users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT pour la table `mursc_projects`
 --
 ALTER TABLE `mursc_projects`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT pour la table `mursc_tasks`
 --
