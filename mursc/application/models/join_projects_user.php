@@ -30,7 +30,7 @@ class Join_Projects_User extends DataMapper
 
 	function _enum_user_status($field)
 	{
-		$enum_list = array('contributor', 'watcher', 'product owner', 'scrum master', 'project manager', '');
+		$enum_list = $this->_get_user_status();
 		foreach($enum_list as $e)
 		{
 			if($this->{$field} === $e)
@@ -41,9 +41,14 @@ class Join_Projects_User extends DataMapper
 		return 'The user_status must be in ' . implode(', ', $enum_list);
 	}
 
+	function _get_user_status()
+	{
+		return array('contributor', 'watcher', 'product owner', 'scrum master', 'project manager', '');
+	}
+
 	function _enum_relationship_type($field)
 	{
-		$enum_list = array('member', 'invitation', 'candidacy');
+		$enum_list = $this->_get_relationship_type();
 		foreach($enum_list as $e)
 		{
 			if($this->{$field} === $e)
@@ -52,6 +57,11 @@ class Join_Projects_User extends DataMapper
 			}
 		}
 		return 'The user_status must be in ' . implode(', ', $enum_list);
+	}
+
+	function _get_relationship_type()
+	{
+		return array('member', 'invitation', 'candidacy');
 	}
 
 	function _primary_couple_with_project_id($field)
