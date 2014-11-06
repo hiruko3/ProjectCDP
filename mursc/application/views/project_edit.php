@@ -6,11 +6,15 @@
         <br/>
 
         <div class='row'>
-            <?php
-            echo anchor('user/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "');
-            echo br(2);
-            ?>
+            <div class='col-md-3'>
+                <?php echo anchor('user/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "'); ?>
+            </div>
+            <div class='col-md-1'></div>
+            <div class='col-md-1'>
+                <?php echo anchor('project_controller/index_project/' . $project->id, ' ', 'class="btn btn-default fa fa-eye "'); ?>
+            </div>
         </div>
+        <br /><br />
 
         <div class='row'>
             <?php

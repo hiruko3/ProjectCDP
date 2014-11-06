@@ -73,10 +73,33 @@ class Project_controller extends CI_Controller {
 
         $p->where('id', $id)->get();
         $data['project'] = $p;
+        $data['list_member'] = $this->_list_members($id);
 
         $this->load->view('header');
         $this->load->view('project_index', $data);
         $this->load->view('footer');
+    }
+
+    /**
+    * @brief : renvoie la liste des membres d un projet (contributerus + watchers)
+    * @param $p_id : l id du projet
+    * @return : un tableau contenant la liste des membres
+    */
+    function _list_members($p_id)
+    {
+        $j = new join_projects_user();
+        $j->where('project_id', $p_id)->where('relationship_type', 'member')->include_related('user', '*')->order_by('user_status', 'desc')->get(); // tous les members de ce projet
+
+        $list_member = array();
+        foreach($j as $m)
+        {
+            $tab['username'] = $m->user_username;
+            $tab['user_status'] = $m->user_status;
+            $tab['user_id'] = $m->user_id;
+
+            array_push($list_member, $tab);
+        }
+        return $list_member;
     }
 
     /**
