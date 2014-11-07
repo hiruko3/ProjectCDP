@@ -50,8 +50,16 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
+
+/* Romain connection 
 $db['default']['password'] = 'root';
 $db['default']['database'] = 'users';
+*/
+
+$db['default']['password'] = '';
+$db['default']['database'] = 'mursc_bdd';
+
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

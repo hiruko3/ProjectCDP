@@ -11,7 +11,8 @@ class Login extends My_Controller {
 
  function index()
  {
-   $this->login();
+    //$this->login();
+   redirect('user_controller');
  }
 
  public function login(){
