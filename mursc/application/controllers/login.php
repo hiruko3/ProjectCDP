@@ -1,11 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Login extends My_Controller {
 
  function __construct()
  {
    parent::__construct();
-    $this->load->Library('form_validation');
    	$this->load->model('user_model');
    	$this->load->library('email');
  }
@@ -20,11 +19,11 @@ class Login extends CI_Controller {
  }
 
  public function member(){
- 	if($this->session->userdata('is_logged_in')){
+ 	//if($this->session->userdata('is_logged_in')){
  		$this->load->view('member_view');
- 	}else {
- 		redirect('login/restricted');
- 	}
+ 	//}else {
+ 	//	redirect('login/restricted');
+ 	//}
  }
 
  public function restricted(){
@@ -34,7 +33,7 @@ class Login extends CI_Controller {
  public function login_validation(){
 
  	$this->form_validation->set_rules('email','Email','required|trim|xss_clean|callback_validate_credentials');
- 	$this->form_validation->set_rules('password','Password','required|trim|md5');
+ 	$this->form_validation->set_rules('password','Password','required|trim|md5|min_length[7]|max_length[255]');
 
  	if($this->form_validation->run()){
  		$data = array(
@@ -69,7 +68,7 @@ public function sign_up(){
 
 public function sign_up_validation(){
 
-	$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]');
+	$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[mursc_users.email]');
 	$this->form_validation->set_rules('password', 'Password', 'required|md5|trim|min_length[7]|max_length[255]');
 	$this->form_validation->set_rules('confirm_password', 'CPassword', 'required|trim|min_length[7]|max_length[255]|matches[password]');
 	
