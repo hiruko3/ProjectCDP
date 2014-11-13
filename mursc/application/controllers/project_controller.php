@@ -68,13 +68,20 @@ class Project_controller extends CI_Controller {
 ////////////////////////// INDEX PROJECT ////////////////////////////
 
     function index_project($id) {
+        
+        $this->session->set_userdata('project_id',$id);
 
         $p = new Project();
 
         $p->where('id', $id)->get();
         $data['project'] = $p;
         $data['list_member'] = $this->_list_members($id);
-
+        
+        $us = new UserStory();
+        
+        $list_us = $p->userstory->include_join_fields()->get();
+        $data['list_us'] = $list_us;
+        
         $this->load->view('header');
         $this->load->view('project_index', $data);
         $this->load->view('footer');
@@ -255,7 +262,6 @@ class Project_controller extends CI_Controller {
                 }
                 $errorMsg1 = $errorMsg1['0'];
             }
-
             if($error == 0)
             {
                 $validMsg['project_created'] = "<p> Project modified ! </p>";

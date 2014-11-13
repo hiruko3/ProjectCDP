@@ -56,6 +56,13 @@ $route['user/index'] = "user_controller/index";
 $route['user/projectList'] = "user_controller/index";
 
 
+// USERSTORIES CONTROLLER
+$route['userstory/new_userstory'] = "userstory_controller/new_userstory";
+
+$route['project/(:num)/new_userstory'] = "userstory_controller/new_userstory";
+$route['project/(:num)/userstory/index_userstory/(:num)'] = "userstory_controller/index_userstory/$2";
+$route['project/(:num)/userstory/delete_userstory/(:num)'] = "userstory_controller/delete_userstory/$2";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

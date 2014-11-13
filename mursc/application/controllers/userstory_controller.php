@@ -1,0 +1,100 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class Userstory_controller extends CI_Controller {
+
+    function __construct() {
+        parent::__construct();
+        $this->load->Library('form_validation');
+        $this->load->library('table');
+        $this->load->helper('form');
+        $this->load->helper('html');
+    }
+
+////////////////////////// NEW USER STORY ////////////////////////////
+
+    function new_userstory() {
+        $user_id = 3; //////////////////////////////////////////////////////// recup en session
+        $project_id = $this->session->userdata('project_id');
+        $validMsg = array();
+        $errorMsg1 = array();
+        $errorMsg2 = array();
+
+        if (!empty($_POST)) {
+
+            $us = new UserStory();
+
+            $us->userstoryname = $_POST['userstoryname'];
+            $us->description = $_POST['description'];
+            $us->statut = 'new';
+            $us->cost = $_POST['cost'];
+            $us->datestart = $_POST['datestart'];
+            $us->dateend = $_POST['dateend'];
+
+            // jointure
+            $p = new Project();
+            $p->where('id', $project_id)->get();
+
+            // Save in bdd
+            if (!$us->save($p)) {
+                array_push($errorMsg1, $us->error->all);
+                $errorMsg1 = $errorMsg1['0'];
+            } else {
+                $validMsg['userstory_created'] = "<p> New user story created ! </p>";
+            }
+        }
+
+        $data['validMsg'] = $validMsg;
+        $data['errorMsg1'] = $errorMsg1;
+        $data['errorMsg2'] = $errorMsg2;
+        $data['project_id'] = $this->session->userdata('project_id');
+
+        //$this->load->view('header');
+        $this->load->view('userstory_new', $data);
+        $this->load->view('footer');
+    }
+
+////////////////////////// DELETE USER STORY ////////////////////////////
+
+    function delete_userstory($id) {
+
+        $validMsg = array();
+        $errorMsg1 = array();
+        $errorMsg2 = array();
+
+        $us = new UserStory();
+
+        if ($us->where('id', $id)->get()->delete()->all) {
+            
+        } else {
+            if ($us->error->all != '') {
+                $validMsg['us_delete'] = "<p> User story deleted ! </p>";
+            }
+            array_push($errorMsg1, $us->error->all);
+            $errorMsg1 = $errorMsg1['0'];
+
+            $data['validMsg'] = $validMsg;
+            $data['errorMsg1'] = $errorMsg1;
+        }
+
+        redirect('project_controller/index_project/' . $this->session->userdata('project_id'));
+    }
+
+    ////////////////////////// INDEX USER STORY ////////////////////////////
+
+    function index_userstory($id) {
+
+        $us = new UserStory();
+
+        $us->where('id', $id)->get();
+        $data['userstory'] = $us;
+        $data['project_id'] = $this->session->userdata('project_id');
+
+        $this->load->view('header');
+        $this->load->view('userstory_index', $data);
+        $this->load->view('footer');
+    }
+
+}
