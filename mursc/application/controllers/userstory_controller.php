@@ -3,6 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+session_start();
+
 class Userstory_controller extends CI_Controller {
 
     function __construct() {
@@ -79,7 +81,29 @@ class Userstory_controller extends CI_Controller {
             $data['errorMsg1'] = $errorMsg1;
         }
 
-        redirect('project_controller/index_project/' . $this->session->userdata('project_id'));
+        redirect('userstory_controller/index/' . $_SESSION['project_id']);
+    }
+
+    function index($id)
+    {
+        $this->load->view('header');
+
+        $p = new project();
+        $p->get_by_id($_SESSION['project_id']);
+        $header_project_data = array(
+            'project_id' => $p->id,
+            'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
+        
+        $us = new UserStory();
+        
+        $list_us = $p->userstory->include_join_fields()->get();
+        $data = array(
+            'project' => $p, 
+            'list_us' => $list_us
+            );
+        $this->load->view('userstory_list', $data);
+        $this->load->view('footer');
     }
 
     ////////////////////////// INDEX USER STORY ////////////////////////////
@@ -93,8 +117,21 @@ class Userstory_controller extends CI_Controller {
         $data['project_id'] = $this->session->userdata('project_id');
 
         $this->load->view('header');
+
+        $p = new project();
+        $p->get_by_id($_SESSION['project_id']);
+        $header_project_data = array(
+            'project_id' => $p->id,
+            'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
+        
         $this->load->view('userstory_index', $data);
         $this->load->view('footer');
+    }
+
+    function edit_userstory($id)
+    {
+
     }
 
 }

@@ -58,7 +58,7 @@
         <label for="date_begin"  class="col-lg-5" > Date start * : </label>
         <div class="col-lg-5">
             <p>
-                <input type="date" name="datestart">
+                <input type="date" name="datestart" placeholder="aaaa/mm/jj">
             </p>
         </div>
 
@@ -67,7 +67,7 @@
         <label for="date_end"  class="col-lg-5" > Date end * : </label>
         <div class="col-lg-5">
             <p>
-                <input type="date" name="dateend">
+                <input type="date" name="dateend" placeholder="aaaa/mm/jj">
             </p>
         </div>
 

@@ -11,7 +11,7 @@ class UserStory extends DataMapper {
     var $validation = array(
         'userstoryname' => array(
             'label' => 'User story name',
-            'rules' => array('required', 'trim', 'unique', 'min_length' => 3, 'max_length' => 30),
+            'rules' => array('required', 'trim', 'min_length' => 3, 'max_length' => 30),
         ),
         'description' => array(
             'label' => 'Description',

@@ -3,6 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+session_start();
+
 class Project_controller extends CI_Controller {
 
     function __construct() {
@@ -69,7 +71,8 @@ class Project_controller extends CI_Controller {
 
     function index_project($id) {
         
-        $this->session->set_userdata('project_id',$id);
+        $_SESSION['project_id'] = $id;
+        $this->session->set_userdata('project_id', $id);
 
         $p = new Project();
 
@@ -77,12 +80,14 @@ class Project_controller extends CI_Controller {
         $data['project'] = $p;
         $data['list_member'] = $this->_list_members($id);
         
-        $us = new UserStory();
-        
-        $list_us = $p->userstory->include_join_fields()->get();
-        $data['list_us'] = $list_us;
         
         $this->load->view('header');
+
+        $header_project_data = array(
+            'project_id' => $id,
+            'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
+
         $this->load->view('project_index', $data);
         $this->load->view('footer');
     }
@@ -163,6 +168,7 @@ class Project_controller extends CI_Controller {
     ////////////////////////// EDIT PROJECT ////////////////////////////
 
     function edit_project($id) {
+        $_SESSION['project_id'] = $id;
         $validMsg = array();
         $errorMsg1 = array();
         $errorMsg2 = array();
@@ -328,6 +334,12 @@ class Project_controller extends CI_Controller {
         $data['errorMsg2'] = $errorMsg2;
 
         $this->load->view('header');
+
+        $header_project_data = array(
+            'project_id' => $id,
+            'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
+
         $this->load->view('project_edit', $data);
         $this->load->view('footer');
     }

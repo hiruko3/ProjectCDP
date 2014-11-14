@@ -9,27 +9,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Mursc</a>
+                <a class="navbar-brand" href="<?php echo base_url() ?>">Mursc</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href='<?php echo base_url()."user/projectList/";?> '> Projects Lists</a>
-                    </li>
-                    <li>
-                        <a href="#">Management</a>
-                    </li>
-                    <li>
-                        <a href="#">Backlog</a>
-                    </li>
-                    <li>
-                        <a href="#">Tasks</a>
-                    </li>
-                    <li>
-                        <a href="#">Tests</a>
-                    </li>
-                    <li>
-                        <a href="#">Versions</a>
                     </li>
                 </ul>
 

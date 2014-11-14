@@ -7,7 +7,7 @@
 
         <div class='row'>
             <div class='col-md-3'>
-                <?php echo anchor('project/index_project/'.  $project_id, 'Return to the projects list', 'class="btn btn-default fa fa-arrow-left "'); ?>
+                <?php echo anchor(base_url() . 'userstory_controller/index/' . $project_id, 'Return to backlog', 'class="btn btn-default fa fa-arrow-left "'); ?>
             </div>
             <div class='col-md-1'></div>
         </div>
