@@ -71,7 +71,6 @@ class Project_controller extends CI_Controller {
 
     function index_project($id) {
         
-        $_SESSION['project_id'] = $id;
         $this->session->set_userdata('project_id', $id);
 
         $p = new Project();
@@ -168,7 +167,7 @@ class Project_controller extends CI_Controller {
     ////////////////////////// EDIT PROJECT ////////////////////////////
 
     function edit_project($id) {
-        $_SESSION['project_id'] = $id;
+        $this->session->set_userdata('project_id', $id);
         $validMsg = array();
         $errorMsg1 = array();
         $errorMsg2 = array();

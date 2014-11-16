@@ -3,7 +3,7 @@
 class Project extends DataMapper {
 
     var $has_many = array(
-        'user','userstory');
+        'user','userstory', 'task');
         /*
         '',
         'versionproject',

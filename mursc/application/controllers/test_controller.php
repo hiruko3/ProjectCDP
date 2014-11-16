@@ -16,7 +16,7 @@ class Test_controller extends CI_Controller {
         $this->load->view('header');
 
         $p = new project();
-        $p->get_by_id($_SESSION['project_id']);
+        $p->get_by_id($this->session->userdata('project_id'));
         $header_project_data = array(
             'project_id' => $p->id,
             'project_name' => $p->projectname);

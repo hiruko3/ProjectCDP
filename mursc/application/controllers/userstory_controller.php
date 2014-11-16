@@ -9,10 +9,6 @@ class Userstory_controller extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->Library('form_validation');
-        $this->load->library('table');
-        $this->load->helper('form');
-        $this->load->helper('html');
     }
 
 ////////////////////////// NEW USER STORY ////////////////////////////
@@ -53,7 +49,15 @@ class Userstory_controller extends CI_Controller {
         $data['errorMsg2'] = $errorMsg2;
         $data['project_id'] = $this->session->userdata('project_id');
 
-        //$this->load->view('header');
+        $this->load->view('header');
+
+        $p = new project();
+        $p->get_by_id($this->session->userdata('project_id'));
+        $header_project_data = array(
+            'project_id' => $p->id,
+            'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
+
         $this->load->view('userstory_new', $data);
         $this->load->view('footer');
     }
@@ -81,7 +85,7 @@ class Userstory_controller extends CI_Controller {
             $data['errorMsg1'] = $errorMsg1;
         }
 
-        redirect('userstory_controller/index/' . $_SESSION['project_id']);
+        redirect('userstory_controller/index/' . $this->session->userdata('project_id'));
     }
 
     function index($id)
@@ -89,7 +93,7 @@ class Userstory_controller extends CI_Controller {
         $this->load->view('header');
 
         $p = new project();
-        $p->get_by_id($_SESSION['project_id']);
+        $p->get_by_id($this->session->userdata('project_id'));
         $header_project_data = array(
             'project_id' => $p->id,
             'project_name' => $p->projectname);
@@ -119,7 +123,7 @@ class Userstory_controller extends CI_Controller {
         $this->load->view('header');
 
         $p = new project();
-        $p->get_by_id($_SESSION['project_id']);
+        $p->get_by_id($this->session->userdata('project_id'));
         $header_project_data = array(
             'project_id' => $p->id,
             'project_name' => $p->projectname);

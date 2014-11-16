@@ -7,6 +7,7 @@ class UserStory extends DataMapper {
     //var $has_many = array('test','user','task');
     
     var $has_one = array('project');
+    var $has_many = array('task');
     
     var $validation = array(
         'userstoryname' => array(
