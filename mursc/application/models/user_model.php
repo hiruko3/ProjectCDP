@@ -1,10 +1,10 @@
-<?php
-
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+ 
 class User_model extends CI_Model {
 
 	public function can_log_in(){
 		$this->db->select('email, password');
-		$this->db->from('user');
+		$this->db->from('mursc_users');
 		$this-> db -> where('email', $this->input->post('email'));
 		$this-> db -> where('password', md5($this->input->post('password')));
 		$query = $this -> db -> get();
@@ -23,7 +23,7 @@ class User_model extends CI_Model {
 			'password' => $this->input->post('password'),
 			'key' => $key
 			);
-		$query = $this->db->insert('tmp_user', $data);
+		$query = $this->db->insert('mursc_tmp_users', $data);
 		if($query){
 			return true;
 		} else {
@@ -33,7 +33,7 @@ class User_model extends CI_Model {
 
 	public function is_key_valid($key){
 		$this->db->where('key', $key);
-		$query = $this->db->get('tmp_user');
+		$query = $this->db->get('mursc_tmp_users');
 
 		if($query->num_rows() == 1)
 			return true;
@@ -43,7 +43,7 @@ class User_model extends CI_Model {
 	public function add_user($key){
 
 		$this->db->where('key',$key);
-		$temp_user = $this->db->get('tmp_user');
+		$temp_user = $this->db->get('mursc_tmp_users');
 		if($temp_user){
 			$row = $temp_user->row();
 
@@ -52,11 +52,11 @@ class User_model extends CI_Model {
 				'password' => $row->password,
 				);
 
-			$query = $this->db->insert('user', $data);
+			$query = $this->db->insert('mursc_users', $data);
 		}
 		if($query){
 			$this->db->where('key',$key);
-			$this->db->delete('tmp_user');
+			$this->db->delete('mursc_tmp_users');
 			return $data['email'];
 		} else return false;
 	}

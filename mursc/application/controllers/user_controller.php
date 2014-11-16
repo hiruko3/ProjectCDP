@@ -16,7 +16,7 @@ class User_controller extends CI_Controller {
     */
     function __construct() {
         parent::__construct();
-        $this->_id = 3;////////////////////////////////
+        $this->_id = 3;
 
         $this->load->model('user');
         $u = new User();
@@ -25,14 +25,20 @@ class User_controller extends CI_Controller {
         $this->_pseudo = $u->username;
         $this->_pass = $u->password;
         $this->_email = $u->email;
-        $this->load->Library('form_validation');
         $this->load->library('table');
-        $this->load->helper('form');
         $this->load->helper('html');
     }
 
     function index($data = array()) {
-        $this->display_project_list();
+        if($this->session->userdata('is_logged_in') == 1){
+            $this->display_project_list();
+        } else $this->display_resume();
+    }
+
+    function display_resume(){
+        $this->load->view('header');
+        $this->load->view('resume_project');
+        $this->load->view('footer');
     }
 
     function display_project_list($data = array())
@@ -297,5 +303,3 @@ class User_controller extends CI_Controller {
     }
 }
 ?>
-
-}

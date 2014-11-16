@@ -32,16 +32,21 @@
                         <a href="#">Versions</a>
                     </li>
                 </ul>
-
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="username" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-default">Sign In</button>
-                </form>
+                <?php if($this->session->userdata('is_logged_in') == 0){?>
+                    <form action="<?php echo base_url()."login/sign_up" ?>" class="navbar-form navbar-right" role="search">
+                        <button type="submit" class="btn btn-default">Sign Up</button>
+                    </form>
+                    <form action="<?php echo base_url()."login" ?>" class="navbar-form navbar-right" role="search">
+                        <button type="submit" class="btn btn-default">Sign In</button>
+                    </form>
+                <?php } else { ?>
+                     <form action="<?php echo base_url()."login/logout" ?>" class="navbar-form navbar-right" role="search">
+                        <button type="submit" class="btn btn-default">Logout</button>
+                    </form>
+                    <form action="<?php echo base_url()."login/member" ?>" class="navbar-form navbar-right" role="search">
+                        <button type="submit" class="btn btn-default">My Profile</button>
+                    </form>
+                <?php } ?>
             </div>
         </div>
     </nav>

@@ -11,8 +11,7 @@ class Login extends My_Controller {
 
  function index()
  {
-    //$this->login();
-   redirect('user_controller');
+    $this->login();
  }
 
  public function login(){
@@ -42,7 +41,7 @@ class Login extends My_Controller {
  			'is_logged_in' => 1
  			);
  		$this -> session -> set_userdata($data);
- 		redirect('login/member');
+ 		redirect('user_controller');
  	} else {
  		$this->login();
  	}
@@ -60,7 +59,7 @@ public function validate_credentials(){
 
 public function logout(){
 	$this->session->sess_destroy();
-	redirect('login/login');
+	redirect('user_controller');
 }
 
 public function sign_up(){

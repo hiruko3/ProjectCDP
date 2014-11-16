@@ -12,6 +12,12 @@
   	echo"</pre>";
   	?>
 
+  	<a href =' <?php echo base_url()."profile_settings/settings" ?>' > Profile Settings </a> 
+	<br/>
   	<a href =' <?php echo base_url()."login/logout" ?>' > Logout </a>
+  	<br/>
+  	<a href =' <?php echo base_url() ?>' > Back to Project </a> 
+  	<br/>
+
  </body>
 </html>
