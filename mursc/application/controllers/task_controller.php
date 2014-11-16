@@ -3,48 +3,18 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-<<<<<<< HEAD
 class task_controller extends My_Controller {
 
-    public $taskDate;
-    public $taskDescription;
-    public $userAttached;
-    public $taskName;
-
-
      function __construct() {
-        parent::__construct();
-           $taskDate = "";
-     $taskDescription = "";
-     $taskName = "";
-        $taskData = array('date' => $taskDate,
-        'description' => $taskDescription,
-        'name' => $taskName
-        );
-        $this->load->library('table',$taskData);
-     
-
+        parent::__construct();     
     }
 
-    function displayTask(){
-        $this->load->view('task_view');
+    function displayTask($t_id){
+        $task = new task();
+        $task->get_by_id($t_id);
+        $this->load->view('task_view',$task);
     }
 
-    function setDate($date){
-        $this->taskDate = $date;
-    }
-
-    function setDateFin($date){
-        $this->dateFin = $date;
-    }
-
-    function setDescriptif($descriptif){
-        $this->$taskDescription = $descriptif;
-    }
-
-    function setTaskName($name){
-        $this->taskName = $name;
-    }
 
     function taskSettings(){
         $this->load->view('task_edit');
@@ -66,15 +36,7 @@ class task_controller extends My_Controller {
         return true;
     }
 
-=======
-session_start();
-
-class Task_controller extends CI_Controller {
-    function __construct() {
-        parent::__construct();
-    }
-
-	function index()
+    function index()
 	{
         $this->load->view('header');
 
@@ -173,16 +135,5 @@ class Task_controller extends CI_Controller {
     {
         echo "delete";
     }
-
-    function view($task_id)
-    {
-        echo "view";
-    }
-
-    function edit_task($task_id)
-    {
-        echo "edit";
-    }
->>>>>>> 033f295a89cc02c34a725d165e511b2c40d87c1b
 }
 ?>
