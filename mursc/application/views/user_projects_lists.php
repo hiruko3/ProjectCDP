@@ -1,5 +1,9 @@
 <html lang="fr">
+ <head>
+   <title>Projects</title>
     <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
     <div id="container">
 
         <h1> My Projects List: ( <?php echo count($projects_list_as_contributor) + count($projects_list_as_follower) + count($invitations_list) + count($candidacy_list); ?> )</h1>

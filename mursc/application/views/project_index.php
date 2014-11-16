@@ -41,27 +41,26 @@
                 </div>
             </fieldset>
             <?php echo form_fieldset_close(); ?>
-
+            ____________________________________________________________________________
+            <br/>   
             <?php echo form_fieldset('Staff'); ?>
             <fieldset class="col-lg-offset-1">
                 <div class="col-lg-11">
                     <?php
-                        $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
-                        $this->table->set_template($tmpl);
-                        $this->table->set_heading('Name', 'Status');
-                        foreach ($list_member as $m)
-                        {
-                            $this->table->add_row(form_label($m['username']),
-                            form_label($m['user_status']));
-                        }
+                    $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
+                    $this->table->set_template($tmpl);
+                    $this->table->set_heading('Name', 'Status');
+                    foreach ($list_member as $m) {
+                        $this->table->add_row(form_label($m['username']), form_label($m['user_status']));
+                    }
 
-                        echo $this->table->generate();
+                    echo $this->table->generate();
                     ?>
                 </div>
             </fieldset>
             <?php
-                echo form_fieldset_close();
-                echo form_close();
+            echo form_fieldset_close();
+            echo form_close();
             ?>
         </div>
     </div>

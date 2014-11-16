@@ -53,6 +53,8 @@ class CI_Controller {
                 
                 // Integration de css & jss partout
                 $this->load->view('jss_and_css');
+                
+                $this->load->library('session');
 	}
 
 	public static function &get_instance()

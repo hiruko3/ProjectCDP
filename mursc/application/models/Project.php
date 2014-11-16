@@ -3,9 +3,9 @@
 class Project extends DataMapper {
 
     var $has_many = array(
-        'user', 'join_projects_user');
+        'user','userstory', 'task');
         /*
-        'userstory',
+        '',
         'versionproject',
         'watcher',
         'contributor');*/
