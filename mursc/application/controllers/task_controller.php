@@ -22,7 +22,45 @@ class Task_controller extends CI_Controller {
         $this->load->view('project_header', $header_project_data);
 
         $t = new task();
-        $task_list = $t->where_related('userstory/project', 'id', $p->id)->distinct()->get();
+        $task_list = $t->where_related('project', 'id', $p->id)->distinct()->get();
+
+        foreach($task_list as $task)
+        {
+            // dev
+            $u = new User();
+            $u->get_by_id($task->dev_id);
+            $task->dev_name = $u->username;
+            ////
+            // dep
+            $tasks = $task->task->get(); // liste des taches dont depend la tache
+
+            ////////// pour avoir la liste des taches (et non le nombre de taches), decommenter ce qui suit... //////////
+            /*$tasks_list_string = '';
+            foreach($tasks as $ta){ $tasks_list_string .= $ta->taskname . ',' . br(); }
+            $task->dep_list = $tasks_list_string;*/
+            ////////// ...et commenter cette ligne //////////
+            $task->dep_list = $tasks->result_count();
+            ////////////////////////////////////////
+
+            ////
+            // us
+            $userstories = $task->userstory->get(); // liste des us auxquelles appartient la tache
+
+            ////////// pour avoir la liste des us (et non le nombre d us), decommenter ce qui suit... //////////
+            /*$us_list_string = '';
+            foreach($userstories as $ustory) { $us_list_string .= $ustory->userstoryname . ',' . br(); }
+            $task->us_list = $us_list_string;*/
+            ////////// ...et commenter cette ligne //////////
+            $task->us_list = $userstories->result_count();
+            ////////////////////////////////////////
+
+            ////
+        }
+
+        /*
+        $dep_list = array();
+        $us_list = array();*/
+
         $data = array(
             'p' => $p,
             'task_list' => $task_list

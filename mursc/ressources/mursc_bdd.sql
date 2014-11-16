@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 16 Novembre 2014 à 14:40
+-- Généré le :  Dim 16 Novembre 2014 à 19:06
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('fbaf5b7941688afce2e6768bbc914665', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', 1416145010, 'a:2:{s:9:"user_data";s:0:"";s:10:"project_id";s:2:"20";}');
+('4f8b8046d68e22a27638efce883c6096', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', 1416161087, 'a:2:{s:9:"user_data";s:0:"";s:10:"project_id";s:2:"20";}');
 
 -- --------------------------------------------------------
 
@@ -117,14 +117,40 @@ CREATE TABLE IF NOT EXISTS `mursc_join_relatedtasks_tasks` (
 `id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
   `relatedtask_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Contenu de la table `mursc_join_relatedtasks_tasks`
 --
 
 INSERT INTO `mursc_join_relatedtasks_tasks` (`id`, `task_id`, `relatedtask_id`) VALUES
-(1, 2, 2);
+(1, 2, 2),
+(2, 2, 8),
+(4, 2, 9),
+(9, 2, 13),
+(11, 2, 14),
+(13, 2, 15),
+(15, 2, 16),
+(17, 2, 17),
+(24, 2, 26),
+(5, 5, 9),
+(10, 5, 13),
+(12, 5, 14),
+(14, 5, 15),
+(16, 5, 16),
+(18, 5, 17),
+(6, 6, 9),
+(19, 6, 19),
+(20, 6, 20),
+(21, 6, 23),
+(22, 6, 24),
+(23, 6, 25),
+(25, 6, 26),
+(3, 7, 8),
+(7, 7, 9),
+(8, 8, 9),
+(26, 17, 26),
+(27, 18, 26);
 
 -- --------------------------------------------------------
 
@@ -136,7 +162,24 @@ CREATE TABLE IF NOT EXISTS `mursc_join_tasks_userstories` (
 `id` int(11) NOT NULL,
   `userstory_id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Contenu de la table `mursc_join_tasks_userstories`
+--
+
+INSERT INTO `mursc_join_tasks_userstories` (`id`, `userstory_id`, `task_id`) VALUES
+(1, 9, 22),
+(3, 9, 23),
+(5, 9, 24),
+(7, 9, 25),
+(2, 10, 22),
+(4, 10, 23),
+(6, 10, 24),
+(8, 10, 25),
+(9, 10, 26),
+(10, 13, 26),
+(11, 14, 26);
 
 -- --------------------------------------------------------
 
@@ -185,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `mursc_tasks` (
   `description` text,
   `dev_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- Contenu de la table `mursc_tasks`
@@ -197,7 +240,26 @@ INSERT INTO `mursc_tasks` (`id`, `taskname`, `statut`, `cost`, `datestart`, `dat
 (3, 'tache 3', 'ready', 8, '2014-11-03', '2014-11-04', NULL, 3, 43),
 (5, 'bbbb', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
 (6, 'bbbb', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
-(7, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', 'desc', 2, 20);
+(7, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', 'desc', 2, 20),
+(8, 'tache avec deps', 'done', 2, '2014-11-15', '2014-11-16', 'description 01', 6, 20),
+(9, 'complete task', 'in progress', 0, '2014-12-15', '2015-11-16', 'test description', 3, 20),
+(10, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
+(11, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
+(12, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
+(13, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
+(14, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
+(15, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
+(16, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
+(17, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
+(18, 'tache 28', 'not ready', 1, '2014-12-15', '2015-11-16', '', 2, 20),
+(19, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
+(20, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
+(21, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
+(22, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
+(23, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
+(24, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
+(25, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
+(26, 'final task', 'ready', 42, '2014-11-15', '2014-12-24', 'des', 6, 20);
 
 -- --------------------------------------------------------
 
@@ -395,12 +457,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 -- AUTO_INCREMENT pour la table `mursc_join_relatedtasks_tasks`
 --
 ALTER TABLE `mursc_join_relatedtasks_tasks`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT pour la table `mursc_join_tasks_userstories`
 --
 ALTER TABLE `mursc_join_tasks_userstories`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `mursc_projects`
 --
@@ -410,7 +472,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
 -- AUTO_INCREMENT pour la table `mursc_tasks`
 --
 ALTER TABLE `mursc_tasks`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT pour la table `mursc_tests`
 --
