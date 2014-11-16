@@ -40,7 +40,7 @@
 
 
 // GENERAL 
-$route['default_controller'] = "login";
+$route['default_controller'] = "user_controller";
 $route['404_override'] = '';
 
 
@@ -51,7 +51,7 @@ $route['project/edit_project/(:num)'] = "project_controller/edit_project/$1";
 $route['project/delete_project/(:num)'] = "project_controller/delete_project/$1";
 
 
-// USER CONTROLLER
+//USER CONTROLLER
 $route['user/index'] = "user_controller/index";
 $route['user/projectList'] = "user_controller/index";
 
