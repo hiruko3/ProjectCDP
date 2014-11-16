@@ -19,7 +19,7 @@
                     	form_label($t->datestart),
                     	form_label($t->dateend),
                     	form_label(character_limiter($t->description, 15)),
-                    	'<a class="btn btn-primary" href="' . base_url() . 'task_controller/view/' . $t->id . '"><i class="fa icon-eye-open"></i> View </a> &nbsp;
+                    	'<a class="btn btn-primary" href="' . base_url() . 'task_controller/displayTask/' . $t->id . '"><i class="fa icon-eye-open"></i> View </a> &nbsp;
                              <a class="btn btn-primary" href="' . base_url() . 'task_controller/edit_task/' . $t->id . '"><i class="fa fa-cog"></i> Edit </a> &nbsp;
                              <a onclick="return confirm(\'Are you sure you want to delete the task ' . $t->taskname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'task_controller/delete_task/' . $t->id . '" ><i class="fa fa-close"></i> Delete </a> &nbsp;');
                 }
