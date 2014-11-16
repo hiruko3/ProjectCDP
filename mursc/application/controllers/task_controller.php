@@ -64,7 +64,7 @@ class Task_controller extends CI_Controller {
             $r_t->dateend = $this->input->post('date_end');
             $r_t->description = $this->input->post('desc');
 
-            // relationships : project, dev, dependancies, TODO /////////////////////////////////us : input->post('us');
+            // relationships : project, dev, dependancies tasks), us
             $r_t->project_id = $p->id;
             $u = new user();
             $r_t->dev_id = $this->input->post('dev');
@@ -74,15 +74,19 @@ class Task_controller extends CI_Controller {
             if($this->input->post('dep'))
             {
                 foreach($this->input->post('dep') as $dep){ array_push($deps, $dep); }
-               $t_dep->where_in('id', $deps)->get();
+                $t_dep->where_in('id', $deps)->get();
             }
 
-
-
-            //echo br(5) . $t->dev_id;
-
+            $asso_us = new userstory();
+            $tab_asso_us = array();
+            if($this->input->post('us'))
+            {
+                foreach($this->input->post('us') as $post_us){ array_push($tab_asso_us, $post_us); }
+                $asso_us->where_in('id', $tab_asso_us)->get();
+            }
             ////
-            if(!$r_t->save(/*$t_dep->all*/)){ $data['error'] = $r_t->error->string; }
+
+            if(!$r_t->save(array($t_dep->all, $asso_us->all))){ $data['error'] = $r_t->error->string; }
             else
             {
                 $data['succes'] = 'Registered task.';

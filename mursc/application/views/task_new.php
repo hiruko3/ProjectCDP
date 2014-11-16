@@ -26,7 +26,7 @@
         echo '<div class="row"><div class="col-lg-2">' . form_label('Cost', 'cost') . '</div><div class="col-lg-2"><input type="number" name="cost" min=0 max=50 value=1 /></div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('Developer', 'dev') . '</div><div class="col-lg-2">' . form_dropdown('dev', $dev_list, '') . '</div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('Dependencies', 'dep') . '</div><div class="col-lg-2">' . form_multiselect('dep[]', $task_list, '') . '</div></div>';
-        echo '<div class="row"><div class="col-lg-2">' . form_label('US', 'us') . '</div><div class="col-lg-2">' . form_multiselect('us', $us_list, '') . '</div></div>';
+        echo '<div class="row"><div class="col-lg-2">' . form_label('US', 'us') . '</div><div class="col-lg-2">' . form_multiselect('us[]', $us_list, '') . '</div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('Date start', 'date_start') . '</div><div class="col-lg-2"><input type="date" name="date_start" placeholder="aaaa/mm/dd" /></div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('Date end', 'date_end') . '</div><div class="col-lg-2"><input type="date" name="date_end" placeholder="aaaa/mm/dd" /></div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('Description', 'desc') . '</div><div class="col-lg-2">' . form_textarea('desc') . '</div></div>';
