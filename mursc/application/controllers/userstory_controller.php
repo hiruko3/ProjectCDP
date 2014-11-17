@@ -133,9 +133,48 @@ class Userstory_controller extends CI_Controller {
         $this->load->view('footer');
     }
 
-    function edit_userstory($id)
-    {
+    ////////////////////////// EDIT USER STORY ////////////////////////////
 
+    function edit_userstory($id) {
+
+        $validMsg = array();
+        $errorMsg1 = array();
+        $errorMsg2 = array();
+
+        $us = new UserStory();
+
+        if (!empty($_POST)) {
+
+            $us->where('id', $id)->get();
+
+            $us->userstoryname = $_POST['userstoryname'];
+            $us->description = $_POST['description'];
+            $us->statut = $_POST['statut'];
+            $us->cost = $_POST['cost'];
+            $us->datestart = $_POST['datestart'];
+            $us->dateend = $_POST['dateend'];
+
+            // Save in bdd
+            if (!$us->save()) {
+                array_push($errorMsg1, $us->error->all);
+                $errorMsg1 = $errorMsg1['0'];
+            } else {
+                $validMsg['userstory_edited'] = "<p> User story edited ! </p>";
+            }
+        }
+
+        $us->where('id', $id)->get();
+
+        $data['userstory'] = $us;
+        $data['project_id'] = $this->session->userdata('project_id');
+
+        $data['validMsg'] = $validMsg;
+        $data['errorMsg1'] = $errorMsg1;
+        $data['errorMsg2'] = $errorMsg2;
+
+        $this->load->view('header');
+        $this->load->view('userstory_edit', $data);
+        $this->load->view('footer');
     }
 
 }

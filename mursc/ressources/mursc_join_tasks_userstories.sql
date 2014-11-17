@@ -57,7 +57,8 @@ INSERT INTO `mursc_join_tasks_userstories` (`id`, `userstory_id`, `task_id`) VAL
 -- Index pour la table `mursc_join_tasks_userstories`
 --
 ALTER TABLE `mursc_join_tasks_userstories`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `userstory_id_2` (`userstory_id`,`task_id`), ADD UNIQUE KEY `userstory_id_3` (`userstory_id`,`task_id`), ADD KEY `userstory_id` (`userstory_id`), ADD KEY `task_id` (`task_id`);
+
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `userstory_id_2` (`userstory_id`,`task_id`), ADD KEY `userstory_id` (`userstory_id`), ADD KEY `task_id` (`task_id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
