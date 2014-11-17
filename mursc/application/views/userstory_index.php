@@ -7,11 +7,12 @@
 
         <div class='row'>
             <div class='col-md-3'>
-                <?php echo anchor(base_url() . 'userstory_controller/index/' . $project_id, 'Return to backlog', 'class="btn btn-default fa fa-arrow-left "'); ?>
+                <?php echo anchor(base_url() . 'userstory_controller/index/' . $project_id, ' Return to backlog', 'class="btn btn-default fa fa-arrow-left "'); ?>
             </div>
             <div class='col-md-1'></div>
         </div>
-        <br /><br /><br/>
+      
+        <?php echo br(3); ?>
 
         <div class='row'>
 
@@ -33,17 +34,16 @@
 
                     echo form_label('Cost :', 'cost');
                     echo "   " . $userstory->cost;
-                    
+
                     echo br(2);
 
                     echo form_label('Date start :', 'datestart');
                     echo "   " . $userstory->datestart;
-                    
+
                     echo br(2);
 
                     echo form_label('Date end :', 'dateend');
                     echo "   " . $userstory->dateend;
-                    
                     ?>
                 </div>
             </fieldset>

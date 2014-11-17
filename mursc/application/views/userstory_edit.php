@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <div id="container">
 
-        <h1> Edit user story </h1>
+        <h1> <?php echo 'Edit ' . $userstory->userstoryname; ?> </h1>
 
         <br/>
 
