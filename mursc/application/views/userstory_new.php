@@ -7,7 +7,7 @@
         <br/>
 
         <?php
-        echo anchor(base_url() . 'userstory_controller/index/' . $project_id, 'Return to backlog', 'class="btn btn-default fa fa-arrow-left "');
+        echo anchor(base_url() . 'userstory_controller/index/' . $project_id, ' Return to backlog', 'class="btn btn-default fa fa-arrow-left "');
         echo br(2);
         ?>
 

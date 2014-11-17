@@ -56,8 +56,8 @@
             <div class="col-lg-5">
                 <p>
                     <select  class="form-control" id="type" name="type">
-                        <option value="public" > Public </option>
-                        <option value="private"  > Private </option>
+                        <option value="public" <?php if($project->type == 'public'){ echo 'SELECTED';}?>> Public </option>
+                        <option value="private"  <?php if($project->type == 'private'){ echo 'SELECTED';}?>> Private </option>
                     </select>
                 </p>
             </div>
