@@ -53,7 +53,7 @@ $autoload['packages'] = array();
 */
 
 
-$autoload['libraries'] = array('database', 'session', 'form_validation', 'datamapper','Template','table');
+$autoload['libraries'] = array('database', 'session', 'form_validation', 'datamapper','parser','table');
 
 
 

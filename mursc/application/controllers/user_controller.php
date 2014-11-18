@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User_controller extends CI_Controller {
+class User_controller extends My_Controller {
 
     private $_id; /** uniq user id : int */
     private $_pseudo; /** uniq user name : string */

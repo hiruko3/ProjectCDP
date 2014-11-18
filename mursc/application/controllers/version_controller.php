@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 session_start();
 
-class Version_controller extends CI_Controller {
+class Version_controller extends My_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('html');

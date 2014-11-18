@@ -80,7 +80,7 @@ class task_controller extends My_Controller {
         $data['us_list'] = array();
         foreach($us as $b){ $data['us_list'][$b->id] = $b->userstoryname; }
 
-        if (!empty($_POST))
+        if(!empty($_POST))
         {
             $r_t = new task();
             $r_t->taskname = $this->input->post('name');
@@ -90,7 +90,7 @@ class task_controller extends My_Controller {
             $r_t->dateend = $this->input->post('date_end');
             $r_t->description = $this->input->post('desc');
 
-            // relationships : project, dev, dependancies tasks), us
+            // relationships : project, dev, dependancies (tasks), us
             $r_t->project_id = $p->id;
             $u = new user();
             $r_t->dev_id = $this->input->post('dev');
