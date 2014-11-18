@@ -1,0 +1,8 @@
+http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/login/sign_up
+	si on entre une adresse mail déjà dans mursc.tmp_user => erreur mysql non capturée
+
+http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/login/member
+	afficher une réponse en brute de la bdd ?
+
+http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/task_controller/index/20
+	réduire taille du tableau en largeur

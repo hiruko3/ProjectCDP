@@ -3,10 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class task_controller extends My_Controller {
+session_start();
 
-     function __construct() {
-        parent::__construct();     
+class Task_controller extends My_Controller {
+    function __construct() {
+        parent::__construct();
     }
 
     function displayTask($t_id){
@@ -36,8 +37,8 @@ class task_controller extends My_Controller {
         return true;
     }
 
-    function index()
-	{
+    function index($data = array())
+    {
         $this->load->view('header');
 
         $p = new project();
@@ -48,15 +49,49 @@ class task_controller extends My_Controller {
         $this->load->view('project_header', $header_project_data);
 
         $t = new task();
-        $task_list = $t->where_related('userstory/project', 'id', $p->id)->distinct()->get();
-        $data = array(
-            'p' => $p,
-            'task_list' => $task_list
-            );
+        $task_list = $t->where_related('project', 'id', $p->id)->distinct()->get();
+
+        foreach($task_list as $task)
+        {
+            // dev
+            $u = new User();
+            $u->get_by_id($task->dev_id);
+            $task->dev_name = $u->username;
+            ////
+            // dep
+            $tasks = $task->task->get(); // liste des taches dont depend la tache
+
+            ////////// pour avoir la liste des taches (et non le nombre de taches), decommenter ce qui suit... //////////
+            /*$tasks_list_string = '';
+            foreach($tasks as $ta){ $tasks_list_string .= $ta->taskname . ',' . br(); }
+            $task->dep_list = $tasks_list_string;*/
+            ////////// ...et commenter cette ligne //////////
+            $task->dep_list = $tasks->result_count();
+            ////////////////////////////////////////
+
+            ////
+            // us
+            $userstories = $task->userstory->get(); // liste des us auxquelles appartient la tache
+
+            ////////// pour avoir la liste des us (et non le nombre d us), decommenter ce qui suit... //////////
+            /*$us_list_string = '';
+            foreach($userstories as $ustory) { $us_list_string .= $ustory->userstoryname . ',' . br(); }
+            $task->us_list = $us_list_string;*/
+            ////////// ...et commenter cette ligne //////////
+            $task->us_list = $userstories->result_count();
+            ////////////////////////////////////////
+
+            ////
+        }
+
+        $data['p'] = $p;
+        $data['task_list'] = $task_list;
         $this->load->view('task_list', $data);
 
         $this->load->view('footer');
-	}
+    }
+
+
 
     function new_task()
     {
@@ -133,7 +168,13 @@ class task_controller extends My_Controller {
 
     function delete_task($task_id)
     {
-        echo "delete";
+        $t = new Task();
+        $task = $t->get_by_id($task_id);
+
+        if($t->delete()){ $data['delete_succes'] = 'Task deleted.'; }
+        else{ $data['delete_error'] = $t->error->string; }
+        
+        $this->index($data);  
     }
 }
 ?>
