@@ -71,11 +71,11 @@ $('#search_task_input').keyup(function() {
     }
     );
 
-    var mots = $('#search_task_input').val().toLowerCase().split(" ");
+    var mot = $('#search_task_input').val().toLowerCase();
 
     $("#table_task tbody tr").each(function(index, tr)
     {
-        if (mots[0].length > 0)
+        if (mot[0].length > 0)
         {
             $(tr).hide();
         }
@@ -88,13 +88,11 @@ $('#search_task_input').keyup(function() {
         {
             if (colonnes[index] in {'Name': true, 'Developer': true})
             {
-                for (mot in mots)
-                {
-                    if (mots[mot].length > 0 && $(td).text().toLowerCase().indexOf(mots[mot]) >= 0)
+                    if (mot.length > 0 && $(td).text().toLowerCase().indexOf(mot) >= 0)
+                    
                     {
                         $(tr).show();
                         return false;
-                    }
                 }
             }
         });
