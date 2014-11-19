@@ -18,7 +18,7 @@
                     <select  class="form-control" id="statut_filter" name="statut_filter">
                         <option value="No filter" > No Filter </option>
                         <option value="Not ready" > Not ready </option>
-                        <option value="Ready to do" > Ready to do </option>
+                        <option value="Ready" > Ready </option>
                         <option value="In progress" > In progress </option>
                         <option value="Done" > Done </option>
                     </select>
@@ -131,7 +131,7 @@ $('#statut_filter').change(function() {
     {
         if (colonnes[index] in {'Status': true})
         {
-            if (mot.length > 0 && $(td).text().toLowerCase().indexOf(mot) >= 0)
+            if ($(td).text().toLowerCase() === mot)
             {
                 $(tr).show();
                  return false;

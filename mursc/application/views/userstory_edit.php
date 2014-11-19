@@ -45,7 +45,7 @@
             <p>
                 <select  class="form-control" id="type" name="statut">
                     <option value="Not ready" <?php if($userstory->statut == 'Not ready'){ echo 'SELECTED';}?> > Not ready </option>
-                    <option value="Ready to do" <?php if($userstory->statut == 'Ready to do'){ echo 'SELECTED';}?> > Ready to do </option>
+                    <option value="Ready" <?php if($userstory->statut == 'Ready'){ echo 'SELECTED';}?> > Ready </option>
                     <option value="In progress" <?php if($userstory->statut == 'In progress'){ echo 'SELECTED';}?> > In progress </option>
                     <option value="Done" <?php if($userstory->statut == 'Done'){ echo 'SELECTED';}?> > Done </option>
                 </select>
