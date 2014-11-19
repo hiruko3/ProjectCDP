@@ -15,19 +15,25 @@ class Login extends My_Controller {
 	 }
 
 	 public function login(){
+	 	$this->load->view('header');
 	 	$this->load->view('login_view');
+	 	$this->load->view('footer');
 	 }
 
 	 public function member(){
+	 	$this->load->view('header');
 	 	//if($this->session->userdata('is_logged_in')){
 	 		$this->load->view('member_view');
 	 	//}else {
 	 	//	redirect('login/restricted');
 	 	//}
+	 	$this->load->view('footer');
 	 }
 
 	 public function restricted(){
+	 	$this->load->view('header');
 	 	$this->load->view('restricted_view');
+	 	$this->load->view('footer');
 	 }
 
 	 public function login_validation(){
@@ -48,7 +54,7 @@ class Login extends My_Controller {
 
 	 		redirect('user_controller');
 	 	} else {
-	 		$this->login();
+	 		redirect('user_controller');
 	 	}
 	}
 
@@ -68,7 +74,9 @@ class Login extends My_Controller {
 	}
 
 	public function sign_up(){
+		$this->load->view('header');
 		$this->load->view('sign_up');
+		$this->load->view('footer');
 	}
 
 	public function sign_up_validation(){

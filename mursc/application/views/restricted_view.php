@@ -10,6 +10,6 @@
   	You do not have access to this page 
   </p>
 
-  	<a href =' <?php echo base_url()."login/login" ?>' > Back to login </a>
+  	<a href = <?php echo base_url() ?>user_controller> Back </a>
  </body>
 </html>
