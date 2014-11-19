@@ -3,6 +3,7 @@
     <div id="container">
 
         <h1> New user story </h1>
+        <?php $this->load->view('fibonacci'); ?>
 
         <br/>
 
@@ -34,7 +35,7 @@
 
 
         <?php
-        echo form_open('userstory/new_userstory', "class='col-lg-6 form-horizontal'");
+            echo form_open('userstory/new_userstory', "class='col-lg-6 form-horizontal'");
         ?>
 
         <label  class="col-lg-5" for="userstoryname">Name * : </label>
@@ -86,7 +87,4 @@
         ?>
 
     </div>
-
-</body>
-
 </html>

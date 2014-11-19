@@ -35,7 +35,7 @@
                 $this->table->set_template($tmpl);
                 $this->table->set_heading('Projectname', 'My status', 'Type', 'Description','Git Url','Actions');
                 foreach ($projects_list_as_contributor as $project) {
-                    $this->table->add_row($project['projectname'], ''.$project['status'], ''.$project['type'].'', $project['description'], $project['giturl'],
+                    $this->table->add_row($project['projectname'], ''.$project['status'], ''.$project['type'].'', character_limiter($project['description'], 20), substr($project['giturl'], 0, 15),
                             '<a class="btn btn-primary" href="'.base_url().'project/index_project/'.$project['id'].'"><i class="fa icon-eye-open"></i> View </a> &nbsp;
                              <a class="btn btn-primary" href="'.base_url().'project/edit_project/'.$project['id'].'"><i class="fa fa-cog"></i> Edit </a> &nbsp;
                              <a onclick="return confirm(\'Are you sure you want to quit the project '.$project['projectname'].' ?\');" class="btn btn-danger" href="'.base_url().'user_controller/quit_project/'.$project['id'].'" ><i class="fa fa-close"></i> Quit </a> &nbsp;');
@@ -57,7 +57,7 @@
                 $this->table->set_template($tmpl);
                 $this->table->set_heading('Projectname', 'My status', 'Type', 'Description','Git Url','Actions');
                 foreach ($projects_list_as_follower as $project) {
-                    $this->table->add_row($project['projectname'], ''.$project['status'], ''.$project['type'].'', $project['description'], $project['giturl'],
+                    $this->table->add_row($project['projectname'], ''.$project['status'], ''.$project['type'].'', character_limiter($project['description'], 20), substr($project['giturl'], 0, 15),
                             '<a class="btn btn-primary" href="'.base_url().'project/index_project/'.$project['id'].'"><i class="fa icon-eye-open"></i> View </a> &nbsp;
                             <a onclick="return confirm(\'Are you sure you want to quit the project '.$project['projectname'].' ?\');" class="btn btn-danger" href="'.base_url().'user_controller/quit_project/'.$project['id'].'" ><i class="fa fa-close"></i> Quit </a> &nbsp;');
                 }
@@ -79,7 +79,7 @@
                 $this->table->set_heading('Projectname', 'Proposed status', 'Type', 'Description','Git Url','Actions');
                 foreach ($invitations_list as $i)
                 {
-                    $this->table->add_row($i['projectname'], '' . $i['proposed_status'], '' . $i['type'] . '', $i['description'], $i['giturl'],
+                    $this->table->add_row($i['projectname'], '' . $i['proposed_status'], '' . $i['type'] . '', character_limiter($i['description'], 20), substr($i['giturl'], 0, 15),
                         '<a class="btn btn-primary" href="'.base_url().'project/index_project/'.$i['id'].'"><i class="fa icon-eye-open"></i> View </a> &nbsp;
                         <a class="btn btn-success" href="'.base_url().'user_controller/validate_invitation/'.$i['id'].'"><i class="fa fa-check"></i> Accept </a> &nbsp;
                         <a class="btn btn-danger" href="'.base_url().'user_controller/reject_invitation/'.$i['id'].'" ><i class="fa fa-close"></i> Reject </a> &nbsp;');
@@ -101,7 +101,7 @@
                 $this->table->set_heading('Projectname', 'Type', 'Description','Git Url','Actions');
                 foreach ($candidacy_list as $i)
                 {
-                    $this->table->add_row($i['projectname'], '' . $i['type'] . '', $i['description'], $i['giturl'],
+                    $this->table->add_row($i['projectname'], '' . $i['type'] . '', character_limiter($i['description'], 20), substr($i['giturl'], 0, 15),
                         '<a class="btn btn-primary" href="'.base_url().'project/index_project/'.$i['id'].'"><i class="fa icon-eye-open"></i> View </a> &nbsp;
                         <a class="btn btn-danger" href="'.base_url().'user_controller/delete_candidacy/'.$i['id'].'" ><i class="fa fa-close"></i> Delete </a> &nbsp;');
                 }

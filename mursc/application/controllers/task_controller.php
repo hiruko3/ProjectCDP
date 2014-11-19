@@ -59,26 +59,26 @@ class Task_controller extends My_Controller {
             $task->dev_name = $u->username;
             ////
             // dep
-            $tasks = $task->task->get(); // liste des taches dont depend la tache
+            //$tasks = $task->task->get(); // liste des taches dont depend la tache
 
             ////////// pour avoir la liste des taches (et non le nombre de taches), decommenter ce qui suit... //////////
             /*$tasks_list_string = '';
             foreach($tasks as $ta){ $tasks_list_string .= $ta->taskname . ',' . br(); }
             $task->dep_list = $tasks_list_string;*/
             ////////// ...et commenter cette ligne //////////
-            $task->dep_list = $tasks->result_count();
+            //$task->dep_list = $tasks->result_count();
             ////////////////////////////////////////
 
             ////
             // us
-            $userstories = $task->userstory->get(); // liste des us auxquelles appartient la tache
+            //$userstories = $task->userstory->get(); // liste des us auxquelles appartient la tache
 
             ////////// pour avoir la liste des us (et non le nombre d us), decommenter ce qui suit... //////////
             /*$us_list_string = '';
             foreach($userstories as $ustory) { $us_list_string .= $ustory->userstoryname . ',' . br(); }
             $task->us_list = $us_list_string;*/
             ////////// ...et commenter cette ligne //////////
-            $task->us_list = $userstories->result_count();
+            //$task->us_list = $userstories->result_count();
             ////////////////////////////////////////
 
             ////

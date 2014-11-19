@@ -14,7 +14,6 @@ class Userstory_controller extends My_Controller {
 ////////////////////////// NEW USER STORY ////////////////////////////
 
     function new_userstory() {
-        $user_id = 3; //////////////////////////////////////////////////////// recup en session
         $project_id = $this->session->userdata('project_id');
         $validMsg = array();
         $errorMsg1 = array();
@@ -173,6 +172,13 @@ class Userstory_controller extends My_Controller {
         $data['errorMsg2'] = $errorMsg2;
 
         $this->load->view('header');
+
+        $p = new project();
+        $p->get_by_id($this->session->userdata('project_id'));
+        $header_project_data = array(
+            'project_id' => $p->id,
+            'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
         $this->load->view('userstory_edit', $data);
         $this->load->view('footer');
     }

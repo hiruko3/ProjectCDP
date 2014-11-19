@@ -6,3 +6,13 @@ http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/login/member
 
 http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/task_controller/index/20
 	réduire taille du tableau en largeur
+	
+pages affichage tasks et backlogs
+	filtres : recuperer valeurs depuis modèle
+	
+recuperation des enums / sets en bdd
+
+http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/login/sign_up_validation
+	"The email has been sent ! " et pas de redirection ou lien (page bloquante)
+
+ajouter la suite de fibonacci a task edit

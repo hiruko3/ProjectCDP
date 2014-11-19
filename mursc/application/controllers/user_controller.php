@@ -16,7 +16,7 @@ class User_controller extends My_Controller {
     */
     function __construct() {
         parent::__construct();
-        $this->_id = 3;
+        $this->_id = $this->session->userdata('user_id');
 
         $this->load->model('user');
         $u = new User();

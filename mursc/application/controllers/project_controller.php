@@ -18,7 +18,7 @@ class Project_controller extends My_Controller {
     ////////////////////////// NEW PROJECT ////////////////////////////
 
     function new_project() {
-        $user_id = 3; //////////////////////////////////////////////////////// recup en session
+        $user_id = $this->session->userdata('user_id');
         $validMsg = array();
         $errorMsg1 = array();
         $errorMsg2 = array();
