@@ -3,6 +3,7 @@
     <div id="container">
 
         <h1> <?php echo 'Edit ' . $userstory->userstoryname; ?> </h1>
+        <?php $this->load->view('fibonacci'); ?>
 
         <br/>
 

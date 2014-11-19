@@ -3,6 +3,7 @@
     <div id="container">
 
         <h1> New task </h1>
+        <?php $this->load->view('fibonacci'); ?>
 
         <br/>
 
