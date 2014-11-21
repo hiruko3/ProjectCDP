@@ -190,7 +190,6 @@ class Userstory_controller extends My_Controller {
                     array_push($tab_asso_task_added, $post_task);
                 }
                 $task_added->where_in('id', $tab_asso_task_added)->get();
-                var_dump($_POST['tasks_added']);
 
                 // ADD
                 if (!$us->save($task_added->all)) {
@@ -208,7 +207,6 @@ class Userstory_controller extends My_Controller {
                     array_push($tab_asso_task_deleted, $post_task);
                 }
                 $task_deleted->where_in('id', $tab_asso_task_deleted)->get();
-                var_dump($_POST['tasks_deleted']);
 
                 // DELETE
                 if (!$us->delete($task_deleted->all)) {
@@ -261,8 +259,8 @@ class Userstory_controller extends My_Controller {
             'project_id' => $p->id,
             'project_name' => $p->projectname);
 
-        //$this->load->view('header');
-        //$this->load->view('project_header', $header_project_data);
+        $this->load->view('header');
+        $this->load->view('project_header', $header_project_data);
         $this->load->view('userstory_edit', $data);
         $this->load->view('footer');
     }
