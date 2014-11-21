@@ -31,7 +31,7 @@
         <fieldset class="col-lg-offset-1">
             <div class="col-lg-11">
                 <?php
-                $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
+                $tmpl = array('table_open' => '<table border="1"  id="table_contributor" class="table table-responsive table-bordered">');
                 $this->table->set_template($tmpl);
                 $this->table->set_heading('Projectname', 'My status', 'Type', 'Description','Git Url','Actions');
                 foreach ($projects_list_as_contributor as $project) {

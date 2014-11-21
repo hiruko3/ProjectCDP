@@ -6,11 +6,14 @@
         <br/>
 
         <div class='row'>
-            <div class='col-md-3'>
+            <div class='col-md-4'>
                 <?php echo anchor('user/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "'); ?>
             </div>
-            <div class='col-md-1'></div>
-            <div class='col-md-1'>
+            <div class='col-md-2'>
+                
+               <div class='row'><div class='col-md-1'></div><div class='col-md-2'><?php echo '<a class="btn btn-primary" href="' . base_url() . 'project_controller/send_invitation/' . $project->id . '" ><i class="fa fa-envelope"></i> Invite new members </a> &nbsp;'; ?></div></div>   
+            </div>
+            <div class='col-md-2'>
                 <?php echo anchor('project_controller/index_project/' . $project->id, ' ', 'class="btn btn-default fa fa-eye "'); ?>
             </div>
         </div>
@@ -114,8 +117,6 @@ echo form_close();
 
 
         </div>
-
-        <div class='row'><div class='col-md-3'></div><div class='col-md-2'><?php echo '<a onclick="return confirm(\'You will left this page\');" class="btn btn-primary" href="' . base_url() . 'project_controller/send_invitation/' . $project->id . '" ><i class="fa fa-envelope"></i> Invite new members </a> &nbsp;'; ?></div></div>
         <div class='row'><div class='col-md-3'></div><div class='col-md-2'><?php echo '<a onclick="return confirm(\'Are you sure you want to delete the project ' . $project->projectname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'project/delete_project/' . $project->id . '" ><i class="icon-trash icon-large"></i> Delete this project </a> &nbsp;'; ?></div></div>
     </div>
 </body>
