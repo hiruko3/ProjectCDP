@@ -85,8 +85,17 @@
         <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ><?php echo $userstory->description; ?></textarea>
 
         <br/>
-        <br/>
+        
+        <?php
+         echo '<div class="col-lg-5">'. form_label('Task(s) assiocated :', 'task_associated') . '</div><div class="col-lg-2">' . form_multiselect('task[]', $tasks_list_associated, '') . '</div>';      
+         echo br(4);
+         echo '<div class="col-lg-5">'. form_label('Added a task :', 'task_added') . '</div><div class="col-lg-2">' . form_multiselect('tasks_added[]', $tasks_list_possible_to_add, '') . '</div>';       
+         echo br(4);
+         echo '<div class="col-lg-5">'. form_label('Deleted a task :', 'task_deleted') . '</div><div class="col-lg-2">' . form_multiselect('tasks_deleted[]', $tasks_list_associated, '') . '</div>';
+         ?>
 
+         <br/>
+         
         <?php
         echo "<p>";
         echo form_submit("edit", "Edit", "class='btn btn-primary col-md-offset-7'");

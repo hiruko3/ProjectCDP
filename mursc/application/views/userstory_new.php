@@ -38,6 +38,7 @@
             echo form_open('userstory/new_userstory', "class='col-lg-6 form-horizontal'");
         ?>
 
+        
         <label  class="col-lg-5" for="userstoryname">Name * : </label>
         <div class="col-lg-5">
             <p>
@@ -77,6 +78,9 @@
         <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ></textarea>
 
         <br/>
+        
+         <?php echo '<div class="col-lg-5">'. form_label('Task(s)', 'task') . '</div><div class="col-lg-2">' . form_multiselect('task[]', $task_list, '') . '</div>';?>
+        
         <br/>
 
         <?php
