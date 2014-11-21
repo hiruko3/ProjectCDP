@@ -79,6 +79,8 @@ class User_controller extends My_Controller {
             $project_in_table['type'] = $project->type;
             $project_in_table['description'] = $project->description;
             $project_in_table['giturl'] = $project->giturl;
+            $count_project_manager = $project->user->include_join_fields()->where('relationship_type', 'member')->where('user_status', 'project manager')->get(); // liste des membres du projet qui sont manager
+            $project_in_table['nb_manager'] = $count_project_manager->result_count(); // compte le nombre de managers
 
             if($project->join_user_status == 'watcher'){ array_push($projects_list_as_follower, $project_in_table); }
             else{ array_push($projects_list_as_contributor, $project_in_table); }

@@ -43,7 +43,7 @@ class Join_Projects_User extends DataMapper
 
 	function _get_user_status()
 	{
-		return array('contributor', 'watcher', 'product owner', 'scrum master', 'project manager', '');
+		return array('project manager', 'contributor', 'watcher', 'product owner', 'scrum master', '');
 	}
 
 	function _enum_relationship_type($field)

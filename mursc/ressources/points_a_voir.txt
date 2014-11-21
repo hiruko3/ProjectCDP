@@ -22,3 +22,6 @@ sign up : page bloquante
 routage
 
 en rentrant sur le site, on est direct sur une page restricted => un peu violent
+
+http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/task_controller/index/
+	filtres : on ne récupère pas toutes les tâches quand on efface tout (mais c'est géré quand on efface pas tout)

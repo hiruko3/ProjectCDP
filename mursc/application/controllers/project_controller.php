@@ -91,6 +91,7 @@ class Project_controller extends My_Controller {
         $this->load->view('footer');
     }
 
+////////////////////////// LIST MEMBERS ////////////////////////////
     /**
     * @brief : renvoie la liste des membres d un projet (contributerus + watchers)
     * @param $p_id : l id du projet
@@ -113,6 +114,7 @@ class Project_controller extends My_Controller {
         return $list_member;
     }
 
+////////////////////////// SEND INVITATION ////////////////////////////
     /**
     * @brief : envoie une invitation a un user (avec un status)
     * @param $p_id : l id du projet pour lequel on invite
@@ -141,8 +143,8 @@ class Project_controller extends My_Controller {
         {
             $u = new User();
             $u->where('username', $_POST['username'])->get();
-            if($_POST['username'] === ''){$data['error'] = 'Please choose a member.';}
-            else if($u->result_count() == 0){$data['error'] .= 'The user ' . $_POST['username'] . ' does not exist.';}
+            if($_POST['username'] === ''){$data['error'] = 'Please choose a member.';} // nom d user non renseigne
+            else if($u->result_count() == 0){$data['error'] .= 'The user ' . $_POST['username'] . ' does not exist.';} // nom d un utilisateur qui n existe pas
             else
             {
                 $j = new Join_Projects_User();
@@ -164,7 +166,7 @@ class Project_controller extends My_Controller {
         $this->load->view('footer');
     }
 
-    ////////////////////////// EDIT PROJECT ////////////////////////////
+////////////////////////// EDIT PROJECT ////////////////////////////
 
     function edit_project($id) {
         $this->session->set_userdata('project_id', $id);
