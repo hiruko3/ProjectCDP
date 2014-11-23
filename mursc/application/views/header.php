@@ -1,6 +1,6 @@
 
 <fieldset class="col-lg-12">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -15,12 +15,14 @@
                 <ul class="nav navbar-nav">
                     <?php if($this->session->userdata('is_logged_in') != 0){ ?>
                     <li>
-                        <a href='<?php echo base_url()."user/projectList/";?> '> Projects Lists</a>
+                        <a href='<?php echo base_url()."user/projectList/";?> '> My projects</a>
+                    </li>
+                    <li>
+                        <a href='<?php echo base_url()."user/list_all/";?> '> Projects list</a>
                     </li>
                     <?php } ?>
                 </ul>
                 <?php if($this->session->userdata('is_logged_in') == 0){
-                    echo validation_errors();
                     echo form_open('login/login_validation', array('class'=>"navbar-form navbar-right", 'role'=>"search"));
                     echo form_input(array('name'=>"email", 'value'=>$this->input->post('email'), 'class'=>"form-control", 'placeholder'=>'email'));
                     echo form_password(array('name'=>"password", 'value'=>$this->input->post(md5('password')), 'class'=>"form-control", 'placeholder'=>'password'));

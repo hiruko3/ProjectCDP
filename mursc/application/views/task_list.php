@@ -48,7 +48,7 @@
                 $this->table->set_template(array('table_open' => '<table border="1" id="table_task" class="table table-responsive table-bordered">'));
                 $this->table->set_heading('Name', 'Status', 'Developer', 'Action');
                 foreach ($task_list as $t) {
-                    $this->table->add_row(form_label($t->taskname, 5), character_limiter($t->statut, 5), character_limiter($t->dev_name, 5), '<a class="btn btn-primary" href="' . base_url() . 'task_controller/view/' . $t->id . '"><i class="fa icon-eye-open"></i> View </a> &nbsp;
+                    $this->table->add_row(form_label($t->taskname), character_limiter($t->statut, 5), character_limiter($t->dev_name, 5), '<a class="btn btn-primary" href="' . base_url() . 'task_controller/view/' . $t->id . '"><i class="fa icon-eye-open"></i> View </a> &nbsp;
                                  <a class="btn btn-primary" href="' . base_url() . 'task_controller/edit_task/' . $t->id . '"><i class="fa fa-cog"></i> Edit </a> &nbsp;
                                  <a onclick="return confirm(\'Are you sure you want to delete the task ' . $t->taskname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'task_controller/delete_task/' . $t->id . '" ><i class="fa fa-close"></i> Delete </a> &nbsp;');
                 }

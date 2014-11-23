@@ -7,11 +7,6 @@
         <br/>
         
         <?php
-        echo anchor('user/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "');
-        echo br(2);
-        ?>
-        
-        <?php
         foreach ($validMsg as $msg) {
             echo "<i class='fa fa-check-square text-success'" . $msg . "</i>";
             echo "</br>";

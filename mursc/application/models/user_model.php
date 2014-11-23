@@ -3,8 +3,9 @@
 class User_model extends CI_Model {
 
 	public function can_log_in(){
-		$this->db->select('email, password');
+		$this->db->select('username, email, password');
 		$this->db->from('mursc_users');
+		$this-> db -> where('username', $this->input->post('username'));
 		$this-> db -> where('email', $this->input->post('email'));
 		$this-> db -> where('password', md5($this->input->post('password')));
 		$query = $this -> db -> get();
@@ -19,6 +20,7 @@ class User_model extends CI_Model {
 	public function add_temp_user($key){
 
 		$data = array(
+			'username' => $this->input->post('username'),
 			'email' => $this->input->post('email'),
 			'password' => $this->input->post('password'),
 			'key' => $key
@@ -48,6 +50,7 @@ class User_model extends CI_Model {
 			$row = $temp_user->row();
 
 			$data = array(
+				'username' => $row->username,
 				'email' => $row->email,
 				'password' => $row->password,
 				);

@@ -3,16 +3,6 @@
     <div id="container">
 
         <h1> <?php echo 'View ' . $userstory->userstoryname; ?> </h1>
-        <br/>
-
-        <div class='row'>
-            <div class='col-md-3'>
-                <?php echo anchor(base_url() . 'userstory_controller/index/' . $project_id, ' Return to backlog', 'class="btn btn-default fa fa-arrow-left "'); ?>
-            </div>
-            <div class='col-md-1'></div>
-        </div>
-
-        <?php echo br(3); ?>
 
         <div class='row'>
 

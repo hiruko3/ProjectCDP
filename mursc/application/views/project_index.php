@@ -5,16 +5,8 @@
         <h1> <?php echo 'View ' . $project->projectname; ?> </h1>
         <br/>
 
-        <div class='row'>
-            <div class='col-md-3'>
-                <?php echo anchor('user/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "'); ?>
-            </div>
-            <div class='col-md-1'></div>
-            <div class='col-md-1'>
-                <?php echo anchor('project_controller/edit_project/' . $project->id, ' ', 'class="btn btn-default fa fa-cog "'); ?>
-            </div>
-        </div>
-        <br /><br /><br/>
+        <div class='row'><div class='col-md-1'><?php echo anchor('project_controller/edit_project/' . $project->id, ' ', 'class="btn btn-default fa fa-cog "'); ?></div></div>
+        <?php echo br(2); ?>
 
         <div class='row'>
             <?php echo form_open(base_url() . "project/view_project/" . $project->id, "class='col-lg-6 form-horizontal'"); ?>

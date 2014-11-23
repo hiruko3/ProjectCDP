@@ -32,30 +32,20 @@ class Project_controller extends My_Controller {
             $p->type = $_POST['type'];
             $p->giturl = $_POST['giturl'];
 
+            $u = new User();
+            $u->get_by_id($user_id);
+
             // Save in bdd
-            if (!$p->save()) {
+            if (!$p->save($u))
+            {
                 array_push($errorMsg1, $p->error->all);
                 $errorMsg1 = $errorMsg1['0'];
             }
-
-            // jointure
-            $p = new Project();
-            $p->where('projectname', $_POST['projectname'])->get();
-
-            $this->load->model('join_projects_user');
-            $j = new Join_Projects_User();
-            $j->user_id = $user_id;
-            $j->project_id = $p->id;
-            $j->user_status = 'project manager';
-            $j->relationship_type = 'member';
-
-            if($j->save()){$validMsg['project_created'] = "<p>New project created ! </p>";}
             else
-            {
-                array_push($errorMsg2, $j->error->all);
-                $errorMsg2 = $errorMsg2['0'];
-            }
-            ////
+                $validMsg['project_created'] = "<p>New project created ! </p>";
+
+            $p->set_join_field($u, 'user_status', 'project manager');
+            $p->set_join_field($u, 'relationship_type', 'member');
         }
 
         $data['validMsg'] = $validMsg;
@@ -371,5 +361,4 @@ class Project_controller extends My_Controller {
         
         redirect('user/projectList');
     }
-
 }

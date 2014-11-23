@@ -5,15 +5,8 @@
         <h1> Edit <?php echo $project->projectname; ?> </h1>
         <br/>
 
-        <div class='row'>
-            <div class='col-md-4'>
-                <?php echo anchor('user/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "'); ?>
-            </div>
-            <div class='col-md-2'>
-                <?php echo anchor('project_controller/index_project/' . $project->id, ' ', 'class="btn btn-default fa fa-eye "'); ?>
-            </div>
-        </div>
-        <br /><br />
+        <div class='row'><div class='col-md-2'><?php echo anchor('project_controller/index_project/' . $project->id, ' ', 'class="btn btn-default fa fa-eye "'); ?></div></div>
+        <?php echo br(2); ?>
 
         <div class='row'>
             <?php
@@ -35,7 +28,6 @@
                 echo "<i class='fa fa-times-circle text-danger'" . $msg . "</i>";
             }
             ?>
-            <br/>
 
 
             <?php

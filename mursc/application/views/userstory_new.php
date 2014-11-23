@@ -5,13 +5,6 @@
         <h1> New user story </h1>
         <?php $this->load->view('fibonacci'); ?>
 
-        <br/>
-
-        <?php
-        echo anchor(base_url() . 'userstory_controller/index/' . $project_id, ' Return to backlog', 'class="btn btn-default fa fa-arrow-left "');
-        echo br(2);
-        ?>
-
         <?php
         foreach ($validMsg as $msg) {
             echo "<i class='fa fa-check-square text-success'" . $msg . "</i>";

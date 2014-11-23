@@ -9,9 +9,6 @@
             <div class='row'>
 
                 <?php
-                    echo anchor('project_controller/edit_project/' . $project_id, ' Return to the projects parameters', 'class="btn btn-default fa fa-arrow-left "');
-                    echo br(2);
-
                     if(ISSET($success)){echo $success;}
                     if(ISSET($error)){echo $error;}
 

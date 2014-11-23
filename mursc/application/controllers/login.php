@@ -16,7 +16,7 @@ class Login extends My_Controller {
 
 	 public function login(){
 	 	$this->load->view('header');
-	 	$this->load->view('login_view');
+	 	$this->load->view('resume_project');
 	 	$this->load->view('footer');
 	 }
 
@@ -70,7 +70,7 @@ class Login extends My_Controller {
 
 	public function logout(){
 		$this->session->sess_destroy();
-		redirect('user_controller');
+		$this->index();
 	}
 
 	public function sign_up(){
@@ -81,12 +81,11 @@ class Login extends My_Controller {
 
 	public function sign_up_validation(){
 
+		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[mursc_users.username]');
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[mursc_users.email]');
 		$this->form_validation->set_rules('password', 'Password', 'required|md5|trim|min_length[7]|max_length[255]');
 		$this->form_validation->set_rules('confirm_password', 'CPassword', 'required|trim|min_length[7]|max_length[255]|matches[password]');
 		
-		$this->form_validation->set_message('is_unique', 'That email already exists');
-
 		if($this->form_validation->run()){
 
 			//Generate a random key for the user's token

@@ -155,8 +155,8 @@ class Userstory_controller extends My_Controller {
         };
 
 
-        // $this->load->view('header');
-        // $this->load->view('project_header', $header_project_data);
+        $this->load->view('header');
+        $this->load->view('project_header', $header_project_data);
         $this->load->view('userstory_index', $data);
         $this->load->view('footer');
     }

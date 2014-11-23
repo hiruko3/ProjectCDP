@@ -12,18 +12,6 @@
             if(ISSET($error)){echo "<div class='error'>" . $error . "</div>";}
         ?>
 
-        <h3> Create or join </h3>
-
-        <?php echo form_open(base_url() . 'user_controller/send_candidacy/', array('name'=>'form_candidacy')); ?>
-        <div class='row'><div class='col-md-2'><?php echo form_input(array('name'=>'project_name', 'placeholder'=>'project')) ?></div></div>
-        <?php echo form_close();?>
-
-        <div class='row'>
-            <div class='col-md-2'><a class='btn btn-primary' href='#' onClick=form_candidacy.submit()><i class='fa fa-envelope-o'></i> Send a candidacy </a> &nbsp;</div>
-            <div class='col-md-1'>OR</div>
-            <div class='col-md-2'><a class='btn btn-primary' href=<?php echo base_url() . 'project/new_project' ?>><i class='fa fa-plus'></i> Create a new project </a> &nbsp;</div>
-        </div>
-
         <h3> As a contributor: ( <?php echo count($projects_list_as_contributor); ?> )</h3>
 
         <br/>
