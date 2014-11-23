@@ -20,7 +20,7 @@
                         <a href="<?php echo base_url() . "userstory_controller/index/" . $project_id; ?>">Backlog</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url() . "task_controller/index/" . $project_id; ?>">Tasks</a>
+                        <a href="<?php echo base_url() . "task_controller/index/"; ?>">Tasks</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url() . "test_controller/index/" . $project_id; ?>">Tests</a>

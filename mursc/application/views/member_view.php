@@ -6,11 +6,14 @@
  </head>
 
  <body>
-  <h1>Your profil</h1>
-  <p>
-    You can modify your personnal settings such as your password or skills.
-  </p>
-    <a href="http://127.0.0.1/CDP/Project/ProjectCDP/mursc/profile_settings/settings" class="btn btn-default fa fa-cog "> </a>
+
+  <h1>Member </h1>
+  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > Profile Settings </a> 
+	<br/>
+  <a href =' <?php echo base_url()."login/logout" ?>' > Logout </a>
+  <br/>
+  <a href =' <?php echo base_url() ?>' > Back to my projects </a> 
+  <br/>
 
  </body>
 </html>

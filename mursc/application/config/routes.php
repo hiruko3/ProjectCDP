@@ -40,7 +40,7 @@
 
 
 // GENERAL 
-$route['default_controller'] = "user_controller";
+$route['default_controller'] = "login";
 $route['404_override'] = '';
 
 
@@ -54,6 +54,8 @@ $route['project/delete_project/(:num)'] = "project_controller/delete_project/$1"
 //USER CONTROLLER
 $route['user/index'] = "user_controller/index";
 $route['user/projectList'] = "user_controller/index";
+$route['user/candidate/(:num)'] = "user_controller/send_candidacy/$1";
+$route['user/list_all'] = "user_controller/all_projects_list";
 
 
 // USERSTORIES CONTROLLER
@@ -62,6 +64,7 @@ $route['userstory/new_userstory'] = "userstory_controller/new_userstory";
 $route['project/(:num)/new_userstory'] = "userstory_controller/new_userstory";
 $route['project/(:num)/userstory/index_userstory/(:num)'] = "userstory_controller/index_userstory/$2";
 $route['project/(:num)/userstory/delete_userstory/(:num)'] = "userstory_controller/delete_userstory/$2";
+$route['project/(:num)/userstory/edit_userstory/(:num)'] = "userstory_controller/edit_userstory/$2";
 
 
 /* End of file routes.php */

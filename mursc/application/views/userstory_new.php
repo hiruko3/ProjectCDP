@@ -3,13 +3,7 @@
     <div id="container">
 
         <h1> New user story </h1>
-
-        <br/>
-
-        <?php
-        echo anchor(base_url() . 'userstory_controller/index/' . $project_id, ' Return to backlog', 'class="btn btn-default fa fa-arrow-left "');
-        echo br(2);
-        ?>
+        <?php $this->load->view('fibonacci'); ?>
 
         <?php
         foreach ($validMsg as $msg) {
@@ -34,9 +28,10 @@
 
 
         <?php
-        echo form_open('userstory/new_userstory', "class='col-lg-6 form-horizontal'");
+            echo form_open('userstory/new_userstory', "class='col-lg-6 form-horizontal'");
         ?>
 
+        
         <label  class="col-lg-5" for="userstoryname">Name * : </label>
         <div class="col-lg-5">
             <p>
@@ -76,6 +71,9 @@
         <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ></textarea>
 
         <br/>
+        
+         <?php echo '<div class="col-lg-5">'. form_label('Task(s)', 'task') . '</div><div class="col-lg-2">' . form_multiselect('task[]', $task_list, '') . '</div>';?>
+        
         <br/>
 
         <?php
@@ -86,7 +84,4 @@
         ?>
 
     </div>
-
-</body>
-
 </html>

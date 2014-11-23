@@ -7,9 +7,9 @@
 
  <body>
   <div id="container">
-    <h1> New Passeword </h1>
+    <h1> New Password </h1>
       <p>
-        Your passeword has been modified with success !
+        Your password has been modified with success !
       </p>
 
        <a href = '<?php echo base_url()."login/member" ?>'> Back to Profile ! </a>

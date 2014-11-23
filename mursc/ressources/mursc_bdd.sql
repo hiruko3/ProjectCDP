@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 16 Novembre 2014 à 19:06
+-- Généré le :  Dim 23 Novembre 2014 à 00:51
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('4f8b8046d68e22a27638efce883c6096', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', 1416161087, 'a:2:{s:9:"user_data";s:0:"";s:10:"project_id";s:2:"20";}');
+('5841210721c9a0138af59cc248d1303f', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0', 1416700153, 'a:5:{s:9:"user_data";s:0:"";s:5:"email";s:16:"mail@yopmail.com";s:12:"is_logged_in";i:1;s:7:"user_id";i:2;s:10:"project_id";s:2:"46";}');
 
 -- --------------------------------------------------------
 
@@ -63,24 +63,37 @@ CREATE TABLE IF NOT EXISTS `mursc_join_projects_users` (
   `project_id` int(11) NOT NULL,
   `user_status` set('contributor','watcher','product owner','scrum master','project manager') NOT NULL,
   `relationship_type` set('member','invitation','candidacy') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=93 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=128 ;
 
 --
 -- Contenu de la table `mursc_join_projects_users`
 --
 
 INSERT INTO `mursc_join_projects_users` (`id`, `user_id`, `project_id`, `user_status`, `relationship_type`) VALUES
-(1, 2, 19, 'contributor', 'member'),
-(2, 2, 21, 'contributor', 'member'),
-(3, 2, 22, 'contributor', 'member'),
-(64, 3, 20, 'product owner', 'member'),
-(69, 3, 22, '', 'candidacy'),
-(70, 3, 17, '', 'candidacy'),
-(72, 3, 19, '', 'candidacy'),
-(83, 2, 20, 'product owner', 'member'),
-(85, 4, 20, 'scrum master', 'member'),
-(90, 5, 20, 'contributor', 'invitation'),
-(92, 6, 20, 'contributor', 'member');
+(3, 2, 22, 'watcher', 'member'),
+(69, 3, 22, 'project manager', 'member'),
+(72, 3, 19, 'project manager', 'member'),
+(85, 4, 20, 'product owner', 'member'),
+(92, 6, 20, 'project manager', 'member'),
+(93, 2, 17, 'project manager', 'member'),
+(94, 3, 17, 'scrum master', 'member'),
+(95, 2, 44, 'project manager', 'member'),
+(107, 5, 20, 'watcher', 'member'),
+(108, 2, 20, 'project manager', 'member'),
+(109, 2, 18, 'project manager', 'member'),
+(111, 2, 21, 'project manager', 'member'),
+(112, 2, 45, 'project manager', 'member'),
+(113, 2, 42, 'project manager', 'member'),
+(114, 2, 23, 'project manager', 'member'),
+(115, 3, 20, 'project manager', 'invitation'),
+(116, 2, 46, 'project manager', 'member'),
+(117, 2, 38, 'project manager', 'member'),
+(118, 2, 39, 'project manager', 'member'),
+(119, 2, 43, 'project manager', 'member'),
+(121, 2, 19, '', 'candidacy'),
+(125, 2, 51, 'project manager', 'member'),
+(126, 2, 52, 'project manager', 'member'),
+(127, 6, 52, 'product owner', 'member');
 
 -- --------------------------------------------------------
 
@@ -99,8 +112,6 @@ CREATE TABLE IF NOT EXISTS `mursc_join_projects_userstories` (
 --
 
 INSERT INTO `mursc_join_projects_userstories` (`id`, `userstory_id`, `project_id`) VALUES
-(7, 9, 20),
-(6, 10, 20),
 (3, 13, 20),
 (8, 14, 20),
 (9, 15, 20),
@@ -117,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `mursc_join_relatedtasks_tasks` (
 `id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
   `relatedtask_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Contenu de la table `mursc_join_relatedtasks_tasks`
@@ -127,30 +138,19 @@ INSERT INTO `mursc_join_relatedtasks_tasks` (`id`, `task_id`, `relatedtask_id`) 
 (1, 2, 2),
 (2, 2, 8),
 (4, 2, 9),
-(9, 2, 13),
-(11, 2, 14),
-(13, 2, 15),
-(15, 2, 16),
-(17, 2, 17),
 (24, 2, 26),
+(31, 2, 28),
 (5, 5, 9),
-(10, 5, 13),
-(12, 5, 14),
-(14, 5, 15),
-(16, 5, 16),
-(18, 5, 17),
+(28, 5, 27),
 (6, 6, 9),
-(19, 6, 19),
-(20, 6, 20),
-(21, 6, 23),
 (22, 6, 24),
-(23, 6, 25),
 (25, 6, 26),
+(29, 6, 27),
 (3, 7, 8),
 (7, 7, 9),
-(8, 8, 9),
-(26, 17, 26),
-(27, 18, 26);
+(30, 7, 27),
+(32, 7, 28),
+(8, 8, 9);
 
 -- --------------------------------------------------------
 
@@ -162,24 +162,18 @@ CREATE TABLE IF NOT EXISTS `mursc_join_tasks_userstories` (
 `id` int(11) NOT NULL,
   `userstory_id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Contenu de la table `mursc_join_tasks_userstories`
 --
 
 INSERT INTO `mursc_join_tasks_userstories` (`id`, `userstory_id`, `task_id`) VALUES
-(1, 9, 22),
-(3, 9, 23),
-(5, 9, 24),
-(7, 9, 25),
-(2, 10, 22),
-(4, 10, 23),
-(6, 10, 24),
-(8, 10, 25),
-(9, 10, 26),
 (10, 13, 26),
-(11, 14, 26);
+(13, 13, 28),
+(11, 14, 26),
+(12, 14, 27),
+(14, 14, 28);
 
 -- --------------------------------------------------------
 
@@ -193,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `mursc_projects` (
   `description` text CHARACTER SET latin1 NOT NULL,
   `type` varchar(50) CHARACTER SET latin1 NOT NULL,
   `giturl` varchar(50) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- Contenu de la table `mursc_projects`
@@ -202,15 +196,20 @@ CREATE TABLE IF NOT EXISTS `mursc_projects` (
 INSERT INTO `mursc_projects` (`id`, `projectname`, `description`, `type`, `giturl`) VALUES
 (17, 'mursc', 'description', 'public', 'giturl/giturl/giturl'),
 (18, 'cdp', 'description', 'public', 'giturl/giturl/giturl'),
-(19, 'un projet', 'haupdhazdiuahdpiuadhaibcapcbuapcizbu', 'private', 'giturl.com'),
-(20, 'yop_yop', 'ogbuygouygouygogoygouy', 'public', 'gigiggigigigigit'),
+(19, 'un projet', 'haup dhaz diuahdpi uadha ib ca pcbuapc izbu', 'private', 'giturl.com'),
+(20, 'yop_yop', 'ogb uygou ygouy go goygouy', 'private', 'gigiggigigigigit'),
 (21, 'machin', 'description', 'public', 'giturl/giturl/giturl'),
 (22, 'projet', 'projet test', 'private', 'https://github.com/hiruko3/ProjectCDP/tree/master/'),
 (23, 'projet_test', 'un projet qui a une description', 'private', 'giturl.com'),
 (38, 'projet créé pour formulaire', 'je suis une desc', 'public', 'giturl/url/plop'),
 (39, 'petit projet', 'description de plus de 10 caractères', 'public', 'urlrulrulrulrulrul'),
 (42, 'test_pro', 'description', 'public', 'giturl/giturl/giturl'),
-(43, 'projet 0', '42', 'public', 'giturl.com');
+(43, 'projet 0', '42', 'public', 'giturl.com'),
+(44, 'I m the boss', 'random description', 'private', 'urlrulrulrulrurrlurlrurlrurlru'),
+(45, 'a test', 'apfuazoifupzofiuzapfoai', 'public', 'fiuazpifuzapfoiauzfpazoifuapzoi'),
+(46, 'hello all', 'mjhmjhmkjhmubnoyrrvtv', 'public', 'hkhljhvvrytdbyt'),
+(51, 'projet 0', 'hedaoudhazpidu pd uahuiaz yre yrezuyg', 'public', 'hiudhzoiudhzoiduhzoduzhodzhdozuh'),
+(52, 'hello all', 'jzepa azuie apyapiu yaey ape aeuaye pzauy eppuy', 'public', 'ajozjazpjazoajzpoajzpi');
 
 -- --------------------------------------------------------
 
@@ -228,14 +227,13 @@ CREATE TABLE IF NOT EXISTS `mursc_tasks` (
   `description` text,
   `dev_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
 
 --
 -- Contenu de la table `mursc_tasks`
 --
 
 INSERT INTO `mursc_tasks` (`id`, `taskname`, `statut`, `cost`, `datestart`, `dateend`, `description`, `dev_id`, `project_id`) VALUES
-(1, 'tache 1', 'ready', 8, '2014-11-04', '2014-11-19', NULL, 3, 17),
 (2, 'aaaa', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
 (3, 'tache 3', 'ready', 8, '2014-11-03', '2014-11-04', NULL, 3, 43),
 (5, 'bbbb', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
@@ -244,22 +242,10 @@ INSERT INTO `mursc_tasks` (`id`, `taskname`, `statut`, `cost`, `datestart`, `dat
 (8, 'tache avec deps', 'done', 2, '2014-11-15', '2014-11-16', 'description 01', 6, 20),
 (9, 'complete task', 'in progress', 0, '2014-12-15', '2015-11-16', 'test description', 3, 20),
 (10, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
-(11, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
-(12, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
-(13, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
-(14, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
-(15, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
-(16, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
-(17, 'complete task 2', 'not ready', 1, '2014-11-15', '2015-11-16', '', 2, 20),
-(18, 'tache 28', 'not ready', 1, '2014-12-15', '2015-11-16', '', 2, 20),
-(19, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
-(20, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
-(21, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
-(22, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
-(23, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
 (24, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
-(25, 'tache 28', 'not ready', 1, '2014-11-15', '2014-11-16', '', 2, 20),
-(26, 'final task', 'ready', 42, '2014-11-15', '2014-12-24', 'des', 6, 20);
+(26, 'final task', 'ready', 42, '2014-11-15', '2014-12-24', 'des', 6, 20),
+(27, 'testus', 'ready', 2, '2014-11-08', '2014-11-16', 'ztgzt', 4, 20),
+(28, 'une tache', 'dev done', 3, '2014-11-15', '2015-11-16', 'desc', 6, 20);
 
 -- --------------------------------------------------------
 
@@ -278,6 +264,26 @@ CREATE TABLE IF NOT EXISTS `mursc_tests` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `mursc_tmp_users`
+--
+
+CREATE TABLE IF NOT EXISTS `mursc_tmp_users` (
+`id` int(11) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` text NOT NULL,
+  `key` text NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `mursc_tmp_users`
+--
+
+INSERT INTO `mursc_tmp_users` (`id`, `email`, `password`, `key`) VALUES
+(1, 'solene.jolly@yahoo.fr', '5f4dcc3b5aa765d61d8327deb882cf99', '5e8c9ef2684c23cf4d749983541620cd');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `mursc_users`
 --
 
@@ -286,18 +292,19 @@ CREATE TABLE IF NOT EXISTS `mursc_users` (
   `username` varchar(50) CHARACTER SET latin1 NOT NULL,
   `password` varchar(80) CHARACTER SET latin1 NOT NULL,
   `email` varchar(50) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `mursc_users`
 --
 
 INSERT INTO `mursc_users` (`id`, `username`, `password`, `email`) VALUES
-(2, 'solene', 'pass', 'mail@truc.com'),
+(2, 'solene', '5f4dcc3b5aa765d61d8327deb882cf99', 'mail@yopmail.com'),
 (3, 'Victor Dupin', 'fad4b79c73a525779459c8f5a433a3e87756b033', 'email@mail.fr'),
 (4, 'romain', 'yopyopyopyop', 'romain@boss.com'),
-(5, 'user_pour_remplir', 'password', 'useless@mail.com'),
-(6, 'user_bis', 'pass', 'yopyop@email.fr');
+(5, 'user_pour_remplir', '5f4dcc3b5aa765d61d8327deb882cf99', 'useless@yopmail.com'),
+(6, 'user_bis', '5f4dcc3b5aa765d61d8327deb882cf99', 'yopyop@yopmail.com'),
+(7, '', '9df2c49cdb1ddd81506bbe2786023d7f', 'fsjolly@yahoo.fr');
 
 -- --------------------------------------------------------
 
@@ -320,11 +327,9 @@ CREATE TABLE IF NOT EXISTS `mursc_userstories` (
 --
 
 INSERT INTO `mursc_userstories` (`id`, `userstoryname`, `description`, `statut`, `cost`, `datestart`, `dateend`) VALUES
-(9, 'test', 'zoijjpzoidzjdozij', 'not ready', 0, '0000-00-00', '0000-00-00'),
-(10, 'user_story', 'gyugouygouygouy', 'in progress', 0, '0000-00-00', '0000-00-00'),
 (11, 'us test 2', 'fzefzehrhthtjtjte', 'in progress', 2, '1991-01-01', '2014-12-15'),
 (12, 'us test 2', 'dzdzdafzfagjukkljhk', 'dev done', 4, '1991-01-01', '0000-00-00'),
-(13, 'us test 2', 'dazdafagreehtjjklkli', 'done', 2, '1991-01-01', '2010-10-21'),
+(13, 'us test 2', 'dazdafagreehtjjklkli', 'done', 3, '1991-01-01', '2010-10-21'),
 (14, 'je suis une US', 'Je suis la description d''un US', 'done', 7, '2014-12-01', '1992-01-01'),
 (15, 'us test 2', 'dazuidhazodazdhaiu', 'in progress', 2, '1991-01-01', '1992-01-01');
 
@@ -396,7 +401,7 @@ ALTER TABLE `mursc_join_tasks_userstories`
 -- Index pour la table `mursc_projects`
 --
 ALTER TABLE `mursc_projects`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `projectname` (`projectname`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `mursc_tasks`
@@ -411,10 +416,16 @@ ALTER TABLE `mursc_tests`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `mursc_tmp_users`
+--
+ALTER TABLE `mursc_tmp_users`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Index pour la table `mursc_users`
 --
 ALTER TABLE `mursc_users`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`), ADD UNIQUE KEY `email` (`email`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Index pour la table `mursc_userstories`
@@ -447,7 +458,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT pour la table `mursc_join_projects_users`
 --
 ALTER TABLE `mursc_join_projects_users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=93;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=128;
 --
 -- AUTO_INCREMENT pour la table `mursc_join_projects_userstories`
 --
@@ -457,32 +468,37 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 -- AUTO_INCREMENT pour la table `mursc_join_relatedtasks_tasks`
 --
 ALTER TABLE `mursc_join_relatedtasks_tasks`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT pour la table `mursc_join_tasks_userstories`
 --
 ALTER TABLE `mursc_join_tasks_userstories`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `mursc_projects`
 --
 ALTER TABLE `mursc_projects`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT pour la table `mursc_tasks`
 --
 ALTER TABLE `mursc_tasks`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT pour la table `mursc_tests`
 --
 ALTER TABLE `mursc_tests`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `mursc_tmp_users`
+--
+ALTER TABLE `mursc_tmp_users`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT pour la table `mursc_users`
 --
 ALTER TABLE `mursc_users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `mursc_userstories`
 --

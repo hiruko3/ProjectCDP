@@ -3,13 +3,7 @@
     <div id="container">
 
         <h1> <?php echo 'Edit ' . $userstory->userstoryname; ?> </h1>
-
-        <br/>
-
-        <?php
-        echo anchor(base_url() . 'userstory_controller/index/' . $project_id, ' Return to backlog', 'class="btn btn-default fa fa-arrow-left "');
-        echo br(2);
-        ?>
+        <?php $this->load->view('fibonacci'); ?>
 
         <?php
         foreach ($validMsg as $msg) {
@@ -45,7 +39,7 @@
             <p>
                 <select  class="form-control" id="type" name="statut">
                     <option value="Not ready" <?php if($userstory->statut == 'Not ready'){ echo 'SELECTED';}?> > Not ready </option>
-                    <option value="Ready to do" <?php if($userstory->statut == 'Ready to do'){ echo 'SELECTED';}?> > Ready to do </option>
+                    <option value="Ready" <?php if($userstory->statut == 'Ready'){ echo 'SELECTED';}?> > Ready </option>
                     <option value="In progress" <?php if($userstory->statut == 'In progress'){ echo 'SELECTED';}?> > In progress </option>
                     <option value="Done" <?php if($userstory->statut == 'Done'){ echo 'SELECTED';}?> > Done </option>
                 </select>
@@ -84,8 +78,17 @@
         <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ><?php echo $userstory->description; ?></textarea>
 
         <br/>
-        <br/>
+        
+        <?php
+         echo '<div class="col-lg-5">'. form_label('Task(s) assiocated :', 'task_associated') . '</div><div class="col-lg-2">' . form_multiselect('task[]', $tasks_list_associated, '') . '</div>';      
+         echo br(4);
+         echo '<div class="col-lg-5">'. form_label('Added a task :', 'task_added') . '</div><div class="col-lg-2">' . form_multiselect('tasks_added[]', $tasks_list_possible_to_add, '') . '</div>';       
+         echo br(4);
+         echo '<div class="col-lg-5">'. form_label('Deleted a task :', 'task_deleted') . '</div><div class="col-lg-2">' . form_multiselect('tasks_deleted[]', $tasks_list_associated, '') . '</div>';
+         ?>
 
+         <br/>
+         
         <?php
         echo "<p>";
         echo form_submit("edit", "Edit", "class='btn btn-primary col-md-offset-7'");

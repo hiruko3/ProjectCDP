@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 session_start();
 
-class Management_controller extends CI_Controller {
+class Management_controller extends My_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('html');

@@ -13,7 +13,7 @@ class Project extends DataMapper {
     var $validation = array(
         'projectname' => array(
             'label' => 'Projectname',
-            'rules' => array('required', 'trim', 'unique', 'min_length' => 5, 'max_length' => 30),
+            'rules' => array('required', 'trim', 'min_length' => 5, 'max_length' => 30),
         ),
         'description' => array(
             'label' => 'Description',

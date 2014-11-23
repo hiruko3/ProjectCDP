@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 session_start();
 
-class Project_controller extends CI_Controller {
+class Project_controller extends My_Controller {
 
     function __construct() {
         parent::__construct();
@@ -18,7 +18,7 @@ class Project_controller extends CI_Controller {
     ////////////////////////// NEW PROJECT ////////////////////////////
 
     function new_project() {
-        $user_id = 3; //////////////////////////////////////////////////////// recup en session
+        $user_id = $this->session->userdata('user_id');
         $validMsg = array();
         $errorMsg1 = array();
         $errorMsg2 = array();
@@ -32,30 +32,20 @@ class Project_controller extends CI_Controller {
             $p->type = $_POST['type'];
             $p->giturl = $_POST['giturl'];
 
+            $u = new User();
+            $u->get_by_id($user_id);
+
             // Save in bdd
-            if (!$p->save()) {
+            if (!$p->save($u))
+            {
                 array_push($errorMsg1, $p->error->all);
                 $errorMsg1 = $errorMsg1['0'];
             }
-
-            // jointure
-            $p = new Project();
-            $p->where('projectname', $_POST['projectname'])->get();
-
-            $this->load->model('join_projects_user');
-            $j = new Join_Projects_User();
-            $j->user_id = $user_id;
-            $j->project_id = $p->id;
-            $j->user_status = 'project manager';
-            $j->relationship_type = 'member';
-
-            if($j->save()){$validMsg['project_created'] = "<p>New project created ! </p>";}
             else
-            {
-                array_push($errorMsg2, $j->error->all);
-                $errorMsg2 = $errorMsg2['0'];
-            }
-            ////
+                $validMsg['project_created'] = "<p>New project created ! </p>";
+
+            $p->set_join_field($u, 'user_status', 'project manager');
+            $p->set_join_field($u, 'relationship_type', 'member');
         }
 
         $data['validMsg'] = $validMsg;
@@ -91,6 +81,7 @@ class Project_controller extends CI_Controller {
         $this->load->view('footer');
     }
 
+////////////////////////// LIST MEMBERS ////////////////////////////
     /**
     * @brief : renvoie la liste des membres d un projet (contributerus + watchers)
     * @param $p_id : l id du projet
@@ -113,6 +104,7 @@ class Project_controller extends CI_Controller {
         return $list_member;
     }
 
+////////////////////////// SEND INVITATION ////////////////////////////
     /**
     * @brief : envoie une invitation a un user (avec un status)
     * @param $p_id : l id du projet pour lequel on invite
@@ -141,8 +133,8 @@ class Project_controller extends CI_Controller {
         {
             $u = new User();
             $u->where('username', $_POST['username'])->get();
-            if($_POST['username'] === ''){$data['error'] = 'Please choose a member.';}
-            else if($u->result_count() == 0){$data['error'] .= 'The user ' . $_POST['username'] . ' does not exist.';}
+            if($_POST['username'] === ''){$data['error'] = 'Please choose a member.';} // nom d user non renseigne
+            else if($u->result_count() == 0){$data['error'] .= 'The user ' . $_POST['username'] . ' does not exist.';} // nom d un utilisateur qui n existe pas
             else
             {
                 $j = new Join_Projects_User();
@@ -164,7 +156,7 @@ class Project_controller extends CI_Controller {
         $this->load->view('footer');
     }
 
-    ////////////////////////// EDIT PROJECT ////////////////////////////
+////////////////////////// EDIT PROJECT ////////////////////////////
 
     function edit_project($id) {
         $this->session->set_userdata('project_id', $id);
@@ -369,5 +361,4 @@ class Project_controller extends CI_Controller {
         
         redirect('user/projectList');
     }
-
 }

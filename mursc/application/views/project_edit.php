@@ -5,16 +5,8 @@
         <h1> Edit <?php echo $project->projectname; ?> </h1>
         <br/>
 
-        <div class='row'>
-            <div class='col-md-3'>
-                <?php echo anchor('user/projectList', ' Return to the projects list', 'class="btn btn-default fa fa-arrow-left "'); ?>
-            </div>
-            <div class='col-md-1'></div>
-            <div class='col-md-1'>
-                <?php echo anchor('project_controller/index_project/' . $project->id, ' ', 'class="btn btn-default fa fa-eye "'); ?>
-            </div>
-        </div>
-        <br /><br />
+        <div class='row'><div class='col-md-2'><?php echo anchor('project_controller/index_project/' . $project->id, ' ', 'class="btn btn-default fa fa-eye "'); ?></div></div>
+        <?php echo br(2); ?>
 
         <div class='row'>
             <?php
@@ -36,7 +28,6 @@
                 echo "<i class='fa fa-times-circle text-danger'" . $msg . "</i>";
             }
             ?>
-            <br/>
 
 
             <?php
@@ -83,7 +74,19 @@
                     $this->table->set_heading('Name', 'Status', 'Action');
                     $this->table->add_row(array('data' => 'Contributors', 'colspan' => 3, 'style' => 'font-size : 16; font-weight : bold; text-align : center;'));
                     foreach ($list_member as $m) {
-                        $this->table->add_row($m['username'], form_dropdown('status_member_' . $m['user_id'], $status_array, $m['status_id']), '<label>' . form_checkbox('dismiss_member_' . $m['user_id'], 1, FALSE) . ' dismiss</label>');
+                        // on ne peut pas toucher au project manager
+                        if($m['status_id'] == 0)
+                        {
+                            $content_status = 'project manager';
+                            $content_actions = NULL;
+                        }
+                        else
+                        {
+                            $content_status = form_dropdown('status_member_' . $m['user_id'], $status_array, $m['status_id']);
+                            $content_actions = '<label>' . form_checkbox('dismiss_member_' . $m['user_id'], 1, FALSE) . ' dismiss</label>';
+                        }
+                        ////
+                        $this->table->add_row($m['username'], $content_status, $content_actions);
                     }
                     $this->table->add_row(array('data' => 'Candidates', 'colspan' => 3, 'style' => 'font-weight : bold; text-align : center;'));
                     foreach ($list_candidate as $c) {
@@ -104,18 +107,16 @@
             <br/>
 
             <p>
-<?php
-echo form_submit("create", "Validate", "class='btn btn-primary col-md-offset-6'");
-echo form_reset("reset", "Reset", "class='btn btn-primary col-md-offset-1'");
-echo form_close();
-?>
+            <?php
+            echo form_submit("create", "Validate", "class='btn btn-primary col-md-offset-6'");
+            echo form_reset("reset", "Reset", "class='btn btn-primary col-md-offset-1'");
+            echo form_close();
+            ?>
             </p>
-
-
 
         </div>
 
-        <div class='row'><div class='col-md-3'></div><div class='col-md-2'><?php echo '<a onclick="return confirm(\'You will left this page\');" class="btn btn-primary" href="' . base_url() . 'project_controller/send_invitation/' . $project->id . '" ><i class="fa fa-envelope"></i> Invite new members </a> &nbsp;'; ?></div></div>
+        <div class='row'><div class='col-md-3'></div><div class='col-md-2'><?php echo '<a class="btn btn-primary" href="' . base_url() . 'project_controller/send_invitation/' . $project->id . '" ><i class="fa fa-envelope"></i> Invite new members </a> &nbsp;'; ?></div></div>   
         <div class='row'><div class='col-md-3'></div><div class='col-md-2'><?php echo '<a onclick="return confirm(\'Are you sure you want to delete the project ' . $project->projectname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'project/delete_project/' . $project->id . '" ><i class="icon-trash icon-large"></i> Delete this project </a> &nbsp;'; ?></div></div>
     </div>
 </body>

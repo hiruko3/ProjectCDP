@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User_controller extends CI_Controller {
+class User_controller extends My_Controller {
 
     private $_id; /** uniq user id : int */
     private $_pseudo; /** uniq user name : string */
@@ -16,7 +16,7 @@ class User_controller extends CI_Controller {
     */
     function __construct() {
         parent::__construct();
-        $this->_id = 3;
+        $this->_id = $this->session->userdata('user_id');
 
         $this->load->model('user');
         $u = new User();
@@ -79,6 +79,8 @@ class User_controller extends CI_Controller {
             $project_in_table['type'] = $project->type;
             $project_in_table['description'] = $project->description;
             $project_in_table['giturl'] = $project->giturl;
+            $count_project_manager = $project->user->include_join_fields()->where('relationship_type', 'member')->where('user_status', 'project manager')->get(); // liste des membres du projet qui sont manager
+            $project_in_table['nb_manager'] = $count_project_manager->result_count(); // compte le nombre de managers
 
             if($project->join_user_status == 'watcher'){ array_push($projects_list_as_follower, $project_in_table); }
             else{ array_push($projects_list_as_contributor, $project_in_table); }
@@ -230,28 +232,25 @@ class User_controller extends CI_Controller {
     
     /**
     * @brief : envoie d une candidature pour rejoindre un projet (le statut sera decide par celui qui validera)
+    * @param project_id : l id du projet auquel on candidate
     */
-    public function send_candidacy()
+    public function send_candidacy($project_id)
     {
-        // exit if project does not exist
-        $this->load->model('project');
-        $p = new Project();
-        $p->where('projectname', $this->input->post('project_name'))->get();
-        if($p->result_count() < 1){$data['error'] = 'Project does not exist.';}
-        ////
+        $p = new Project();        
+        if($p->get_by_id($project_id)->result_count() < 1){ $data['error'] = 'Project does not exist.'; } // verifie si le projet existe
         else
         {
-            $this->load->model('join_projects_user');
-            $j = new Join_Projects_User();
-            $j->user_id = $this->_id;
-            $j->project_id = $p->id;
+            $j = new Join_projects_user();
+            
+            $j->user_id = $this->session->userdata('user_id');
+            $j->project_id = $project_id;
             $j->relationship_type = 'candidacy';
 
-            if($j->save()){$data['succes'] = 'Candidacy sent.';}
+            if($j->save()){ $data['succes'] = 'Candidacy sent.'; }
             else{$data['error'] = $j->error->string;}
         }
 
-        $this->display_project_list($data);
+        $this->all_projects_list($data);
     }
     
     /**
@@ -300,6 +299,25 @@ class User_controller extends CI_Controller {
         }
 
         $this->display_project_list($data);
+    }
+
+
+////////////////////////// LIST ALL PROJECT ////////////////////////////
+    function all_projects_list($data = array())
+    {
+        $p = new Project();
+        $data['projects'] = $p->get();
+
+        foreach($data['projects'] as $p)
+        {
+            $j = new Join_Projects_User();
+            $p->contributor_count = $j->where('project_id', $p->id)->where('relationship_type', 'member')->where_not_in('user_status', 'watcher')->get()->result_count();
+        }
+
+
+        $this->load->view('header');
+        $this->load->view('all_projects_list', $data);
+        $this->load->view('footer');
     }
 }
 ?>

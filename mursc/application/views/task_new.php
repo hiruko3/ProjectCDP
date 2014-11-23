@@ -3,13 +3,7 @@
     <div id="container">
 
         <h1> New task </h1>
-
-        <br/>
-
-        <?php
-        echo anchor(base_url() . 'task_controller/index/' . $project_id, 'Return to tasks list', 'class="btn btn-default fa fa-arrow-left "');
-        echo br(2);
-        ?>
+        <?php $this->load->view('fibonacci'); ?>
 
         <?php
         if(ISSET($succes)){ echo $succes; }

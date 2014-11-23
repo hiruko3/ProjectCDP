@@ -18,7 +18,7 @@
                     <select  class="form-control" id="statut_filter" name="statut_filter">
                         <option value="No filter" > No Filter </option>
                         <option value="Not ready" > Not ready </option>
-                        <option value="Ready to do" > Ready to do </option>
+                        <option value="Ready" > Ready </option>
                         <option value="In progress" > In progress </option>
                         <option value="Done" > Done </option>
                     </select>
@@ -66,11 +66,11 @@ $('#search_userstory_input').keyup(function() {
     }
     );
 
-    var mots = $('#search_userstory_input').val().toLowerCase().split(" ");
+    var mot = $('#search_userstory_input').val().toLowerCase();
 
     $("#table_us tbody tr").each(function(index, tr)
     {
-        if (mots[0].length > 0)
+        if (mot[0].length > 0)
         {
             $(tr).hide();
         }
@@ -83,14 +83,11 @@ $('#search_userstory_input').keyup(function() {
         {
             if (colonnes[index] in {'Name': true, 'Description': true})
             {
-                for (mot in mots)
-                {
-                    if (mots[mot].length > 0 && $(td).text().toLowerCase().indexOf(mots[mot]) >= 0)
+                    if (mot.length > 0 && $(td).text().toLowerCase().indexOf(mot) >= 0)
                     {
                         $(tr).show();
                         return false;
                     }
-                }
             }
         });
     });
@@ -131,7 +128,7 @@ $('#statut_filter').change(function() {
     {
         if (colonnes[index] in {'Status': true})
         {
-            if (mot.length > 0 && $(td).text().toLowerCase().indexOf(mot) >= 0)
+            if ($(td).text().toLowerCase() === mot)
             {
                 $(tr).show();
                  return false;
