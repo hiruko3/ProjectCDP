@@ -9,26 +9,68 @@ class task_controller extends My_Controller {
         parent::__construct();     
     }
 
+    function setDescriptif($description,$id){
+        $task = $this->getTaskById($id);
+        $task->description = $description;
+        $this->saveModificationTask($task);
+    }
+
+    function setDateDebut($date,$id){
+        $task = $this->getTaskById($id);
+        $task->datedebut = $date;
+        $this->saveModificationTask($task);
+    }
+
+     function setTaskName($name,$id){
+        $task = $this->getTaskById($id);
+        $task->taskname = $name;
+        $this->saveModificationTask($task);
+    }
+
+    function setCost($cost, $id){
+        $task = $this->getTaskById($id);
+        $task->cost = $cost;
+        $this->saveModificationTask($task);
+    }
+
+    function getTaskById($id){
+        $task = new task();
+        return $task->get_by_id($id);
+    }
+
+    function saveModificationTask($task){
+        if($task->save()){
+            $data['succes'] = "Modifications succeed"; 
+        } else {
+           $data['error'] = $task->error->string;
+        }
+    }
+
     function displayTask($t_id){
         $task = new task();
-        $task->get_by_id($t_id);
-        $this->load->view('task_view',$task);
+        $data['task'] = $task->get_by_id($t_id);
+        $this->load->view('task_view',$data);
     }
 
 
-    function taskSettings(){
-        $this->load->view('task_edit');
+    function taskSettings($t_id){
+        $data['t_id'] = $t_id;
+        $this->load->view('task_edit',$data);
     }
 
-    function task_edit(){
+    function task_edit($t_id){
 
         $this->form_validation->set_rules('task_name', 'Task', 'xss_clean|callback_validate_edit');
-        $this->form_validation->set_rules('task_date', 'Date', 'xss_clean|callback_validate_edit');
+        $this->form_validation->set_rules('task_date_debut', 'Date', 'xss_clean|callback_validate_edit');
         $this->form_validation->set_rules('task_description', 'Description', 'xss_clean|callback_validate_edit');
+        $this->form_validation->set_rules('task_cost', 'Cost', 'xss_clean|callback_validate_edit');
+
         if($this->form_validation->run()){
-            $this->setDescriptif($this->input->post('description'));
-            $this->setDate($this->input->post('date'));
-            $this->setTaskName($this->input->post('task'));
+            $this->setDescriptif($this->input->post('task_description'),$t_id);
+            $this->setDateDebut($this->input->post('task_date_debut'),$t_id);
+            $this->setTaskName($this->input->post('task_name'),$t_id);
+            $this->setCost($this->input->post('task_cost'),$t_id);
+            $this->displayTask($t_id);
         } else echo 'fail during edit this task try again !';
     }
 

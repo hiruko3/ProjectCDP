@@ -7,6 +7,9 @@ class Login extends My_Controller {
    parent::__construct();
    	$this->load->model('user_model');
    	$this->load->library('email');
+   	$this->load->library('template');
+   	$this->load->helper('html');
+   	$this->load->library('table');
  }
 
  function index()
@@ -19,11 +22,7 @@ class Login extends My_Controller {
  }
 
  public function member(){
- 	//if($this->session->userdata('is_logged_in')){
- 		$this->load->view('member_view');
- 	//}else {
- 	//	redirect('login/restricted');
- 	//}
+ 	$this->template->show('member_view');
  }
 
  public function restricted(){
@@ -63,16 +62,16 @@ public function logout(){
 }
 
 public function sign_up(){
-	$this->load->view('sign_up');
+	$this->template->show("sign_up");
 }
 
 public function sign_up_validation(){
 
-	$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[mursc_users.email]');
+	$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[mursc_users.email]|is_unique[mursc_tmp_users.email]');
 	$this->form_validation->set_rules('password', 'Password', 'required|md5|trim|min_length[7]|max_length[255]');
 	$this->form_validation->set_rules('confirm_password', 'CPassword', 'required|trim|min_length[7]|max_length[255]|matches[password]');
 	
-	$this->form_validation->set_message('is_unique', 'That email already exists');
+	$this->form_validation->set_message('is_unique', 'That email already exists or is in proccess to be validate');
 
 	if($this->form_validation->run()){
 
@@ -112,7 +111,7 @@ public function register_user($key){
 				);
 
 			$this->session->set_userdata($data);
-			redirect('login/member');
+			$this->member();
 		} else echo "failed when adding you to our database";
 	} else echo "key is not valid";
 }

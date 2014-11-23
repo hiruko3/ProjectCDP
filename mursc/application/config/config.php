@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/';
+$config['base_url']	= 'http://127.0.0.1/CDP/Project/ProjectCDP/mursc';
 
 /*
 |--------------------------------------------------------------------------
