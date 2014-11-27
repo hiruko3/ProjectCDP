@@ -5,6 +5,7 @@ class Sprint extends My_Controller {
  function __construct()
  {
    parent::__construct();
+   $this->load->library('template');
  }
 
  function index(){

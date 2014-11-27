@@ -50,13 +50,17 @@ class Task_controller extends My_Controller {
     function displayTask($t_id){
         $task = new task();
         $data['task'] = $task->get_by_id($t_id);
+        $this->load->view('header');
         $this->load->view('task_view',$data);
+        $this->load->view('footer');
     }
 
 
     function taskSettings($t_id){
         $data['t_id'] = $t_id;
+        $this->load->view('header');
         $this->load->view('task_edit',$data);
+        $this->load->view('footer');
     }
 
     function task_edit($t_id){

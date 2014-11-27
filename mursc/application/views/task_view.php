@@ -35,7 +35,10 @@
                             '<a class="btn btn-primary" href="'.base_url().'task_controller/taskSettings/'.$task->id.'"><i class="fa fa-cog"></i> Edit </a> &nbsp;');
                // }
                 echo $this->table->generate();
+
                 ?>
+                <a class="btn btn-primary" href="<?php echo base_url().'task_controller/' ?>"><i class="fa fa-cog"></i> Back </a>
+
             </div>
         </fieldset>
 

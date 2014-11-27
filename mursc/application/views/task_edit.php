@@ -7,10 +7,8 @@
 
  <body>
   <div id="container">
-    <h1> Task </h1>
+    <h1> Task Edition </h1>
       <?php
-      if(ISSET($succes)){ echo $succes; }
-      if(ISSET($error)){ echo $error; }
       echo validation_errors();
       ?>
 
@@ -44,7 +42,11 @@
                 echo "</p>";
 
                 echo "<p> Description : ";
-                echo form_input("task_description", $this->input->post('description'));
+                $desc = array("type" => "text",
+                              "name" => "task_description",
+                              "style" => "width: 300px; height: 150;",
+                              "value" => $this->input->post('description'));
+                echo form_input($desc);
                 echo "</p>";
 
                 echo "<p>";
