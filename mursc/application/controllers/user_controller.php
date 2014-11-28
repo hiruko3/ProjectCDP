@@ -31,7 +31,7 @@ class User_controller extends My_Controller {
 
     function index($data = array()) {
         if($this->session->userdata('is_logged_in') == 1){
-            $this->display_project_list();
+            $this->display_project_list_contributor();
         } else $this->display_resume();
     }
 
@@ -41,12 +41,42 @@ class User_controller extends My_Controller {
         $this->load->view('footer');
     }
 
-    function display_project_list($data = array())
+    function display_project_list_contributor($data = array())
     {
         $data = array_merge($data, $this->_projectList());
 
         $this->load->view('header');
-        $this->load->view('user_projects_lists', $data);
+        $this->load->view('user_projects_list_contributor', $data);
+        $this->load->view('footer');
+
+    }
+    
+       function display_project_list_follower($data = array())
+    {
+        $data = array_merge($data, $this->_projectList());
+
+        $this->load->view('header');
+        $this->load->view('user_projects_list_follower', $data);
+        $this->load->view('footer');
+
+    }
+    
+       function display_project_list_candidature($data = array())
+    {
+        $data = array_merge($data, $this->_projectList());
+
+        $this->load->view('header');
+        $this->load->view('user_projects_list_candidature', $data);
+        $this->load->view('footer');
+
+    }
+    
+       function display_project_list_invitation($data = array())
+    {
+        $data = array_merge($data, $this->_projectList());
+
+        $this->load->view('header');
+        $this->load->view('user_projects_list_invitation', $data);
         $this->load->view('footer');
 
     }
@@ -70,7 +100,6 @@ class User_controller extends My_Controller {
         $projects_list_as_follower = array();
 
         $projects = $user->project->include_join_fields()->where('relationship_type', 'member')->get(); // seulement les projets dont je suis membre
-
         foreach ($projects as $project) {
             $project_in_table = array();
             $project_in_table['id'] = $project->id;
@@ -82,15 +111,18 @@ class User_controller extends My_Controller {
             $count_project_manager = $project->user->include_join_fields()->where('relationship_type', 'member')->where('user_status', 'project manager')->get(); // liste des membres du projet qui sont manager
             $project_in_table['nb_manager'] = $count_project_manager->result_count(); // compte le nombre de managers
 
-            if($project->join_user_status == 'watcher'){ array_push($projects_list_as_follower, $project_in_table); }
-            else{ array_push($projects_list_as_contributor, $project_in_table); }
+            if($project->join_user_status == 'watcher'){
+                array_push($projects_list_as_follower, $project_in_table);
+              }
+            else{
+                array_push($projects_list_as_contributor, $project_in_table);
+                }
         }
 
         $data['projects_list_as_contributor'] = $projects_list_as_contributor;
         $data['projects_list_as_follower'] = $projects_list_as_follower;
 
-
-        $user->project->include_join_fields()->where('relationship_type', 'invitation')->get_iterated(); // seulement les projets dont l invitation est en attente
+        $user->project->include_join_fields()->where('relationship_type', 'invitation')->get(); // seulement les projets dont l invitation est en attente
 
         $invitations_list = array();
         foreach($user->projects as $p)
@@ -108,7 +140,7 @@ class User_controller extends My_Controller {
         $data['invitations_list'] = $invitations_list;
 
 
-        $user->project->include_join_fields()->where('relationship_type', 'candidacy')->get_iterated(); // seulement les candidatures
+        $user->project->include_join_fields()->where('relationship_type', 'candidacy')->get(); // seulement les candidatures
 
         $candidacy_list = array();
         foreach($user->projects as $p)

@@ -56,6 +56,10 @@ $route['user/index'] = "user_controller/index";
 $route['user/projectList'] = "user_controller/index";
 $route['user/candidate/(:num)'] = "user_controller/send_candidacy/$1";
 $route['user/list_all'] = "user_controller/all_projects_list";
+$route['user/list_contributor'] = "user_controller/display_project_list_contributor";
+$route['user/list_follower'] = "user_controller/display_project_list_follower";
+$route['user/list_candidature'] = "user_controller/display_project_list_candidature";
+$route['user/list_invitation'] = "user_controller/display_project_list_invitation";
 
 
 // USERSTORIES CONTROLLER
