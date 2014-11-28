@@ -57,31 +57,6 @@ public function validate_credentials(){
 	}
 }
 
-public function logout(){
-	$this->session->sess_destroy();
-	redirect('user_controller');
-}
-
-public function sign_up(){
-	$this->template->show("sign_up");
-}
-
-public function sign_up_validation(){
-
-	$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[mursc_users.email]|is_unique[mursc_tmp_users.email]');
-	$this->form_validation->set_rules('password', 'Password', 'required|md5|trim|min_length[7]|max_length[255]');
-	$this->form_validation->set_rules('confirm_password', 'CPassword', 'required|trim|min_length[7]|max_length[255]|matches[password]');
-	
-	$this->form_validation->set_message('is_unique', 'That email already exists or is in proccess to be validate');
-
-		if($this->user_model->can_log_in()){
-			return true;
-		} else {
-			$this->form_validation->set_message('validate_credentials','Incorrect Username/Password.');
-			return false;
-		}
-	}
-
 	public function logout(){
 		$this->session->sess_destroy();
 		$this->index();

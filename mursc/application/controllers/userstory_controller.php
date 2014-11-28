@@ -185,6 +185,14 @@ class Userstory_controller extends My_Controller {
             $task_added = new Task();
             $tab_asso_task_added = array();
 
+            if (!$us->save()) {
+                array_push($errorMsg1, $us->error->all);
+                $errorMsg1 = $errorMsg1['0'];
+            } else {
+                $validMsg['userstory_added'] = "<p> US edited ! </p>";
+            }
+
+
             if (!empty($_POST['tasks_added'])) {
                 foreach ($_POST['tasks_added'] as $post_task) {
                     array_push($tab_asso_task_added, $post_task);
@@ -227,7 +235,7 @@ class Userstory_controller extends My_Controller {
         $tasks = $us->task->get();
 
         $data['tasks_list_associated'] = array();
-        
+
         foreach ($tasks as $t) {
             $data['tasks_list_associated'][$t->id] = $t->taskname;
         };
