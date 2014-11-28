@@ -28,11 +28,10 @@
 
 
         <?php
-            echo form_open('userstory/new_userstory', "class='col-lg-6 form-horizontal'");
+            echo form_open('userstory/new_userstory', "class='col-lg-7 form-horizontal '");
         ?>
-
         
-        <label  class="col-lg-5" for="userstoryname">Name * : </label>
+        <label  class="col-lg-5 " for="userstoryname">Name * : </label>
         <div class="col-lg-5">
             <p>
                 <input class="form-control" type="text" name="userstoryname" id="userstoryname" </input>
@@ -41,10 +40,22 @@
 
         <br/>
 
-        <label  class="col-lg-5" for="cost">Cost * : </label>
+        <label for="cost" class="col-lg-5" > Cost * : </label>
         <div class="col-lg-5">
             <p>
-                <input class="form-control" type="number" min="1" max="20" name="cost" id="cost" </input>
+                <select  class="form-control" id="cost" name="type">
+                    <option value="0"  >0 </option>
+                    <option value="1"  >1 </option>
+                    <option value="2"  >2 </option>
+                    <option value="3"  >3 </option>
+                    <option value="5"  >5 </option>
+                    <option value="8"  >8 </option>
+                    <option value="13" >13 </option>
+                    <option value="21" >21 </option>
+                    <option value="34" >34 </option>
+                    <option value="55" >55 </option>
+                    <option value="89" >89 </option>
+                </select>
             </p>
         </div>
 
@@ -53,7 +64,7 @@
         <label for="date_begin"  class="col-lg-5" > Date start * : </label>
         <div class="col-lg-5">
             <p>
-                <input type="date" name="datestart" placeholder="aaaa/mm/jj">
+                <input type="date" class="form-control" name="datestart" placeholder="aaaa/mm/jj">
             </p>
         </div>
 
@@ -62,18 +73,17 @@
         <label for="date_end"  class="col-lg-5" > Date end * : </label>
         <div class="col-lg-5">
             <p>
-                <input type="date" name="dateend" placeholder="aaaa/mm/jj">
+                <input type="date" class="form-control" name="dateend" placeholder="aaaa/mm/jj">
             </p>
         </div>
 
 
         <label for="description"  class="col-lg-5" > Description * : </label>
-        <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ></textarea>
+        <textarea  class="form-control" id="description"  name="description" style="width: 440px; height: 111px; resize: none;" ></textarea>
 
         <br/>
         
-         <?php echo '<div class="col-lg-5">'. form_label('Task(s)', 'task') . '</div><div class="col-lg-2">' . form_multiselect('task[]', $task_list, '') . '</div>';?>
-        
+         <?php echo '<div class="col-lg-5">'. form_label('Task(s)', 'task',"class='form-control '") . '</div ><div class="">' . form_multiselect('task[]', $task_list, '') . '</div>';?>
         <br/>
 
         <?php

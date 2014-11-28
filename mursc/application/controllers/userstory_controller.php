@@ -25,32 +25,42 @@ class Userstory_controller extends My_Controller {
 
             $us->userstoryname = $_POST['userstoryname'];
             $us->description = $_POST['description'];
-            $us->statut = 'new';
+            $us->statut = 'Not ready';
             $us->cost = $_POST['cost'];
             $us->datestart = $_POST['datestart'];
             $us->dateend = $_POST['dateend'];
 
-            // jointure
-            $p = new Project();
-            $p->where('id', $project_id)->get();
+            //verification datestart<dateend
+            $timestamp_datestart = strtotime($us->datestart);
+            $timestamp_dateend = strtotime($us->dateend);
 
-            $asso_task = new Task();
-            $tab_asso_task = array();
-            if ($_POST['task']) {
-                foreach ($_POST['task'] as $post_task) {
-                    array_push($tab_asso_task, $post_task);
+            if ($timestamp_datestart < $timestamp_dateend) {
+
+                // jointure
+                $p = new Project();
+                $p->where('id', $project_id)->get();
+
+                $asso_task = new Task();
+                $tab_asso_task = array();
+                if ($_POST['task']) {
+                    foreach ($_POST['task'] as $post_task) {
+                        array_push($tab_asso_task, $post_task);
+                    }
+                    $asso_task->where_in('id', $tab_asso_task)->get();
                 }
-                $asso_task->where_in('id', $tab_asso_task)->get();
-            }
 
-            // Save in bdd
-            if (!$us->save(array($p, $asso_task->all))) {
-                array_push($errorMsg1, $us->error->all);
-                $errorMsg1 = $errorMsg1['0'];
+                // Save in bdd
+                if (!$us->save(array($p, $asso_task->all))) {
+                    array_push($errorMsg1, $us->error->all);
+                    $errorMsg1 = $errorMsg1['0'];
+                } else {
+                    $validMsg['userstory_created'] = "<p> New user story created ! </p>";
+                }
             } else {
-                $validMsg['userstory_created'] = "<p> New user story created ! </p>";
+                array_push($errorMsg1, '<p> End date of the User Story is older than the start date </p>');
             }
         }
+
         $p = new project();
         $p->get_by_id($this->session->userdata('project_id'));
 
@@ -104,7 +114,8 @@ class Userstory_controller extends My_Controller {
 
         redirect('userstory_controller/index/' . $this->session->userdata('project_id'));
     }
-
+////////////////////////// INDEX  ////////////////////////////
+    
     function index($id) {
         $this->load->view('header');
 
@@ -182,47 +193,55 @@ class Userstory_controller extends My_Controller {
             $us->datestart = $_POST['datestart'];
             $us->dateend = $_POST['dateend'];
 
-            $task_added = new Task();
-            $tab_asso_task_added = array();
+            $timestamp_datestart = strtotime($us->datestart);
+            $timestamp_dateend = strtotime($us->dateend);
 
-            if (!$us->save()) {
-                array_push($errorMsg1, $us->error->all);
-                $errorMsg1 = $errorMsg1['0'];
+            if ($timestamp_datestart < $timestamp_dateend) {
+
+                $task_added = new Task();
+                $tab_asso_task_added = array();
+
+                if (!$us->save()) {
+                    array_push($errorMsg1, $us->error->all);
+                    $errorMsg1 = $errorMsg1['0'];
+                } else {
+                    $validMsg['userstory_added'] = "<p> US edited ! </p>";
+                }
+
+
+                if (!empty($_POST['tasks_added'])) {
+                    foreach ($_POST['tasks_added'] as $post_task) {
+                        array_push($tab_asso_task_added, $post_task);
+                    }
+                    $task_added->where_in('id', $tab_asso_task_added)->get();
+
+                    // ADD
+                    if (!$us->save($task_added->all)) {
+                        array_push($errorMsg1, $us->error->all);
+                        $errorMsg1 = $errorMsg1['0'];
+                    } else {
+                        $validMsg['userstory_added'] = "<p> Tasks added ! </p>";
+                    }
+                }
+
+                $task_deleted = new Task();
+                $tab_asso_task_deleted = array();
+                if (!empty($_POST['tasks_deleted'])) {
+                    foreach ($_POST['tasks_deleted'] as $post_task) {
+                        array_push($tab_asso_task_deleted, $post_task);
+                    }
+                    $task_deleted->where_in('id', $tab_asso_task_deleted)->get();
+
+                    // DELETE
+                    if (!$us->delete($task_deleted->all)) {
+                        array_push($errorMsg1, $us->error->all);
+                        $errorMsg1 = $errorMsg1['0'];
+                    } else {
+                        $validMsg['userstory_deleted'] = "<p> Tasks deleted ! </p>";
+                    }
+                }
             } else {
-                $validMsg['userstory_added'] = "<p> US edited ! </p>";
-            }
-
-
-            if (!empty($_POST['tasks_added'])) {
-                foreach ($_POST['tasks_added'] as $post_task) {
-                    array_push($tab_asso_task_added, $post_task);
-                }
-                $task_added->where_in('id', $tab_asso_task_added)->get();
-
-                // ADD
-                if (!$us->save($task_added->all)) {
-                    array_push($errorMsg1, $us->error->all);
-                    $errorMsg1 = $errorMsg1['0'];
-                } else {
-                    $validMsg['userstory_added'] = "<p> Tasks added ! </p>";
-                }
-            }
-
-            $task_deleted = new Task();
-            $tab_asso_task_deleted = array();
-            if (!empty($_POST['tasks_deleted'])) {
-                foreach ($_POST['tasks_deleted'] as $post_task) {
-                    array_push($tab_asso_task_deleted, $post_task);
-                }
-                $task_deleted->where_in('id', $tab_asso_task_deleted)->get();
-
-                // DELETE
-                if (!$us->delete($task_deleted->all)) {
-                    array_push($errorMsg1, $us->error->all);
-                    $errorMsg1 = $errorMsg1['0'];
-                } else {
-                    $validMsg['userstory_deleted'] = "<p> Tasks deleted ! </p>";
-                }
+                array_push($errorMsg1, '<p> End date of the User Story is older than the start date </p>');
             }
         }
 
@@ -246,12 +265,6 @@ class Userstory_controller extends My_Controller {
         };
 
         $data['tasks_list_possible_to_add'] = array_diff_assoc($tasks_list_project, $data['tasks_list_associated']);
-
-        /*
-          var_dump($tasks_list_project);
-          var_dump($data['tasks_list_associated']);
-          var_dump($data['tasks_list_possible']);
-         */
 
         $data['userstory'] = $us;
         $data['project_id'] = $this->session->userdata('project_id');

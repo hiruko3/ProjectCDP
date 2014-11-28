@@ -22,7 +22,7 @@
         <br/>
 
         <?php
-        echo form_open('project/' . $project_id . '/userstory/edit_userstory/' . $userstory->id, "class='col-lg-6 form-horizontal'");
+        echo form_open('project/' . $project_id . '/userstory/edit_userstory/' . $userstory->id, "class='col-lg-8 form-horizontal'");
         ?>
 
         <label  class="col-lg-5" for="userstoryname">Name : </label>
@@ -48,10 +48,22 @@
 
         <br/>
 
-        <label  class="col-lg-5" for="cost">Cost : </label>
+        <label for="cost" class="col-lg-5" > Cost * : </label>
         <div class="col-lg-5">
             <p>
-                <input class="form-control" type="number" min="1" max="20" name="cost" id="cost" value="<?php echo $userstory->cost; ?>" </input>
+                <select  class="form-control" id="cost" name="type">
+                    <option value="0" <?php if($userstory->cost == '0'){ echo 'SELECTED';}?> >0 </option>
+                    <option value="1" <?php if($userstory->cost == '1'){ echo 'SELECTED';}?> >1 </option>
+                    <option value="2" <?php if($userstory->cost == '2'){ echo 'SELECTED';}?> >2 </option>
+                    <option value="3" <?php if($userstory->cost == '3'){ echo 'SELECTED';}?> >3 </option>
+                    <option value="5" <?php if($userstory->cost == '5'){ echo 'SELECTED';}?> >5 </option>
+                    <option value="8" <?php if($userstory->cost == '8'){ echo 'SELECTED';}?> >8 </option>
+                    <option value="13" <?php if($userstory->cost == '13'){ echo 'SELECTED';}?>>13 </option>
+                    <option value="21" <?php if($userstory->cost == '21'){ echo 'SELECTED';}?>>21 </option>
+                    <option value="34" <?php if($userstory->cost == '34'){ echo 'SELECTED';}?>>34 </option>
+                    <option value="55" <?php if($userstory->cost == '55'){ echo 'SELECTED';}?>>55 </option>
+                    <option value="89" <?php if($userstory->cost == '89'){ echo 'SELECTED';}?>>89 </option>
+                </select>
             </p>
         </div>
 
