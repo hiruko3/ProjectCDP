@@ -40,10 +40,9 @@
                 echo br(2);
                 $tmpl = array('table_open' => '<table border="1"  id="table_us" class="table table-responsive table-bordered">');
                 $this->table->set_template($tmpl);
-                $this->table->set_heading('Name', 'Status', 'Description', 'Cost', 'Start date', 'End date', 'Action');
+                $this->table->set_heading('Name', 'Status', 'Cost', 'Action');
                 foreach ($list_us as $us) {
-                    $this->table->add_row($us->userstoryname, $us->statut, $us->description, $us->cost, $us->datestart, $us->dateend, '<a class="btn btn-primary" href="' . base_url() . 'project/' . $project->id . '/userstory/index_userstory/' . $us->id . '"><i class="fa icon-eye-open"></i> View </a> &nbsp;
-                             <a class="btn btn-primary" href="' . base_url() . 'project/' . $project->id . '/userstory/edit_userstory/' . $us->id . '"><i class="fa fa-cog"></i> Edit </a> &nbsp;
+                    $this->table->add_row($us->userstoryname, $us->statut, $us->cost, '<a class="btn btn-primary" href="' . base_url() . 'project/' . $project->id . '/userstory/index_userstory/' . $us->id . '"><i class="fa icon-eye-open"></i> View </a> &nbsp;
                              <a onclick="return confirm(\'Are you sure you want to delete the user story ' . $us->userstoryname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'project/' . $project->id . '/userstory/delete_userstory/' . $us->id . '" ><i class="fa fa-close"></i> Delete </a> &nbsp;');
                 }
 

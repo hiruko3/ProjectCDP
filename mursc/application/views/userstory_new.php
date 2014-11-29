@@ -42,7 +42,7 @@
         <label for="cost" class="col-lg-5" > Cost * : </label>
         <div class="col-lg-5">
             <p>
-                <select  class="form-control" id="cost" name="type">
+                <select  class="form-control" id="cost" name="cost">
                     <option value="0"  >0 </option>
                     <option value="1"  >1 </option>
                     <option value="2"  >2 </option>
@@ -59,23 +59,6 @@
         </div>
 
         <br/>
-
-        <label for="date_begin"  class="col-lg-5" > Date start * : </label>
-        <div class="col-lg-5">
-            <p>
-                <input type="date" class="form-control" name="datestart" placeholder="aaaa/mm/jj">
-            </p>
-        </div>
-
-        <br/>
-
-        <label for="date_end"  class="col-lg-5" > Date end * : </label>
-        <div class="col-lg-5">
-            <p>
-                <input type="date" class="form-control" name="dateend" placeholder="aaaa/mm/jj">
-            </p>
-        </div>
-
 
         <label for="description"  class="col-lg-5" > Description * : </label>
         <textarea  class="form-control" id="description"  name="description" style="width: 440px; height: 111px; resize: none;" ></textarea>

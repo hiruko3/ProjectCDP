@@ -68,23 +68,6 @@
 
         <br/>
 
-        <label for="date_begin"  class="col-lg-5" > Date start : </label>
-        <div class="col-lg-5">
-            <p>
-                <input type="date" name="datestart" value="<?php echo $userstory->datestart; ?>" >
-            </p>
-        </div>
-
-        <br/>
-
-        <label for="date_end"  class="col-lg-5" > Date end : </label>
-        <div class="col-lg-5">
-            <p>
-                <input type="date" name="dateend" value="<?php echo $userstory->dateend; ?>">
-            </p>
-        </div>
-
-
         <label for="description"  class="col-lg-5" > Description : </label>
         <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ><?php echo $userstory->description; ?></textarea>
 

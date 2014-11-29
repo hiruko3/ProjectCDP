@@ -34,15 +34,6 @@
             echo form_label('Cost :', 'cost');
             echo "   " . $userstory->cost;
 
-            echo br(2);
-
-            echo form_label('Date start :', 'datestart');
-            echo "   " . $userstory->datestart;
-
-            echo br(2);
-
-            echo form_label('Date end :', 'dateend');
-            echo "   " . $userstory->dateend;
             ?>
         </fieldset>
 
