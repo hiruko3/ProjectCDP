@@ -52,7 +52,7 @@
             $this->table->set_template(array('table_open' => '<table border="1" id="table_task" class="table table-responsive table-bordered">'));
             $this->table->set_heading('Name', 'Status', 'Developer');
             foreach ($tasks_list_associated as $t) {
-                $this->table->add_row(form_label('<a href=' . base_url() . 'task_controller/view/' . $t->id . '>' . $t->taskname . '</a>'), character_limiter($t->statut, 10), character_limiter($t->dev_name, 10));
+                $this->table->add_row(form_label('<a href=' . base_url() . 'task_controller/displayTask/' . $t->id . '>' . $t->taskname . '</a>'), character_limiter($t->statut, 10), character_limiter($t->dev_name, 10));
             }
             echo $this->table->generate();
             ?>

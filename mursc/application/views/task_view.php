@@ -1,48 +1,87 @@
 <html lang="fr">
- <head>
-   <title>tasks</title>
     <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
- </head>
-    <div id="container">
 
-        <h1> Tasks : </h1>
+    <?php echo br(1); ?>  
 
-        <h3> Manage your task </h3>
+    <div class='row col-lg-offset-1'>
 
-        <?php
-        if(ISSET($succes)){ echo $succes; }
-        if(ISSET($error)){ echo $error; }
-        ?>
+        <h2> <?php echo 'Tâche : ' . $task->taskname; ?> </h2>
+
+        <?php echo br(1); ?>
 
         <div class='row'>
-            <div class='col-md-1'><a class='btn btn-primary' href=<?php echo base_url() . 'task_controller/new_task' ?>><i class='fa fa-plus'></i> Create a new Task </a> &nbsp;</div>
-        </div>
-
-        <br/>
-
-        <fieldset class="col-lg-offset-1">
-            <div class="col-lg-11">
-                <?php
-                $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
-                $this->table->set_template($tmpl);
-               // foreach ($tasks_list as $task) {
-
-                $this->table->set_heading('Task', 'Cost', 'Date', 'Description', 'Assignement', 'Tests', 'Status', 'Edit');
-
-                    $this->table->add_row($task->taskname,$task->cost,$task->datestart.$task->dateend, $task->description, "Dev3", "Not defined", $task->statut,
-                    /*$this->table->add_row($task['task'], ''.$task['Number'], ''.$task['Description'].'', $task['Assignement'], $task['Tests'], $task['Status'],*/
-                            '<a class="btn btn-primary" href="'.base_url().'task_controller/taskSettings/'.$task->id.'"><i class="fa fa-cog"></i> Edit </a> &nbsp;');
-               // }
-                echo $this->table->generate();
-
-                ?>
-                <a class="btn btn-primary" href="<?php echo base_url().'task_controller/' ?>"><i class="fa fa-cog"></i> Back </a>
-
+            <div class='col-md-1'>
+                <?php echo anchor(base_url() . 'task_controller/task_settings/' . $task->id, ' Edit this task', 'class="btn btn-default fa fa-cog "'); ?>
             </div>
+        </div>   
+
+
+        <?php echo br(1); ?>
+
+        <fieldset class="col-lg-5 scheduler-border">
+            <legend class="scheduler-border">General Settings</legend>
+            <?php
+            echo form_label('Description of task :', 'description_task');
+            echo "   " . $task->description;
+
+            echo br(2);
+
+            echo form_label('Statut :', 'statut');
+            echo "   " . $task->statut;
+
+            echo br(2);
+
+            echo form_label('Cost :', 'cost');
+            echo "   " . $task->cost;
+
+            echo br(2);
+
+            echo form_label('Developer :', 'dev');
+            $u = new User();
+            $u->get_by_id($task->dev_id);
+            echo "   " . $u->username;
+
+            echo br(2);
+
+            echo form_label('Date start :', 'datestart');
+            echo "   " . $task->datestart;
+
+            echo br(2);
+
+            echo form_label('Date end :', 'dateend');
+            echo "   " . $task->dateend;
+            ?>
         </fieldset>
 
-    </div>
+        <fieldset class="col-lg-10">
+            <h3> Userstories </h3>
+            <?php
+            $this->table->set_template(array('table_open' => '<table border="1" id="table_task" class="table table-responsive table-bordered">'));
+            $this->table->set_heading('Name', 'Status');
+            foreach ($us_list as $us)
+            {
+                $this->table->add_row(form_label('<a href=' . base_url() . 'userstory_controller/index_userstory/' . $us->id . '>' . $us->userstoryname . '</a>'), character_limiter($us->statut, 10));
+            }
+            echo $this->table->generate();
+            ?>
+        </fieldset>
 
-</body>
+        <fieldset class="col-lg-10">
+            <h3> Dependencies </h3>
+            <?php
+            $this->table->set_template(array('table_open' => '<table border="1" id="table_task" class="table table-responsive table-bordered">'));
+            $this->table->set_heading('Name', 'Status', 'Developer');
+            $user = new User();
+            foreach ($task_list as $t)
+            {
+                $this->table->add_row(form_label('<a href=' . base_url() . 'task_controller/displayTask/' . $t->id . '>' . $t->taskname . '</a>'), character_limiter($t->statut, 10), character_limiter($user->get_by_id($t->dev_id)->username, 10));
+            }
+            echo $this->table->generate();
+            ?>
+        </fieldset>
+
+        </div>
+            <?php echo form_fieldset_close(); ?>
+        </div>
+    </div>
 </html>

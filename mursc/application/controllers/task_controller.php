@@ -48,10 +48,24 @@ class Task_controller extends My_Controller {
     }
 
     function displayTask($t_id){
+        // recupetation de la tache
         $task = new task();
         $data['task'] = $task->get_by_id($t_id);
-        $this->load->view('header');
-        $header_project_data = array('project_id' => $p->id, 'project_name' => $p->projectname);
+        ////
+
+        // recuperation des us correspendantes
+        $data['us_list'] = $task->userstory->get();
+        ////
+
+        // recuperation des taches dont la tache courrante depend
+        $data['task_list'] = $task->task->get();
+        ////
+
+        $this->load->view('header');$p = new project();
+        $p->get_by_id($this->session->userdata('project_id'));
+        $header_project_data = array(
+            'project_id' => $p->id,
+            'project_name' => $p->projectname);
         $this->load->view('project_header', $header_project_data);
         $this->load->view('task_view',$data);
         $this->load->view('footer');
@@ -60,8 +74,11 @@ class Task_controller extends My_Controller {
 
     function taskSettings($t_id){
         $data['t_id'] = $t_id;
-        $this->load->view('header');
-        $header_project_data = array('project_id' => $p->id, 'project_name' => $p->projectname);
+        $this->load->view('header');$p = new project();
+        $p->get_by_id($this->session->userdata('project_id'));
+        $header_project_data = array(
+            'project_id' => $p->id,
+            'project_name' => $p->projectname);
         $this->load->view('project_header', $header_project_data);
         $this->load->view('task_edit',$data);
         $this->load->view('footer');
