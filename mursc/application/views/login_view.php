@@ -32,7 +32,7 @@
                     echo "</p>";
 
                     echo "<p>Password : ";
-                    echo form_input(['name' => 'password', 'class' => 'form-control', "required" => "required", 'value' => $this->input->post(md5('password'))]);
+                    echo form_input(['name' => 'password', 'type' => 'password', 'class' => 'form-control', "required" => "required", 'value' => $this->input->post(md5('password'))]);
                     echo "</p>";
 
                     echo "<p>";

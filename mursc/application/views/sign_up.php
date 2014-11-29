@@ -34,11 +34,11 @@
                     echo "</p>";
 
                     echo "<p> Password : ";
-                    echo form_input(['name' => 'password', 'class' => 'form-control', "required" => "required", 'value' => $this->input->post(md5('password'))]);
+                    echo form_input(['name' => 'password', 'type' => 'password', 'class' => 'form-control', "required" => "required", 'value' => $this->input->post(md5('password'))]);
                     echo "</p>";
 
                     echo "<p> Password confirmation : ";
-                    echo form_input(['name' => 'confirm_password', 'class' => 'form-control', "required" => "required", 'value' => $this->input->post(md5('confirm_password'))]);
+                    echo form_input(['name' => 'confirm_password', 'type' => 'password', 'class' => 'form-control', "required" => "required", 'value' => $this->input->post(md5('confirm_password'))]);
                     echo "</p>";
 
                     echo "<div>" . form_submit('signup_submit', 'Sign Up', "class='btn btn-success'");
