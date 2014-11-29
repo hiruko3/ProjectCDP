@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <div id="container" class="col-lg-offset-1">
 
-        <h2> Edit project : <?php echo $project->projectname; ?> </h2>
+        <h2> Edit project </h2>
         <br/>
 
         <?php echo anchor('project_controller/index_project/' . $project->id, ' Return to the project', 'class="btn btn-default fa fa-eye "'); ?>
