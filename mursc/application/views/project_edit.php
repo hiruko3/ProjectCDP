@@ -117,15 +117,15 @@
 
             <br/>
             <br/>
-
+            <div class="text-center">
             <p>
                 <?php
-                echo form_submit("create", "Validate", "class='btn btn-primary col-md-offset-6'");
-                echo form_reset("reset", "Reset", "class='btn btn-primary col-md-offset-1'");
+                echo form_submit("create", "Validate", "class='btn btn-primary'");
+                echo '&nbsp;&nbsp;'.form_reset("reset", "Reset", "class='btn btn-primary'");
                 echo form_close();
                 ?>
             </p>
-
+            </div>
         </div>
     </div>
 </body>

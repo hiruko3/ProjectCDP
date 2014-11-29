@@ -38,11 +38,13 @@ class Userstory_controller extends My_Controller {
 
             $asso_task = new Task();
             $tab_asso_task = array();
+            if (!empty($_POST['task'])) {
             if ($_POST['task']) {
                 foreach ($_POST['task'] as $post_task) {
                     array_push($tab_asso_task, $post_task);
                 }
                 $asso_task->where_in('id', $tab_asso_task)->get();
+            }
             }
 
             // Save in bdd
