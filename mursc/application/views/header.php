@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url() ?>"><i class="fa fa-home fa-1x"></i></a>
+                <a class="navbar-brand" href="<?php echo base_url() . 'user/display_resume'; ?>"><i class="fa fa-home fa-1x"></i></a>
             </div>
             
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

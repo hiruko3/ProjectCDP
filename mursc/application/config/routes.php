@@ -60,6 +60,7 @@ $route['user/list_contributor'] = "user_controller/display_project_list_contribu
 $route['user/list_follower'] = "user_controller/display_project_list_follower";
 $route['user/list_candidature'] = "user_controller/display_project_list_candidature";
 $route['user/list_invitation'] = "user_controller/display_project_list_invitation";
+$route['user/display_resume'] = "user_controller/display_resume";
 
 
 // USERSTORIES CONTROLLER

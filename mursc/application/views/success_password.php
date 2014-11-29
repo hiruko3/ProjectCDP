@@ -6,8 +6,8 @@
  </head>
 
  <body>
-  <div id="container">
-    <h1> New Password </h1>
+  <div id="container" class="col-lg-offset-1">
+    <h2> New Password </h2>
       <p>
         Your password has been modified with success !
       </p>
