@@ -31,8 +31,15 @@
    </tbody>
 </table>
 
-    <div class="draggable" >#6</div>
-    <div class="draggable" >#7</div>
+    <!-- <div class="draggable" >#6</div>
+    <div class="draggable" >#7</div> -->
+    <?php
+      echo br(3);
+      foreach($tasks as $t)
+      {
+        echo "<div class='draggable'><a class='btn btn-default' href=" . base_url() . "task_controller/displayTask/" . $t->id . ">" . $t->taskname . "</a></div> ";
+      }
+    ?>
     <script type="text/javascript" src= '<?php echo base_url('application/js/dragndrop.js')?>'></script>
  </body>
 </html>

@@ -25,3 +25,5 @@ http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/task_controller/index/
 	filtres : on ne récupère pas toutes les tâches quand on efface tout (mais c'est géré quand on efface pas tout)
 
 vue tasks / edit tasks
+
+après validation mail inscription, on est invité à tous les projets ?????

@@ -41,6 +41,11 @@ class Login extends My_Controller {
  			'is_logged_in' => 1
  			);
  		$this -> session -> set_userdata($data);
+
+	 	$u = new user();
+	 	$u->where('email', $this->input->post('email'))->get();
+	 	$this->session->set_userdata('user_id', $u->id);
+	 	
  		redirect('user_controller');
  	} else {
  		$this->login();
