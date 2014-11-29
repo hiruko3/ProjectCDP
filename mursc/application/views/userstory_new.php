@@ -1,9 +1,8 @@
 <html lang="fr">
     <meta charset="utf-8">
-    <div id="container">
+    <div id="container" class="col-lg-offset-1">
 
-        <h1> New user story </h1>
-        <?php $this->load->view('fibonacci'); ?>
+        <h2> New user story </h2>
 
         <?php
         foreach ($validMsg as $msg) {
@@ -28,9 +27,9 @@
 
 
         <?php
-            echo form_open('userstory/new_userstory', "class='col-lg-7 form-horizontal '");
+        echo form_open('userstory/new_userstory', "class='col-lg-7 form-horizontal '");
         ?>
-        
+
         <label  class="col-lg-5 " for="userstoryname">Name * : </label>
         <div class="col-lg-5">
             <p>
@@ -82,10 +81,11 @@
         <textarea  class="form-control" id="description"  name="description" style="width: 440px; height: 111px; resize: none;" ></textarea>
 
         <br/>
-        
-         <?php echo '<div class="col-lg-5">'. form_label('Task(s)', 'task',"class='form-control '") . '</div ><div class="">' . form_multiselect('task[]', $task_list, '') . '</div>';?>
-        <br/>
 
+        <?php echo '<div class="col-lg-5">' . form_label('Task(s)', 'task', "class='form-control '") . '</div ><div class="">' . form_multiselect('task[]', $task_list, '') . '</div>'; ?>
+        
+        <br/><br/><br/>
+        
         <?php
         echo "<p>";
         echo form_submit("create", "Create", "class='btn btn-primary col-md-offset-7'");

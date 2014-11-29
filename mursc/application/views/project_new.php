@@ -1,8 +1,8 @@
 <html lang="fr">
     <meta charset="utf-8">
-    <div id="container">
+    <div id="container" class="col-lg-offset-1">
 
-        <h1> New project </h1>
+        <h2> New project </h2>
 
         <br/>
         

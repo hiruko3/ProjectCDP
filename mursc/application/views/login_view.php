@@ -1,41 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
- <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1"  >
-    <title>Login Page</title>
- </head>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"  >
+            <title>Login Page</title>
+    </head>
 
- <body>
-  <div id="container">
-    <h1> Login </h1>
-      <?php
-      echo validation_errors();
-      ?>
+    <body>
+        <div id="container" class="col-lg-offset-1" >
 
-        <fieldset class="col-lg-offset-1">
-          <div class="form_login">
-            <?php
-               echo form_open('login/login_validation');
+            <?php echo br(4); ?>
 
-                echo "<p> Email : ";
-                echo form_input("email", $this->input->post('email'));
-                echo "</p>";
+            <div class="form_login col-lg-4 col-lg-offset-3">
 
-                echo "<p>Password : ";
-                echo form_password("password",$this->input->post(md5('password')));
-                echo "</p>";
+                <div class="text-center">
+                    <h2>Welcome to Mursc project</h2>
+                </div>
+                <?php echo br(2); ?>
 
-                echo "<p>";
-                echo form_submit("login_submit","Login");
-                echo "</p>";
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border ">Login</legend>
 
+                    <?php
+                    echo validation_errors();
+                    ?>
 
-                echo form_close();
-                ?>
-              </div>
-            </fieldset>
-       <a href = '<?php echo base_url()."login/sign_up" ?>'> Sign up ! </a>
+                    <?php
+                    echo form_open('login/login_validation');
 
-  </div>
- </body>
+                    echo "<p> Email : ";
+                    echo form_input(['name' => 'email', 'class' => 'form-control', "required" => "required", 'value' => $this->input->post('email')]);
+                    echo "</p>";
+
+                    echo "<p>Password : ";
+                    echo form_input(['name' => 'password', 'class' => 'form-control', "required" => "required", 'value' => $this->input->post(md5('password'))]);
+                    echo "</p>";
+
+                    echo "<p>";
+                    echo form_submit("login_submit", "Login", "class='btn btn-primary col-lg-2'");
+                    echo "</p>";
+
+                    echo form_close();
+                    ?>
+                    <div id="container" class="col-lg-3">
+                        <a href = '<?php echo base_url() . "login/sign_up" ?>'>Sign up </a>
+                    </div>
+                </fieldset>
+            </div>
+
+        </div>
+    </body>
 </html>

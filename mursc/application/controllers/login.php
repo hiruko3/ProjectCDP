@@ -68,9 +68,7 @@ public function validate_credentials(){
 	}
 
 	public function sign_up(){
-		$this->load->view('header');
 		$this->load->view('sign_up');
-		$this->load->view('footer');
 	}
 
 	public function sign_up_validation(){
