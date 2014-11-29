@@ -51,6 +51,8 @@ class Task_controller extends My_Controller {
         $task = new task();
         $data['task'] = $task->get_by_id($t_id);
         $this->load->view('header');
+        $header_project_data = array('project_id' => $p->id, 'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
         $this->load->view('task_view',$data);
         $this->load->view('footer');
     }
@@ -59,6 +61,8 @@ class Task_controller extends My_Controller {
     function taskSettings($t_id){
         $data['t_id'] = $t_id;
         $this->load->view('header');
+        $header_project_data = array('project_id' => $p->id, 'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
         $this->load->view('task_edit',$data);
         $this->load->view('footer');
     }
