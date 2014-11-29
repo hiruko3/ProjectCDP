@@ -31,28 +31,7 @@ class Sprint extends My_Controller {
  	}
 
  	$tab_userstory[-1] = $p->task->get()->where_not_in('id', $all_tasks)->get();
-
-
- 	// manque les sans US !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
  	$data['userstories'] = $tab_userstory;
-
-
- 	/*$tasks = $p->task->get();
- 	$data['tasks'] = $tasks;
-
- 	foreach($tasks as $t)
- 	{
- 		echo 'id : ' . $t->id . br();
- 		echo 'name : ' . $t->taskname . br();
- 		$userstories = $t->userstory->get();
- 		foreach($userstories as $us)
- 		{
- 			echo 'us id : ' . $us->id . br();
- 			echo 'us name : ' . $us->userstoryname . br();
- 		}
- 		echo br();
- 	}*/
 
 	$this->load->view('header');
 	$header_project_data = array('project_id' => $p->id, 'project_name' => $p->projectname);
