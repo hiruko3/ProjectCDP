@@ -1,9 +1,8 @@
 <html lang="fr">
     <meta charset="utf-8">
-    <div id="container">
+    <div id="container" class="col-lg-offset-1">
 
-        <h1> <?php echo 'Edit ' . $userstory->userstoryname; ?> </h1>
-        <?php $this->load->view('fibonacci'); ?>
+        <h2> <?php echo 'Edit userstory : ' . $userstory->userstoryname; ?> </h2>
 
         <?php
         foreach ($validMsg as $msg) {
@@ -51,7 +50,7 @@
         <label for="cost" class="col-lg-5" > Cost * : </label>
         <div class="col-lg-5">
             <p>
-                <select  class="form-control" id="cost" name="type">
+                <select  class="form-control" id="cost" name="cost">
                     <option value="0" <?php if($userstory->cost == '0'){ echo 'SELECTED';}?> >0 </option>
                     <option value="1" <?php if($userstory->cost == '1'){ echo 'SELECTED';}?> >1 </option>
                     <option value="2" <?php if($userstory->cost == '2'){ echo 'SELECTED';}?> >2 </option>
@@ -102,10 +101,12 @@
          <br/>
          
         <?php
+                echo br(4);
         echo "<p>";
-        echo form_submit("edit", "Edit", "class='btn btn-primary col-md-offset-7'");
+        echo form_submit("edit", "Apply", "class='btn btn-primary col-md-offset-7'");
         echo "</p>";
         echo form_close();
+
         ?>
 
     </div>

@@ -1,6 +1,6 @@
 
 <fieldset class="col-lg-12">
-    <nav class="navbar navbar-inverse" role="navigation">
+    <nav class="navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -32,6 +32,9 @@
             </div>
         </div>
     </nav>
+    
 </fieldset>
+
+
 
 <?php echo br(3); ?> 
