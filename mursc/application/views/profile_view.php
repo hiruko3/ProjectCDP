@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
    <title>Profile Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"  >
+    <link rel="stylesheet" type="text/css" href='<?php echo base_url('application/css/profile_settings.css')?>'>
  </head>
 
  <body>
@@ -11,7 +13,8 @@
     
       echo validation_errors();
 
-      echo form_open('profile_settings/replace_old_password');
+      $attributes = array('id' => 'settings');
+      echo form_open('profile_settings/replace_old_password', $attributes);
 
       echo "<p> Enter Previous password : ";
       echo form_password("old_password", $this->input->post(md5('old_password')));
@@ -33,6 +36,9 @@
       echo form_close();
 
       ?>
+
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  </head>
 
        <a href = '<?php echo base_url()."login/member" ?>'> Votre profil! </a>
 

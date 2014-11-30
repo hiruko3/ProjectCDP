@@ -14,7 +14,7 @@
 	</form>
 
  	<table class="table">
-   	<caption>Sprint</caption>
+   	<caption><b>Garrent</b></caption>
    	<thead id="thead">
       <tr>
          <th>Developer</th>
@@ -36,11 +36,17 @@
       <img src ='<?php echo base_url('ressources/delete.svg')?>'
        id="deleteTask1" width= "10px" height="10px" class="suppIcon" 
        style = "display : none" draggable="false" alt="delete"
-       onclick="deleteThisTask()">
-      #6</div>
+       onclick="deleteThisTask('deleteTask'+1)">
+      #tache6</div>
 
-      
-    <div class="draggable" >#7</div>
+    <div class="draggable" id="taskDrag" onmouseover="document.getElementById('deleteTask2').style.display = 'inline';"
+    onmouseout="document.getElementById('deleteTask2').style.display = 'none';"
+    onclick= "displayTask()">
+      <img src ='<?php echo base_url('ressources/delete.svg')?>'
+       id="deleteTask2" width= "10px" height="10px" class="suppIcon" 
+       style = "display : none" draggable="false" alt="delete"
+       onclick="deleteThisTask('deleteTask'+2)">
+      #tache7</div>
     <script type="text/javascript" src= '<?php echo base_url('application/js/dragndrop.js')?>'></script>
  </body>
 </html>

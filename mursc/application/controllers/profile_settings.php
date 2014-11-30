@@ -6,11 +6,13 @@
 
 			parent::__construct();
 			$this->load->model('profile_model');
+			$this->load->library('template');
 		}
 
 
 		public function settings(){
-			$this->load->view('profile_view');
+
+			$this->template->show('profile_view');
 		}
 
 		public function success_password(){
