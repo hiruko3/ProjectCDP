@@ -1,6 +1,6 @@
 
 <fieldset class="col-lg-12">
-    <nav class="navbar-default" role="navigation">
+    <nav class="navbar-collapse" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">

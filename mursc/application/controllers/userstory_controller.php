@@ -250,6 +250,7 @@ class Userstory_controller extends My_Controller {
         };
 
         $tasks_of_project = $p->task->get();
+        $tasks_list_project = array();
         foreach ($tasks_of_project as $t) {
             $tasks_list_project[$t->id] = $t->taskname;
         };

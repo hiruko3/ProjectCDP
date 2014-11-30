@@ -12,7 +12,7 @@
   
   </br>
   
-  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > Profile Settings </a> 
+  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > Change your password </a> 
 
 
 </div>
