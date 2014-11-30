@@ -62,14 +62,14 @@
         {
           $us_bdd = new userstory();
           $us_bdd->get_by_id($us_id);
-          echo '<ul><div class="col-md-2"><div class="btn btn-primary">' . character_limiter($us_bdd->userstoryname, 20) . '</div></div>';
+          echo '<div class="row"><ul><div class="col-md-2"><div class="btn btn-primary">' . character_limiter($us_bdd->userstoryname, 20) . '</div></div>';
         }
-        else{ echo '<ul><div class="col-md-2"><div class="btn btn-primary">' . character_limiter('no userstory', 20) . '</div></div>'; } // traitement des
+        else{ echo '<div class="row"><ul><div class="col-md-2"><div class="btn btn-primary">' . character_limiter('no userstory', 20) . '</div></div>'; } // traitement des
         foreach($us as $task)
         {
           echo '<li class="btn btn-default"><div class="draggable">#' . $task->taskname . '</div></li> ';
         }
-        echo '</ul>';
+        echo '</ul></div>';
       }
     ?>
 
