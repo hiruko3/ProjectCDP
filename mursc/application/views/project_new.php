@@ -1,10 +1,11 @@
 <html lang="fr">
     <meta charset="utf-8">
-    <div id="container">
+    <div id="container" class="col-lg-offset-1">
 
-        <h1> New project </h1>
-
-        <br/>
+        </br>
+        
+        <fieldset class="col-lg-5 scheduler-border">
+        <legend class="scheduler-border">New Project</legend>
         
         <?php
         foreach ($validMsg as $msg) {
@@ -25,12 +26,10 @@
             echo "<i class='fa fa-times-circle text-danger'" . $msg . "</i>";
         }
         ?>
-        <br/>
-
 
         <?php
         //echo validation_errors();
-        echo form_open('project/new_project', "class='col-lg-6 form-horizontal'");
+        echo form_open('project/new_project', "class='form-horizontal'");
         ?>
 
         <label  class="col-lg-5" for="projectname">Project name * : </label>
@@ -58,16 +57,18 @@
         </div>
 
         <label for="description"  class="col-lg-5" > Description * : </label>
-        <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ></textarea>
+        <textarea  class="form-control" id="description"  name="description" style="height: 111px; resize: none;" ></textarea>
 
         <br/>
         <br/>
 
+        <div class="text-center">
         <?php
         echo "<p>";
-        echo form_submit("create", "Create", "class='btn btn-primary col-md-offset-7'");
-        echo "</p>";
-
+        echo form_submit("create", "Create", "class='btn btn-primary'");
+        echo "</p>";?>
+        </div>
+        <?php
         echo form_close();
         ?>
 

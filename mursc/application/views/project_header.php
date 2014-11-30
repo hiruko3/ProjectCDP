@@ -1,6 +1,6 @@
 
 <fieldset class="col-lg-12">
-    <nav class="navbar navbar-inverse" role="navigation">
+    <nav class="navbar-collapse" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -13,6 +13,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <?php if($this->session->userdata('project_type') == 'public' || $this->session->userdata('my_relation') == 'member') { /* affichage pour tous les members, watchers compris */ ?>
                     <li>
                         <a href="<?php echo base_url() . "management_controller/index/" . $project_id; ?>">Management</a>
                     </li>
@@ -28,10 +29,14 @@
                     <li>
                         <a href="<?php echo base_url() . "version_controller/index/" . $project_id; ?>">Versions</a>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
     </nav>
+    
 </fieldset>
+
+
 
 <?php echo br(3); ?> 

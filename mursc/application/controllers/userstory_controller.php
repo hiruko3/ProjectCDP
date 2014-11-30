@@ -25,10 +25,12 @@ class Userstory_controller extends My_Controller {
 
             $us->userstoryname = $_POST['userstoryname'];
             $us->description = $_POST['description'];
-            $us->statut = 'new';
+            $us->statut = 'Not ready';
             $us->cost = $_POST['cost'];
-            $us->datestart = $_POST['datestart'];
-            $us->dateend = $_POST['dateend'];
+            //$us->datestart = $_POST['datestart'];
+            //$us->dateend = $_POST['dateend'];
+            $us->datestart = '';
+            $us->dateend = '';
 
             // jointure
             $p = new Project();
@@ -36,11 +38,13 @@ class Userstory_controller extends My_Controller {
 
             $asso_task = new Task();
             $tab_asso_task = array();
+            if (!empty($_POST['task'])) {
             if ($_POST['task']) {
                 foreach ($_POST['task'] as $post_task) {
                     array_push($tab_asso_task, $post_task);
                 }
                 $asso_task->where_in('id', $tab_asso_task)->get();
+            }
             }
 
             // Save in bdd
@@ -51,6 +55,7 @@ class Userstory_controller extends My_Controller {
                 $validMsg['userstory_created'] = "<p> New user story created ! </p>";
             }
         }
+
         $p = new project();
         $p->get_by_id($this->session->userdata('project_id'));
 
@@ -104,6 +109,8 @@ class Userstory_controller extends My_Controller {
 
         redirect('userstory_controller/index/' . $this->session->userdata('project_id'));
     }
+
+////////////////////////// INDEX  ////////////////////////////
 
     function index($id) {
         $this->load->view('header');
@@ -179,11 +186,21 @@ class Userstory_controller extends My_Controller {
             $us->description = $_POST['description'];
             $us->statut = $_POST['statut'];
             $us->cost = $_POST['cost'];
-            $us->datestart = $_POST['datestart'];
-            $us->dateend = $_POST['dateend'];
+            //$us->datestart = $_POST['datestart'];
+            //$us->dateend = $_POST['dateend'];
+            $us->datestart = '';
+            $us->dateend = '';
 
             $task_added = new Task();
             $tab_asso_task_added = array();
+
+            if (!$us->save()) {
+                array_push($errorMsg1, $us->error->all);
+                $errorMsg1 = $errorMsg1['0'];
+            } else {
+                $validMsg['userstory_added'] = "<p> US edited ! </p>";
+            }
+
 
             if (!empty($_POST['tasks_added'])) {
                 foreach ($_POST['tasks_added'] as $post_task) {
@@ -227,23 +244,18 @@ class Userstory_controller extends My_Controller {
         $tasks = $us->task->get();
 
         $data['tasks_list_associated'] = array();
-        
+
         foreach ($tasks as $t) {
             $data['tasks_list_associated'][$t->id] = $t->taskname;
         };
 
         $tasks_of_project = $p->task->get();
+        $tasks_list_project = array();
         foreach ($tasks_of_project as $t) {
             $tasks_list_project[$t->id] = $t->taskname;
         };
 
         $data['tasks_list_possible_to_add'] = array_diff_assoc($tasks_list_project, $data['tasks_list_associated']);
-
-        /*
-          var_dump($tasks_list_project);
-          var_dump($data['tasks_list_associated']);
-          var_dump($data['tasks_list_possible']);
-         */
 
         $data['userstory'] = $us;
         $data['project_id'] = $this->session->userdata('project_id');

@@ -69,6 +69,12 @@ class Project_controller extends My_Controller {
         $data['project'] = $p;
         $data['list_member'] = $this->_list_members($id);
         
+        // on retient mon statut pour ce project en session : ici, ce statut sera modifie a chaque changement de projet
+        $stat = $p->user->where('user_id', $this->session->userdata('user_id'))->include_join_fields()->get();
+        $this->session->set_userdata('my_status', $stat->join_user_status);
+        $this->session->set_userdata('my_relation', $stat->join_relationship_type);
+        $this->session->set_userdata('project_type', $p->type);
+        ////
         
         $this->load->view('header');
 
@@ -158,8 +164,8 @@ class Project_controller extends My_Controller {
 
 ////////////////////////// EDIT PROJECT ////////////////////////////
 
-    function edit_project($id) {
-        $this->session->set_userdata('project_id', $id);
+    function edit_project() {
+        $id = $this->session->userdata('project_id');
         $validMsg = array();
         $errorMsg1 = array();
         $errorMsg2 = array();

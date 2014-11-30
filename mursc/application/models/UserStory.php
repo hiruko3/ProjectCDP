@@ -28,11 +28,11 @@ class UserStory extends DataMapper {
         ),
         'datestart' => array(
             'label' => 'Start date',
-            'rules' => array('required', 'trim', 'valid_date'),
+            'rules' => array('trim', 'valid_date'),
         ),
         'dateend' => array(
             'label' => 'End date',
-            'rules' => array('required', 'trim', 'valid_date'),
+            'rules' => array('trim', 'valid_date'),
         )
     );
 

@@ -39,6 +39,11 @@ class Login extends My_Controller {
  			'is_logged_in' => 1
  			);
  		$this -> session -> set_userdata($data);
+
+	 	$u = new user();
+	 	$u->where('email', $this->input->post('email'))->get();
+	 	$this->session->set_userdata('user_id', $u->id);
+	 	
  		redirect('user_controller');
  	} else {
  		$this->login();
@@ -73,7 +78,6 @@ public function sign_up_validation(){
 	
 	$this->form_validation->set_message('is_unique', 'That email/usrname already exists or is in proccess to be validate');
 	if($this->form_validation->run()){
-
 			//Generate a random key for the user's token
 			$key = md5(uniqid());
 

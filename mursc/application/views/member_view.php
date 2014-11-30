@@ -6,6 +6,13 @@
  </head>
 
  <body>
+<div id="container" class="col-lg-offset-1" >
+    
+  <h1>My profile </h1>
+  
+  </br>
+  
+  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > Change your password </a> 
 
   <h1><center>Member </center></h1>
 
@@ -16,5 +23,6 @@
   <a href =' <?php echo base_url() ?>' ><center> Back to my projects </center></a> 
   <br/>
 
+</div>
  </body>
 </html>

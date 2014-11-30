@@ -47,6 +47,47 @@
        style = "display : none" draggable="false" alt="delete"
        onclick="deleteThisTask('deleteTask'+2)">
       #tache7</div>
+
+    <?php
+      echo br(3);
+      /*foreach($tasks as $t)
+      {
+        echo "<div class='draggable'><a class='btn btn-default' href=" . base_url() . "task_controller/displayTask/" . $t->id . ">" . $t->taskname . "</a></div> ";
+      }*/
+
+      /*foreach($userstories as $us_id => $us)
+      {
+        if($us_id != -1)
+        {
+          $us_bdd = new userstory();
+          $us_bdd->get_by_id($us_id);
+          echo '<ul><div class="col-md-2"><div class="btn btn-primary">' . character_limiter($us_bdd->userstoryname, 20) . '</div></div>';
+        }
+        else{ echo '<ul><div class="col-md-2"><div class="btn btn-primary">' . character_limiter('no userstory', 20) . '</div></div>'; } // traitement des
+        foreach($us as $task)
+        {
+          echo '<li class="draggable"><a class="btn btn-default" href=' . base_url() . 'task_controller/displayTask/' . $task->id . '>' . $task->taskname . '</a></li> ';
+        }
+        echo '</ul>';
+      }*/
+
+      foreach($userstories as $us_id => $us)
+      {
+        if($us_id != -1)
+        {
+          $us_bdd = new userstory();
+          $us_bdd->get_by_id($us_id);
+          echo '<div class="row"><ul><div class="col-md-2"><div class="btn btn-primary">' . character_limiter($us_bdd->userstoryname, 20) . '</div></div>';
+        }
+        else{ echo '<div class="row"><ul><div class="col-md-2"><div class="btn btn-primary">' . character_limiter('no userstory', 20) . '</div></div>'; } // traitement des
+        foreach($us as $task)
+        {
+          echo '<li class="btn btn-default"><div class="draggable">#' . $task->taskname . '</div></li> ';
+        }
+        echo '</ul></div>';
+      }
+    ?>
+
     <script type="text/javascript" src= '<?php echo base_url('application/js/dragndrop.js')?>'></script>
  </body>
 </html>
