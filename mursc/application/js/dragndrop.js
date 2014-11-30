@@ -52,9 +52,9 @@
  
     }
 
-    function deleteThisTask(){
+    function deleteThisTask(paramTask){
         if (confirm('Voules vous vraiment supprimer cette tâche ?')){
-            var a = document.getElementById('deleteTask1')
+            var a = document.getElementById(paramTask)
             b = a.parentNode
             if(b)
                 b.parentNode.removeChild(b)
@@ -103,7 +103,6 @@
     }   
 
 
-
     function addDropper(){
         var droppers = document.querySelectorAll('.dropper'),
             droppersLen = droppers.length;
@@ -117,6 +116,13 @@
         for(var i = 0 ; i < elementsLen ; i++) {
             dndHandler.applyDragEvents(elements[i]); // Application des paramètres nécessaires aux éléments déplaçables
         }
+    }
+
+
+    //TODO
+
+    function displayTask(){
+        //Appel de l'affichage de la vue
     }
 
 

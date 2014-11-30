@@ -10,16 +10,18 @@ div.drop_hover {
 }
 
 .draggable {
+    border-radius: 10px;
+    background-color: #EFFBFF;
     display: inline-block;
     font-size: 1em;
 }
 
 div #taskDrag:hover{
     border-radius: 10px;
-    background-color: #98DB9C;
+    background-color: #D5EDEE;
 }
 
 div #taskDrag img:hover{
-    background-color: #E1E6FA;
+    background-color: #FF8385;
     border-radius: 10px;
 }
