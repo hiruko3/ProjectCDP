@@ -40,7 +40,7 @@
 
 
 // GENERAL 
-$route['default_controller'] = "login";
+$route['default_controller'] = "user_controller";
 $route['404_override'] = '';
 
 

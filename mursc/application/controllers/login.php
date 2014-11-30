@@ -9,8 +9,6 @@ class Login extends My_Controller {
    	$this->load->model('user_model');
    	$this->load->library('email');
    	$this->load->library('template');
-   	$this->load->helper('html');
-   	$this->load->library('table');
  }
 
  function index()
@@ -63,51 +61,24 @@ public function logout(){
 }
 
 public function sign_up(){
-	$this->template->show("sign_up");
+	$this->load->view("sign_up");
 }
 
 public function sign_up_validation(){
 
+	$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[mursc_users.username]');
 	$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[mursc_users.email]|is_unique[mursc_tmp_users.email]');
 	$this->form_validation->set_rules('password', 'Password', 'required|md5|trim|min_length[7]|max_length[255]');
 	$this->form_validation->set_rules('confirm_password', 'CPassword', 'required|trim|min_length[7]|max_length[255]|matches[password]');
 	
-	$this->form_validation->set_message('is_unique', 'That email already exists or is in proccess to be validate');
-
-		if($this->user_model->can_log_in()){
-			return true;
-		} else {
-			$this->form_validation->set_message('validate_credentials','Incorrect Username/Password.');
-			return false;
-		}
-	}
-
-	public function logout(){
-		$this->session->sess_destroy();
-		$this->index();
-	}
-
-	public function sign_up(){
-		$this->load->view('header');
-		$this->load->view('sign_up');
-		$this->load->view('footer');
-	}
-
-	public function sign_up_validation(){
-
-		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[mursc_users.username]');
-		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[mursc_users.email]');
-		$this->form_validation->set_rules('password', 'Password', 'required|md5|trim|min_length[7]|max_length[255]');
-		$this->form_validation->set_rules('confirm_password', 'CPassword', 'required|trim|min_length[7]|max_length[255]|matches[password]');
-		
-		if($this->form_validation->run()){
+	$this->form_validation->set_message('is_unique', 'That email/usrname already exists or is in proccess to be validate');
+	if($this->form_validation->run()){
 
 			//Generate a random key for the user's token
 			$key = md5(uniqid());
 
 			//send a message to the user with a unique key to confirm account
-			$this->email->from('romain3.verger3@gmail.com','Lemon');
-			//$this->email->from('romainwownolife@hotmail.fr','Lemon');
+			$this->email->from('serveurtestromain@gmail.com','Lemon');
 			$this->email->to($this->input->post('email'));
 			$this->email->subject("Confirm your account by validating your email adress");
 
@@ -127,6 +98,7 @@ public function sign_up_validation(){
 		} else {
 			$this->sign_up();
 		}
+	
 	}
 
 

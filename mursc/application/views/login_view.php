@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"  >
+    <link rel="stylesheet" type="text/css" href='<?php echo base_url('css/login.css') ?>'>
     <title>Login Page</title>
  </head>
 
@@ -17,7 +18,7 @@
             <?php
                echo form_open('login/login_validation');
 
-                echo "<p> Email : ";
+                echo "<p> Email or Username: ";
                 echo form_input("email", $this->input->post('email'));
                 echo "</p>";
 

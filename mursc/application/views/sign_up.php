@@ -14,20 +14,26 @@
 
       echo form_open ('login/sign_up_validation');
 
-      echo "<div class='row'><div class='col-md-1'>Username</div>";
-      echo "<div class='col-md-2'>" . form_input('username', $this->input->post('username')) . "</div></div>";
+      echo "<p> Email : ";
+      echo form_input("username", $this->input->post('username'));
+      echo "</p>";
 
-      echo "<div class='row'><div class='col-md-1'>Email</div>";
-      echo "<div class='col-md-2'>" . form_input('email', $this->input->post('email')) . "</div></div>";
+      echo "<p> Email : ";
+      echo form_input("email", $this->input->post('email'));
+      echo "</p>";
 
-      echo "<div class='row'><div class='col-md-1'>Password</div>";
-      echo "<div class='col-md-2'>" . form_password('password', $this->input->post(md5('password'))) . "</div></div>";
+      echo "<p>Password : ";
+      echo form_password("password",$this->input->post(md5('password')));
+      echo "</p>";
 
-      echo "<div class='row'><div class='col-md-1'>Password confirmation</div>";
-      echo "<div class='col-md-2'>" . form_password('confirm_password') . "</div></div>";
+      echo "<p>Confirm Password : ";
+      echo form_password("cpassword",$this->input->post(md5('cpassword')));
+      echo "</p>";
 
-      echo "<div class='row'><div class='col-md-1'></div>";
-      echo "<div class='col-md-2'>" . form_submit('signup_submit', 'Sign Up') . "</div></div>";
+      echo "<p>";
+      echo form_submit("login_submit","Login");
+      echo "</p>";
+
        
       echo form_close();
 
