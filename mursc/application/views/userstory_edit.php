@@ -4,9 +4,11 @@
 
         <h2> <?php echo 'Edit userstory : ' . $userstory->userstoryname; ?> </h2>
 
+        <br />
+
         <div class='row'>
             <div class='col-md-1'>
-                <?php echo anchor('project/' . $project_id . '/userstory/index_userstory/' . $userstory->id, ' Back to US index', 'class="btn btn-default fa fa-eye "'); ?>
+                <?php echo anchor('project/' . $project_id . '/userstory/index_userstory/' . $userstory->id, ' View', 'class="btn btn-default fa fa-eye "'); ?>
             </div>
         </div>   
 

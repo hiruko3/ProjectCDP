@@ -1,8 +1,6 @@
 <html lang="fr">
     <meta charset="utf-8">
 
-    <?php echo br(1); ?>  
-
     <div class='row col-lg-offset-1'>
 
         <h2> <?php echo 'Tâche : ' . $task->taskname; ?> </h2>
@@ -11,7 +9,7 @@
 
         <div class='row'>
             <div class='col-md-1'>
-                <?php echo anchor(base_url() . 'task_controller/task_settings/' . $task->id, ' Edit this task', 'class="btn btn-default fa fa-cog "'); ?>
+                <?php echo anchor(base_url() . 'task_controller/taskSettings/' . $task->id, ' Edit', 'class="btn btn-default fa fa-cog "'); ?>
             </div>
         </div>   
 

@@ -1,8 +1,6 @@
 <html lang="fr">
     <meta charset="utf-8">
 
-    <?php echo br(1); ?>  
-
     <div class='row col-lg-offset-1'>
 
         <h2> <?php echo 'US : ' . $userstory->userstoryname; ?> </h2>
@@ -11,7 +9,7 @@
 
         <div class='row'>
             <div class='col-md-1'>
-                <?php echo anchor('project/' . $project_id . '/userstory/edit_userstory/' . $userstory->id, ' Edit this user story', 'class="btn btn-default fa fa-cog "'); ?>
+                <?php echo anchor('project/' . $project_id . '/userstory/edit_userstory/' . $userstory->id, ' Edit', 'class="btn btn-default fa fa-cog "'); ?>
             </div>
         </div>   
 

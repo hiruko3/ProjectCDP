@@ -3,7 +3,6 @@
     <div id="container">
 
         <h1> New task </h1>
-        <?php $this->load->view('fibonacci'); ?>
 
         <?php
         if(ISSET($succes)){ echo $succes; }
@@ -17,7 +16,7 @@
 
         echo '<div class="row"><div class="col-lg-2">' . form_label('Name', 'name') . '</div><div class="col-lg-2">' . form_input('name') . '</div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('Status', 'status') . '</div><div class="col-lg-2">' . form_dropdown('status', $status, '') . '</div></div>';
-        echo '<div class="row"><div class="col-lg-2">' . form_label('Cost', 'cost') . '</div><div class="col-lg-2"><input type="number" name="cost" min=0 max=50 value=1 /></div></div>';
+        echo '<div class="row"><div class="col-lg-2">' . form_label('Cost', 'cost') . '</div><div class="col-lg-2">' . form_dropdown('cost', $fibonacci, '') . '</div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('Developer', 'dev') . '</div><div class="col-lg-2">' . form_dropdown('dev', $dev_list, '') . '</div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('Dependencies', 'dep') . '</div><div class="col-lg-2">' . form_multiselect('dep[]', $task_list, '') . '</div></div>';
         echo '<div class="row"><div class="col-lg-2">' . form_label('US', 'us') . '</div><div class="col-lg-2">' . form_multiselect('us[]', $us_list, '') . '</div></div>';
