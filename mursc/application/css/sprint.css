@@ -1,19 +1,25 @@
 div.dropper {
     margin: auto;
-    width: th.width;
-    height: th.height;
-    background-color: #069;
-    border: 1px solid #111;
+    height: 50px;
+    background-color: active;
 }
 
 
 div.drop_hover {
-    -moz-box-shadow: 0 0 30px rgba(0, 0, 0, 0.8) inset;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8) inset;
-    background-color: #239;
+    background-color: #C3D9E0;
 }
 
 .draggable {
     display: inline-block;
     font-size: 1em;
+}
+
+div #taskDrag:hover{
+    border-radius: 10px;
+    background-color: #98DB9C;
+}
+
+div #taskDrag img:hover{
+    background-color: #E1E6FA;
+    border-radius: 10px;
 }

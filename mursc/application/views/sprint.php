@@ -31,7 +31,15 @@
    </tbody>
 </table>
 
-    <div class="draggable" >#6</div>
+    <div class="draggable" id="taskDrag" onmouseover="document.getElementById('deleteTask1').style.display = 'inline';"
+    onmouseout="document.getElementById('deleteTask1').style.display = 'none';">
+      <img src ='<?php echo base_url('ressources/delete.svg')?>'
+       id="deleteTask1" width= "10px" height="10px" class="suppIcon" 
+       style = "display : none" draggable="false" alt="delete"
+       onclick="deleteThisTask()">
+      #6</div>
+
+      
     <div class="draggable" >#7</div>
     <script type="text/javascript" src= '<?php echo base_url('application/js/dragndrop.js')?>'></script>
  </body>

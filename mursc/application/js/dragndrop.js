@@ -29,77 +29,95 @@
                 //alert("vous quittez la zone de drop")
             });
             
-            var dndHandler = this; // Cette variable est nécessaire pour que l'événement « drop » ci-dessous accède facilement au namespace « dndHandler »
+            var dndHandler = this // Cette variable est nécessaire pour que l'événement « drop » ci-dessous accède facilement au namespace « dndHandler »
 
             dropper.addEventListener('drop', function(e) {
 
                 var target = e.target,
                 draggedElement = dndHandler.draggedElement, // Récupération de l'élément concerné
-                clonedElement = draggedElement.cloneNode(true); // On créé immédiatement le clone de cet élément
+                clonedElement = draggedElement.cloneNode(true) // On créé immédiatement le clone de cet élément
                 
                 while(target.className.indexOf('dropper') == -1) { // Cette boucle permet de remonter jusqu'à la zone de drop parente
-                    target = target.parentNode;
+                    target = target.parentNode
                 }
 
-                target.className = 'dropper'; // Application du style par défaut
+                target.className = 'dropper' // Application du style par défaut
                 
-                clonedElement = target.appendChild(clonedElement); // Ajout de l'élément cloné à la zone de drop actuelle
-                dndHandler.applyDragEvents(clonedElement); // Nouvelle application des événements qui ont été perdus lors du cloneNode()                
-            });
+                clonedElement = target.appendChild(clonedElement) // Ajout de l'élément cloné à la zone de drop actuelle
+                dndHandler.applyDragEvents(clonedElement)// Nouvelle application des événements qui ont été perdus lors du cloneNode()                
+                draggedElement = draggedElement.parentNode.removeChild(draggedElement)
+            })
             
         }
  
-    };
-    
-    
+    }
+
+    function deleteThisTask(){
+        if (confirm('Voules vous vraiment supprimer cette tâche ?')){
+            var a = document.getElementById('deleteTask1')
+            b = a.parentNode
+            if(b)
+                b.parentNode.removeChild(b)
+        }
+    }
+        
+    function confirmation(){
+        var mess = ''
+        var name = document.getElementById('dev').value
+        if(name == '') { mess += 'Veuillez renseigner un nom' }
+        if (mess != '')
+            alert(mess)
+        else
+            return true
+    }
 
     function ajouterLigne()
     {
-        var tableau = document.getElementById("tbody")
-        var col = document.getElementById("thead").rows
-        var ligne = tableau.insertRow(-1)//on a ajouté une ligne
+        if(confirmation()){
+            var tableau = document.getElementById("tbody")
+            var col = document.getElementById("thead").rows
+            var ligne = tableau.insertRow(-1)
 
-        var colonne1 = ligne.insertCell(0)//on a une ajouté une cellule
-        colonne1.innerHTML += document.getElementById("dev").value
+            var colonne1 = ligne.insertCell(0)
+            colonne1.innerHTML += document.getElementById("dev").value
 
-        var i=1
-        var length = col[0].cells.length
+            var i=1
+            var length = col[0].cells.length
 
-        //The next area for drop element draggable
-        var divDropper = document.createElement('div')
-        divDropper.className = "dropper"
-
-        //Add des cellules dynamiquement
-        colonne = new Array()
-        for (i; i< length; ++i){
-            colonne[i] = ligne.insertCell(i)//on ajoute les length - 1 cellule
-            colonne[i].className = "active"//bootstrap skin
-            colonne[i].id = "tobeDropped"
-            dupNode =divDropper.cloneNode(true);
-            colonne[i].appendChild(dupNode)
+            //The next area for drop element draggable
+            var divDropper = document.createElement('div')
+            divDropper.className = "dropper"
+            //Add des cellules dynamiquement
+            colonne = new Array()
+            for (i; i< length; ++i){
+                colonne[i] = ligne.insertCell(i)//on ajoute les length - 1 cellule
+                colonne[i].className = "active"//bootstrap skin
+                colonne[i].id = "tobeDropped"
+                colonne[i].height = "50px"
+                divDropper.height = "50px"
+                dupNode =divDropper.cloneNode(true);
+                colonne[i].appendChild(dupNode)
+            }
+            addDropper()
         }
-        addDropper()
     }   
 
 
+
     function addDropper(){
-        alert("yo2")
         var droppers = document.querySelectorAll('.dropper'),
             droppersLen = droppers.length;
         
         for(var i = 0 ; i < droppersLen ; i++) {
             dndHandler.applyDropEvents(droppers[i]); // Application des événements nécessaires aux zones de drop
+        }
+
+        var elements = document.querySelectorAll('div.draggable'),
+        elementsLen = elements.length
+        for(var i = 0 ; i < elementsLen ; i++) {
+            dndHandler.applyDragEvents(elements[i]); // Application des paramètres nécessaires aux éléments déplaçables
+        }
     }
-
-    var elements = document.querySelectorAll('div.draggable'),
-    elementsLen = elements.length
-    for(var i = 0 ; i < elementsLen ; i++) {
-        dndHandler.applyDragEvents(elements[i]); // Application des paramètres nécessaires aux éléments déplaçables
-    }
-
-
-
-}
 
 
 
