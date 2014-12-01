@@ -11,7 +11,7 @@
                 You do not have access to this page 
             </p>
 
-            <a href = <?php echo base_url() ?>> Back to login page </a>
+            <a href = <?php echo base_url() ?>> Back to main page </a>
         </div>
     </body>
 </html>

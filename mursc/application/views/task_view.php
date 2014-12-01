@@ -9,7 +9,12 @@
 
         <div class='row'>
             <div class='col-md-1'>
-                <?php echo anchor(base_url() . 'task_controller/taskSettings/' . $task->id, ' Edit', 'class="btn btn-default fa fa-cog "'); ?>
+                <?php
+                if($this->session->userdata('my_relation') == 'member' && $this->session->userdata('my_status') == 'project manager') // acl product manager only
+                {
+                    echo anchor(base_url() . 'task_controller/taskSettings/' . $task->id, ' Edit', 'class="btn btn-default fa fa-cog "');
+                }
+                ?>
             </div>
         </div>   
 

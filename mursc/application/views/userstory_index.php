@@ -8,8 +8,13 @@
         <?php echo br(1); ?>
 
         <div class='row'>
-            <div class='col-md-1'>
-                <?php echo anchor('project/' . $project_id . '/userstory/edit_userstory/' . $userstory->id, ' Edit', 'class="btn btn-default fa fa-cog "'); ?>
+            <div class='col-md-1'>                
+                <?php
+                    if($this->session->userdata('my_relation') == 'member' && $this->session->userdata('my_status') == 'project manager') // acl product manager only
+                    {
+                        echo anchor('project/' . $project_id . '/userstory/edit_userstory/' . $userstory->id, ' Edit', 'class="btn btn-default fa fa-cog "');
+                    }
+                ?>
             </div>
         </div>   
 

@@ -10,11 +10,11 @@
           echo br(1);
         ?>
 
-        <div class='row'>
-            <div class='col-md-1'>
-                <?php echo anchor(base_url() . 'task_controller/displayTask/' . $task->id, ' View', 'class="btn btn-default fa fa-eye"'); ?>
-            </div>
-        </div>   
+        <?php
+          echo anchor(base_url() . 'task_controller/displayTask/' . $task->id, ' View', 'class="btn btn-default fa fa-eye"');
+          echo '&nbsp;&nbsp;&nbsp;';
+          echo '<a onclick="return confirm(\'Are you sure you want to delete the task ' . $task->taskname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'task_controller/delete_task/' . $task->id . '" ><i class="icon-trash icon-large"></i> Delete this task </a> &nbsp;';
+        ?>
 
         <?php echo br(1); ?>
 

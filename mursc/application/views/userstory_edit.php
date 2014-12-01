@@ -6,12 +6,12 @@
 
         <br />
 
-        <div class='row'>
-            <div class='col-md-1'>
-                <?php echo anchor('project/' . $project_id . '/userstory/index_userstory/' . $userstory->id, ' View', 'class="btn btn-default fa fa-eye "'); ?>
-            </div>
-        </div>   
-
+        <?php
+            echo anchor('project/' . $project_id . '/userstory/index_userstory/' . $userstory->id, ' View', 'class="btn btn-default fa fa-eye " &nbsp;');
+            echo '&nbsp;&nbsp;&nbsp;';
+            echo '<a onclick="return confirm(\'Are you sure you want to delete the userstory ' . $userstory->userstoryname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'project/' . $project_id . '/userstory/delete_userstory/' . $userstory->id . '" ><i class="icon-trash icon-large"></i> Delete this userstory </a> &nbsp;';
+        ?>
+       
         <br/>
 
         <?php

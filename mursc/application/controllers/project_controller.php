@@ -115,8 +115,16 @@ class Project_controller extends My_Controller {
     * @brief : envoie une invitation a un user (avec un status)
     * @param $p_id : l id du projet pour lequel on invite
     */
-    function send_invitation($p_id)
+    function send_invitation()
     {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
+
+        $p_id = $this->session->userdata('project_id');
+
         // tableau de status
         $j = new join_projects_user();
         $status_array = array();
@@ -158,6 +166,13 @@ class Project_controller extends My_Controller {
         $data['status_array'] = $status_array;
 
         $this->load->view('header');
+
+        $p = new Project();
+        $p->get_by_id($p_id);
+        $header_project_data = array(
+            'project_id' => $p->id,
+            'project_name' => $p->projectname);
+        $this->load->view('project_header', $header_project_data);
         $this->load->view('send_invitation', $data);
         $this->load->view('footer');
     }
@@ -165,6 +180,12 @@ class Project_controller extends My_Controller {
 ////////////////////////// EDIT PROJECT ////////////////////////////
 
     function edit_project() {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
+
         $id = $this->session->userdata('project_id');
         $validMsg = array();
         $errorMsg1 = array();
@@ -341,10 +362,15 @@ class Project_controller extends My_Controller {
         $this->load->view('footer');
     }
 
-
 ///////////////////////// DELETE PROJECT ////////////////////////////
 
-    function delete_project($id) {
+    function delete_project() {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
+        $id = $this->session->userdata('project_id');
 
         $validMsg = array();
         $errorMsg1 = array();

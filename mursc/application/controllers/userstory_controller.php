@@ -14,6 +14,12 @@ class Userstory_controller extends My_Controller {
 ////////////////////////// NEW USER STORY ////////////////////////////
 
     function new_userstory() {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
+
         $project_id = $this->session->userdata('project_id');
         $validMsg = array();
         $errorMsg1 = array();
@@ -87,6 +93,11 @@ class Userstory_controller extends My_Controller {
 ////////////////////////// DELETE USER STORY ////////////////////////////
 
     function delete_userstory($id) {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
 
         $validMsg = array();
         $errorMsg1 = array();
@@ -113,6 +124,12 @@ class Userstory_controller extends My_Controller {
 ////////////////////////// INDEX  ////////////////////////////
 
     function index($id) {
+        if($this->session->userdata('project_type') == 'private' && !($this->session->userdata('my_relation') == 'member')) // si le projet est prive, seuls les members, watchers compris peuvent voir
+        {
+            redirect('login/restricted');
+            return;
+        }
+
         $this->load->view('header');
 
         $p = new project();
@@ -138,6 +155,11 @@ class Userstory_controller extends My_Controller {
     ////////////////////////// INDEX USER STORY ////////////////////////////
 
     function index_userstory($id) {
+        if($this->session->userdata('project_type') == 'private' && !($this->session->userdata('my_relation') == 'member')) // si le projet est prive, seuls les members, watchers compris peuvent voir
+        {
+            redirect('login/restricted');
+            return;
+        }
 
         $us = new UserStory();
 
@@ -171,6 +193,11 @@ class Userstory_controller extends My_Controller {
     ////////////////////////// EDIT USER STORY ////////////////////////////
 
     function edit_userstory($id) {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
 
         $validMsg = array();
         $errorMsg1 = array();
@@ -278,3 +305,5 @@ class Userstory_controller extends My_Controller {
     }
 
 }
+
+?>

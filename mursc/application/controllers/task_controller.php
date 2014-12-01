@@ -48,7 +48,13 @@ class Task_controller extends My_Controller {
     }
 
     function displayTask($t_id){
-        // recupetation de la tache
+        if($this->session->userdata('project_type') == 'private' && !($this->session->userdata('my_relation') == 'member')) // si le projet est prive, seuls les members, watchers compris peuvent voir
+        {
+            redirect('login/restricted');
+            return;
+        }
+
+        // recuperation de la tache
         $task = new task();
         $data['task'] = $task->get_by_id($t_id);
         ////
@@ -61,7 +67,8 @@ class Task_controller extends My_Controller {
         $data['task_list'] = $task->task->get();
         ////
 
-        $this->load->view('header');$p = new project();
+        $this->load->view('header');
+        $p = new project();
         $p->get_by_id($this->session->userdata('project_id'));
         $header_project_data = array(
             'project_id' => $p->id,
@@ -74,6 +81,12 @@ class Task_controller extends My_Controller {
 
     function taskSettings($t_id)
     {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
+
         $p = new project();
         $p->get_by_id($this->session->userdata('project_id'));
 
@@ -169,6 +182,11 @@ class Task_controller extends My_Controller {
 
     function task_edit($t_id)
     {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
 
         $this->form_validation->set_rules('task_name', 'Task', 'xss_clean|callback_validate_edit');
         $this->form_validation->set_rules('task_date_debut', 'Date', 'xss_clean|callback_validate_edit');
@@ -191,6 +209,12 @@ class Task_controller extends My_Controller {
 
     function index($data = array())
     {
+        if($this->session->userdata('project_type') == 'private' && !($this->session->userdata('my_relation') == 'member')) // si le projet est prive, seuls les members, watchers compris peuvent voir
+        {
+            redirect('login/restricted');
+            return;
+        }
+
         $this->load->view('header');
 
         $p = new project();
@@ -247,6 +271,12 @@ class Task_controller extends My_Controller {
 
     function new_task()
     {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
+
         $p = new project();
         $p->get_by_id($this->session->userdata('project_id'));
         $header_project_data = array('project_id' => $p->id, 'project_name' => $p->projectname);
@@ -331,6 +361,12 @@ class Task_controller extends My_Controller {
 
     function delete_task($task_id)
     {
+        if(!($this->session->userdata('my_status') == 'project manager') || !($this->session->userdata('my_relation') == 'member')) // acl : acces project manager only
+        {
+            redirect('login/restricted');
+            return;
+        }
+
         $t = new Task();
         $task = $t->get_by_id($task_id);
 
@@ -340,4 +376,5 @@ class Task_controller extends My_Controller {
         $this->index($data);  
     }
 }
+
 ?>

@@ -1,15 +1,17 @@
 <html lang="fr">
     <meta charset="utf-8">
     <div id="container">
-        <?php
-        echo br(3);
-        form_fieldset('User Stories');
-        ?>
+        <?php form_fieldset('User Stories'); ?>
         <fieldset class="col-lg-offset-1">
-            
-            <div class='col-md-2'>
-                <a class='btn btn-primary' href=<?php echo base_url() . 'project/' . $project->id . '/new_userstory' ?>><i class='fa fa-plus'></i> Create a new US </a>
-                &nbsp;</div>
+         
+        <div class='col-md-3'>
+            <?php
+                if($this->session->userdata('my_relation') == 'member' && $this->session->userdata('my_status') == 'project manager') // acl product manager only
+                {
+                    echo br(3) . "<a class='btn btn-primary' href=" . base_url() . "project/" . $project->id . "/new_userstory><i class='fa fa-plus'></i> Create a new US </a>&nbsp;";
+                }
+            ?>
+        </div>
            
             <?php  echo br(3); ?>
 
@@ -40,10 +42,9 @@
                 echo br(2);
                 $tmpl = array('table_open' => '<table border="1"  id="table_us" class="table table-responsive table-bordered">');
                 $this->table->set_template($tmpl);
-                $this->table->set_heading('Name', 'Status', 'Cost', 'Action');
+                $this->table->set_heading('Name', 'Status', 'Cost');
                 foreach ($list_us as $us) {
-                    $this->table->add_row($us->userstoryname, $us->statut, $us->cost, '<a class="btn btn-primary" href="' . base_url() . 'project/' . $project->id . '/userstory/index_userstory/' . $us->id . '"><i class="fa icon-eye-open"></i> View </a> &nbsp;
-                             <a onclick="return confirm(\'Are you sure you want to delete the user story ' . $us->userstoryname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'project/' . $project->id . '/userstory/delete_userstory/' . $us->id . '" ><i class="fa fa-close"></i> Delete </a> &nbsp;');
+                    $this->table->add_row('<a href="' . base_url() . 'project/' . $project->id . '/userstory/index_userstory/' . $us->id . '"><i class="fa icon-eye-open"></i>&nbsp;' . $us->userstoryname . '</a>', $us->statut, $us->cost);
                 }
 
                 echo $this->table->generate();

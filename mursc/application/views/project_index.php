@@ -3,7 +3,15 @@
     
      <?php echo br(1); ?>
 
-        <div class='row col-lg-offset-1'><div class='col-md-1'><?php echo anchor('project_controller/edit_project/' . $project->id, ' Edit this project', 'class="btn btn-default fa fa-cog "'); ?></div></div>
+        <div class='row col-lg-offset-1'>
+            <div class='col-md-1'>
+                <?php if($this->session->userdata('my_relation') == 'member' && $this->session->userdata('my_status') == 'project manager')
+                {
+                    echo anchor('project_controller/edit_project/', ' Edit', 'class="btn btn-default fa fa-cog "');
+                }
+                ?>
+            </div>
+        </div>
         <?php echo br(2); ?>      
 
         <div class='row col-lg-offset-1'>
