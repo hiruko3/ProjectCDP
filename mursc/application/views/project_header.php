@@ -15,7 +15,7 @@
                 <ul class="nav navbar-nav">
                     <?php if($this->session->userdata('project_type') == 'public' || $this->session->userdata('my_relation') == 'member') { /* affichage pour tous les members, watchers compris */ ?>
                     <li>
-                        <a href="<?php echo base_url() . "management_controller/index/" . $project_id; ?>">Management</a>
+                        <a href="<?php echo base_url() . "sprint_controller/" ?>">Management</a>
                     </li>
                     <li>
                         <a href="<?php echo base_url() . "userstory_controller/index/" . $project_id; ?>">Backlog</a>

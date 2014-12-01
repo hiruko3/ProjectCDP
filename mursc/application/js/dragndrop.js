@@ -75,7 +75,7 @@
     {
         if(confirmation()){
             var tableau = document.getElementById("tbody")
-            var col = document.getElementById("thead").rows
+            var col = document.getElementById("thead2").rows
             var ligne = tableau.insertRow(-1)
 
             var colonne1 = ligne.insertCell(0)
