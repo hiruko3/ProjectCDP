@@ -27,25 +27,20 @@
             dropper.addEventListener('dragleave', function() {
                 this.className = 'dropper'; // On revient au style de base lorsque l'élément quitte la zone de drop
                 //alert("vous quittez la zone de drop")
-            });
+            })
             
             var dndHandler = this // Cette variable est nécessaire pour que l'événement « drop » ci-dessous accède facilement au namespace « dndHandler »
 
             dropper.addEventListener('drop', function(e) {
 
-                var target = e.target,
-                draggedElement = dndHandler.draggedElement, // Récupération de l'élément concerné
-                clonedElement = draggedElement.cloneNode(true) // On créé immédiatement le clone de cet élément
+               var target = e.target
+               var draggedElement2 = dndHandler.draggedElement // Récupération de l'élément concerné
                 
                 while(target.className.indexOf('dropper') == -1) { // Cette boucle permet de remonter jusqu'à la zone de drop parente
                     target = target.parentNode
                 }
 
-                target.className = 'dropper' // Application du style par défaut
-                
-                clonedElement = target.appendChild(clonedElement) // Ajout de l'élément cloné à la zone de drop actuelle
-                dndHandler.applyDragEvents(clonedElement)// Nouvelle application des événements qui ont été perdus lors du cloneNode()                
-                draggedElement = draggedElement.parentNode.removeChild(draggedElement)
+                target.appendChild(draggedElement2)
             })
             
         }
@@ -79,7 +74,7 @@
             var ligne = tableau.insertRow(-1)
 
             var colonne1 = ligne.insertCell(0)
-            colonne1.innerHTML += document.getElementById("dev").value
+            colonne1.innerHTML += document.getElementById("dev").value  //insère le nom du dev dans la première cellule
 
             var i=1
             var length = col[0].cells.length
@@ -111,7 +106,7 @@
             dndHandler.applyDropEvents(droppers[i]); // Application des événements nécessaires aux zones de drop
         }
 
-        var elements = document.querySelectorAll('div.draggable'),
+        var elements = document.querySelectorAll('.draggable'),
         elementsLen = elements.length
         for(var i = 0 ; i < elementsLen ; i++) {
             dndHandler.applyDragEvents(elements[i]); // Application des paramètres nécessaires aux éléments déplaçables
