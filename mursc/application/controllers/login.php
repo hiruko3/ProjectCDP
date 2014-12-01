@@ -71,12 +71,12 @@ public function sign_up(){
 
 public function sign_up_validation(){
 
-	$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[mursc_users.username]');
+	$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[mursc_users.username]|is_unique[mursc_tmp_users.email]');
 	$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[mursc_users.email]|is_unique[mursc_tmp_users.email]');
 	$this->form_validation->set_rules('password', 'Password', 'required|md5|trim|min_length[7]|max_length[255]');
 	$this->form_validation->set_rules('confirm_password', 'CPassword', 'required|trim|min_length[7]|max_length[255]|matches[password]');
 	
-	$this->form_validation->set_message('is_unique', 'That email/usrname already exists or is in proccess to be validate');
+	$this->form_validation->set_message('is_unique', 'That email/username already exists or is in proccess to be validate');
 	if($this->form_validation->run()){
 			//Generate a random key for the user's token
 			$key = md5(uniqid());

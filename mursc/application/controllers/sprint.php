@@ -9,7 +9,7 @@ class Sprint extends My_Controller {
  }
 
  function index(){
- 	$data = array();
+ 	/*$data = array();
  	$all_tasks = array(); // tableau contenant toutes les tasks
  	$p = new Project();
  	$p->get_by_id($this->session->userdata['project_id']);
@@ -35,10 +35,9 @@ class Sprint extends My_Controller {
 
 	$this->load->view('header');
 	$header_project_data = array('project_id' => $p->id, 'project_name' => $p->projectname);
-    $this->load->view('project_header', $header_project_data);
+    $this->load->view('project_header', $header_project_data);*/
     
-	$this->load->view('sprint', $data);
-    $this->load->view('footer');
+	$this->template->show('sprint');/*, $data);*/
  }
 
 }

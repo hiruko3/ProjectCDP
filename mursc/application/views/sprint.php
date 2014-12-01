@@ -48,8 +48,8 @@
        onclick="deleteThisTask('deleteTask'+2)">
       #tache7</div>
 
-    <?php
-      echo br(3);
+    <?php 
+      //echo br(3);
       /*foreach($tasks as $t)
       {
         echo "<div class='draggable'><a class='btn btn-default' href=" . base_url() . "task_controller/displayTask/" . $t->id . ">" . $t->taskname . "</a></div> ";
@@ -70,7 +70,7 @@
         }
         echo '</ul>';
       }*/
-
+/*
       foreach($userstories as $us_id => $us)
       {
         if($us_id != -1)
@@ -86,7 +86,7 @@
         }
         echo '</ul></div>';
       }
-    ?>
+    ?>*/?>
 
     <script type="text/javascript" src= '<?php echo base_url('application/js/dragndrop.js')?>'></script>
  </body>

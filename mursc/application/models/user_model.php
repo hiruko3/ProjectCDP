@@ -5,8 +5,7 @@ class User_model extends CI_Model {
 	public function can_log_in(){
 		$this->db->select('username, email, password');
 		$this->db->from('mursc_users');
-		$this-> db -> where('username', $this->input->post('username'));
-		$this-> db -> where('email', $this->input->post('email'));
+		$this-> db -> where('email', $this->input->post('email')) OR $this->db->where('username', $this->input->post('username'));
 		$this-> db -> where('password', md5($this->input->post('password')));
 		$query = $this -> db -> get();
 		
