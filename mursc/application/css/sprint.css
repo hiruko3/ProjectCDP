@@ -4,6 +4,9 @@ div.dropper {
     background-color: active;
 }
 
+div.drop {
+    background-color: : active;
+}
 
 div.drop_hover {
     background-color: #C3D9E0;

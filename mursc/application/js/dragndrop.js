@@ -32,9 +32,9 @@
             var dndHandler = this // Cette variable est nécessaire pour que l'événement « drop » ci-dessous accède facilement au namespace « dndHandler »
 
             dropper.addEventListener('drop', function(e) {
-
-               var target = e.target
-               var draggedElement2 = dndHandler.draggedElement // Récupération de l'élément concerné
+                this.className = 'dropper drop'
+                var target = e.target
+                var draggedElement2 = dndHandler.draggedElement // Récupération de l'élément concerné
                 
                 while(target.className.indexOf('dropper') == -1) { // Cette boucle permet de remonter jusqu'à la zone de drop parente
                     target = target.parentNode
