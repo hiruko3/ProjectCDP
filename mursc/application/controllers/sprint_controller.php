@@ -41,11 +41,12 @@ class Sprint_controller extends My_Controller {
 
         $project_id = $p->id;
         $time = date("Y-m-d");
-        
+
         $calendar_week = date('W', strtotime($time));
         $calendar_week = intval($calendar_week);
-        $before = $calendar_week-1;
-        $after = $calendar_week+1;
+        $before = $calendar_week - 1;
+        $after = $calendar_week + 1;
+
 
         $this->load->database();
 
@@ -55,8 +56,11 @@ class Sprint_controller extends My_Controller {
 
         $data['gantt_lines'] = $result->result_array();
         $data['week'] = "Week " . $calendar_week;
+        $data['numweek'] = $calendar_week;
         $data['before'] = $before;
         $data['after'] = $after;
+        $that_week_or_not = 1;
+        $data['that_week_or_not'] = $that_week_or_not;
         $data['project'] = $p;
 
         //////////////////////////////////////////////
@@ -75,11 +79,14 @@ class Sprint_controller extends My_Controller {
         $data = json_decode($_POST['data']);
 
         if (!empty($_POST)) {
-
+            
             $project_id = $this->session->userdata['project_id'];
             $time = date("Y-m-d");
             $calendar_week = date('W', strtotime($time));
 
+            if($_POST['the_week'] != $calendar_week_test){
+              $calendar_week = $_POST['the_week'];
+            }
 
             // Si il existe deja un gantt de ce projet pour cette semaine...
             $sqltest = "SELECT * FROM mursc_table_gantt WHERE project_id = " . $project_id . " AND semaine = " . $calendar_week . ";";
@@ -107,8 +114,8 @@ class Sprint_controller extends My_Controller {
         $p->get_by_id($this->session->userdata['project_id']);
         $data['userstories'] = array();
 
-        $before = (string)((intval($week))-1);
-        $after = (string)((intval($week))+1);
+        $before = (string) ((intval($week)) - 1);
+        $after = (string) ((intval($week)) + 1);
         $project_id = $p->id;
         $time = date("Y-m-d");
 
@@ -120,8 +127,11 @@ class Sprint_controller extends My_Controller {
 
         $data['gantt_lines'] = $result->result_array();
         $data['week'] = "Week " . $week;
+        $data['numweek'] = $week;
         $data['before'] = $before;
         $data['after'] = $after;
+        $that_week_or_not = 0;
+        $data['that_week_or_not'] = $that_week_or_not;
         $data['project'] = $p;
 
         //////////////////////////////////////////////
@@ -133,6 +143,25 @@ class Sprint_controller extends My_Controller {
         $this->load->view('project_header', $header_project_data);
         $this->load->view('sprint_view', $data);
         $this->load->view('footer');
+    }
+
+    
+    function delete_gantt($week) {
+        $p = new Project();
+        $p->get_by_id($this->session->userdata['project_id']);
+        $project_id = $p->id;
+
+        // Si il existe deja un gantt de ce projet pour cette semaine...
+        $sqltest = "SELECT * FROM mursc_table_gantt WHERE project_id = " . $project_id . " AND semaine = " . $week . ";";
+        $result = $this->db->query($sqltest);
+        if ($result->num_rows() > 0) {
+            //On delete...
+            $sqldelete = "DELETE FROM mursc_table_gantt "
+                    . "WHERE project_id=" . $project_id . " AND semaine=" . $week;
+            $this->db->query($sqldelete);
+        }
+
+        redirect('sprint_controller/index/');
     }
 
 }

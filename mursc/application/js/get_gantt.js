@@ -24,11 +24,17 @@ return gantt_table;
 
 
 
-function get_gantt() {
+function get_gantt(week,that_week_or_not) {
 
     var tab = new Array();
     tab = get_table();
     
+    if(that_week_or_not == 1){
+        var $url = "save_gantt";
+    }else{
+        var $url = "../save_gantt";
+    }
+
     /*
     document.write("<br/>----------------- <br/>");
     document.write(tab[0]);
@@ -39,9 +45,9 @@ function get_gantt() {
     */
 
     $.ajax({
-        url: "save_gantt",
+        url: $url,
         type: "POST",
-        data: {'data':JSON.stringify(tab)},
+        data: {'data':JSON.stringify(tab), 'the_week':week},
         cache: false,
         success: function(msg) {
         //alert("Save table");
