@@ -17,7 +17,7 @@ class Login extends My_Controller {
  }
 
  public function login(){
- 	$this->load->view('login_view');
+ 	$this->template->show('login_view');
  }
 
  public function member(){
@@ -66,7 +66,7 @@ public function logout(){
 }
 
 public function sign_up(){
-	$this->load->view("sign_up");
+	$this->template->show("sign_up");
 }
 
 public function sign_up_validation(){
