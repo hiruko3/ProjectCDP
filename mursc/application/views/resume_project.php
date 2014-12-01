@@ -6,7 +6,7 @@
     </head>
     <div class="col-lg-offset-1">
         <body>
-            <h1>Mursc, makes for your project owner </h1>
+            <h1>Mursc, made for project owners </h1>
             <p>
                 What can you do ? <br/>
 
