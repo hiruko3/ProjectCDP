@@ -10,7 +10,8 @@ class My_Controller extends CI_Controller {
 		'login/restricted',
 		'login/login_validation',
 		'login/sign_up_validation',
-		'login/register_user'
+		'login/register_user',
+		'user_controller/index'
 		);
 
 	public function __construct() {
