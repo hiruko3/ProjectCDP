@@ -105,13 +105,16 @@
         for(var i = 0 ; i < droppersLen ; i++) {
             dndHandler.applyDropEvents(droppers[i]); // Application des événements nécessaires aux zones de drop
         }
+    }
 
+    function addDraggable(){
         var elements = document.querySelectorAll('.draggable'),
         elementsLen = elements.length
         for(var i = 0 ; i < elementsLen ; i++) {
             dndHandler.applyDragEvents(elements[i]); // Application des paramètres nécessaires aux éléments déplaçables
         }
     }
+    
 
 
     //TODO
@@ -119,8 +122,6 @@
     function displayTask(){
         //Appel de l'affichage de la vue
     }
-
-
 
 
 
