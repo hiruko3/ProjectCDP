@@ -6,7 +6,7 @@
         <title>Sprint</title>
     </head>
 
-    <body onload="addDraggable()">
+    <body onload="addDraggable();addDropper()">
 
         <div class="text-center">
             <h2> Garrent </h2>
