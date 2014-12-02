@@ -8,11 +8,11 @@
  <body>
 <div id="container" class="col-lg-offset-1" >
     
-  <h1>My profile </h1>
+  <h1><center>My profile </center></h1>
   
   </br>
   
-  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > Change your password </a> 
+  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > <center>Change your password </center></a> 
 
   <h1><center>Member </center></h1>
 
