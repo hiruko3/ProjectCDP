@@ -372,25 +372,24 @@ class Project_controller extends My_Controller {
         }
         $id = $this->session->userdata('project_id');
 
-        $validMsg = array();
-        $errorMsg1 = array();
-        $errorMsg2 = array();
+        $data = array();
+        $data['project_delete_error'] = '';
+        $data['project_delete_success'] = '';
 
         $p = new Project();
+        $table_gantt = new table_gantt();
+        $p->get_by_id($id);
+        $us = $p->userstory->get(); // les us du projet
+        $t = $p->task->get(); // les taches du projet
+        $sprint = $p->table_gantt->get(); // les sprints du projet
 
-        if ($p->where('id', $id)->get()->delete()) {
-            
-        } else {
-            if ($p->error->all != '') {
-                $validMsg['project_delete'] = "<p> Project deleted ! </p>";
-            }
-            array_push($errorMsg1, $p->error->all);
-            $errorMsg1 = $errorMsg1['0'];
+        foreach($t as $task){ if(!$task->delete()){ $data['project_delete_error'] .= $task->error->string; } } // on delete les tasks du projet
+        foreach($us as $userstory){ if(!$userstory->delete()){ $data['project_delete_error'] .= $userstory->error->string; } } // on delete les us du projet
+        foreach($sprint as $s){ if(!$s->delete()){ $data['project_delete_error'] .= $s->error->string; } } // on delete les sprints du projet
+        if(!$p->delete()){ $data['project_delete_error'] = $p->error->string; }
 
-            $data['validMsg'] = $validMsg;
-            $data['errorMsg1'] = $errorMsg1;
-        }
-        
+        if($data['project_delete_error'] == ''){ $data['project_delete_success'] = 'Project deleted.'; }
+
         redirect('user/projectList');
     }
 }

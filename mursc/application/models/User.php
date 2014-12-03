@@ -34,3 +34,5 @@ class User extends DataMapper {
     }
 
 }
+
+?>

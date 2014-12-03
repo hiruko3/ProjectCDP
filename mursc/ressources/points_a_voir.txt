@@ -22,3 +22,7 @@ dans le menu deroulant "as contributor / as follower / candidacy / invitation", 
 design new task
 
 tache dependante d elle meme dans edit
+
+css sur msgs error / success
+
+pb dans design new project ?
