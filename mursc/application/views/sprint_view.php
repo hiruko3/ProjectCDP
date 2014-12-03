@@ -9,7 +9,7 @@
     <body onload="addDraggable();addDropper()">
 
         <div class="text-center">
-            <h2> Garrent </h2>
+            <h2> Gantt </h2>
         </div>
 
         <br/>
@@ -48,7 +48,7 @@
 
                     foreach ($gantt_lines as $line) {
                         echo '<td>' . $line['developper_name'] . '</td>';
-                        if ($line == '') {
+                        if ($line['lundi'] == '') {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper"></div>'
                             . '</td>';
@@ -61,7 +61,7 @@
                             . '</div>'
                             . '</td>';
                         }
-                        if ($line == '') {
+                        if ($line['mardi'] == '') {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper"></div>'
                             . '</td>';
@@ -74,7 +74,7 @@
                             . '</div>'
                             . '</td>';
                         }
-                        if ($line == '') {
+                        if ($line['mercredi'] == '') {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper"></div>'
                             . '</td>';
@@ -87,7 +87,7 @@
                             . '</div>'
                             . '</td>';
                         }
-                        if ($line == '') {
+                        if ($line['jeudi'] == '') {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper"></div>'
                             . '</td>';
@@ -100,7 +100,7 @@
                             . '</div>'
                             . '</td>';
                         }
-                        if ($line == '') {
+                        if ($line['vendredi'] == '') {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper"></div>'
                             . '</td>';
@@ -113,7 +113,7 @@
                             . '</div>'
                             . '</td>';
                         }
-                        if ($line == '') {
+                        if ($line['samedi'] == '') {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper"></div>'
                             . '</td>';
@@ -126,28 +126,15 @@
                             . '</div>'
                             . '</td>';
                         }
-                        if ($line == '') {
+                        if ($line['dimanche'] == '') {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper"></div>'
-                            . '</td>';
+                            . '</td></tr>';
                         } else {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper">'
                             . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask7' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask7' . $id_task . '\').style.display = \'none\';"  draggable="true">'
                             . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask7' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 7' . $id_task . ')">'
-                            . $line['dimanche']
-                            . '</div>'
-                            . '</td>';
-                        }
-                        if ($line == '') {
-                            echo '<td class="active" id="tobeDropped" height="50px">'
-                            . '<div class="dropper"></div>'
-                            . '</td>';
-                        } else {
-                            echo '<td class="active" id="tobeDropped" height="50px">'
-                            . '<div class="dropper">'
-                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask8' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask8' . $id_task . '\').style.display = \'none\';" draggable="true">'
-                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask8' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 8' . $id_task . ')">'
                             . $line['dimanche']
                             . '</div>'
                             . '</td></tr>';
