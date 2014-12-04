@@ -1,4 +1,4 @@
-
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <fieldset class="col-lg-12">
     <nav class="navbar-inverse" role="navigation">
         <div class="container">
@@ -28,7 +28,7 @@
                     </li>
 
                     <li>
-                        <a href='<?php echo base_url()."user/list_all/";?> '> Others Projects</a>
+                        <a href='<?php echo base_url()."user/list_all/";?> '> Public Projects</a>
                     </li>
                     <?php } ?>
                 </ul>

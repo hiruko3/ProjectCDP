@@ -1,9 +1,11 @@
 <html lang="fr">
     <meta charset="utf-8">
-    <div id="container" class="col-lg-offset-1">
 
-        <h2> Edit project </h2>
-        <br/>
+    <div id="container" class="col-lg-offset-1 col-lg-11">
+
+        <h2>Edit project</h2>
+        
+        <?php echo br(1); ?>
 
         <?php echo anchor('project_controller/index_project/' . $project->id, ' Return to the project', 'class="btn btn-default fa fa-eye "'); ?>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -12,7 +14,7 @@
         <?php echo '<a onclick="return confirm(\'Are you sure you want to delete the project ' . $project->projectname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'project/delete_project/' . $project->id . '" ><i class="icon-trash icon-large"></i> Delete this project </a> &nbsp;'; ?>
 
 
-<?php echo br(3); ?>
+        <?php echo br(2); ?>
 
         <div class='row'>
             <?php
@@ -38,19 +40,19 @@
 
             <?php
             //echo validation_errors();
-            echo form_open(base_url() . "project/edit_project/" . $project->id, "class='col-lg-6 form-horizontal'");
+            echo form_open(base_url() . "project/edit_project/" . $project->id, "class='col-lg-11 form-horizontal'");
 
-            echo form_fieldset('General settings');
+            echo form_fieldset('General settings', array('class' => 'col-lg-4'));
             ?>
-            <label  class="col-lg-5" for="projectname">Project name * :</label>
-            <div class="col-lg-5">
+            <label  for="projectname">Project name * :</label>
+            <div 
                 <p>
                     <input class="form-control" type="text" name="projectname" id="projectname" value="<?php echo $project->projectname; ?>"</input>
                 </p>
-            </div>
+            </div 
 
-            <label for="type" class="col-lg-5" > Type * : </label>
-            <div class="col-lg-5">
+            <label for="type"  > Type * : </label>
+            <div>
                 <p>
                     <select  class="form-control" id="type" name="type">
                         <option value="public" <?php
@@ -67,22 +69,21 @@
                 </p>
             </div>
 
-            <label  class="col-lg-5" for="giturl">Git url : </label>
-            <div class="col-lg-5">
+            <label   for="giturl">Git url : </label>
+            <div >
                 <p>
                     <input class="form-control" type="text" name="giturl" id="giturl" value="<?php echo $project->giturl; ?>"</input>
                 </p>
             </div>
 
-            <label for="description"  class="col-lg-5" > Description * : </label>
+            <label for="description" > Description * : </label>
             <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ><?php echo $project->description; ?></textarea>
             <?php echo form_fieldset_close(); ?>
 
-            <?php echo br(2); ?>
 
-            <?php echo form_fieldset('Staff'); ?>
-            <fieldset class="col-lg-offset-1">
-                <div class="col-lg-11">
+            <?php echo form_fieldset('Staff', array('class' => 'col-lg-5 col-lg-offset-1')); ?>
+            <fieldset class="">
+                <div>
                     <?php
                     $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
                     $this->table->set_template($tmpl);
@@ -115,18 +116,18 @@
             </fieldset>
             <?php echo form_fieldset_close(); ?>
 
-            <br/>
-            <br/>
-            <div class="text-center">
-            <p>
-                <?php
-                echo form_submit("create", "Validate", "class='btn btn-primary'");
-                echo '&nbsp;&nbsp;'.form_reset("reset", "Reset", "class='btn btn-primary'");
-                echo form_close();
-                ?>
-            </p>
+            <div class="text-center col-lg-10">
+                </br>
+                <p>
+                    <?php
+                    echo form_submit("create", "Validate", "class='btn btn-primary'");
+                    echo '&nbsp;&nbsp;' . form_reset("reset", "Reset", "class='btn btn-primary'");
+                    echo form_close();
+                    ?>
+                </p>
             </div>
         </div>
+
     </div>
 </body>
 

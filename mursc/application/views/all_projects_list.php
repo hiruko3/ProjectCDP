@@ -6,10 +6,6 @@
 
         <fieldset class="col-lg-offset-1">
 
-            <div class='col-md-3'>
-               <div class='col-md-2'><a class='btn btn-primary' href=<?php echo base_url() . 'project/new_project' ?>><i class='fa fa-plus'></i> Create a new project </a> &nbsp;</div>
-                &nbsp;</div>
-
             <div class="col-lg-11">
                 <?php
                 if (ISSET($error)) {

@@ -16,7 +16,7 @@ class UserStory extends DataMapper {
         ),
         'description' => array(
             'label' => 'Description',
-            'rules' => array('required', 'trim', 'min_length' => 10, 'max_length' => 200),
+            'rules' => array('required', 'trim', 'min_length' => 3, 'max_length' => 200),
         ),
         'statut' => array(
             'label' => 'Type',
