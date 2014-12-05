@@ -17,7 +17,7 @@
             <?php
             echo form_open('task_controller/new_task', "class='form-horizontal'");
 
-            echo '<div class="row"><div class="col-lg-4">' . form_label('Name :', 'name') . '</div><div class="col-lg-6">' . form_input(array('name' =>'username','class' => 'form-control')) . '</div></div>';
+            echo '<div class="row"><div class="col-lg-4">' . form_label('Name :', 'name') . '</div><div class="col-lg-6">' . form_input(array('name' =>'name','class' => 'form-control')) . '</div></div>';
             echo br(1);
             echo '<div class="row"><div class="col-lg-4">' . form_label('Status :', 'status') . '</div><div class="col-lg-6">' . form_dropdown('status', $status,'', 'class="form-control"') . '</div></div>';
             echo br(1);
