@@ -66,15 +66,36 @@
             return true
     }
 
+    
+    valueLigne = 0
+    
     function ajouterLigne()
     {
         if(confirmation()){
+            valueLigne++
             var tableau = document.getElementById("tbody")
             var col = document.getElementById("thead2").rows
             var ligne = tableau.insertRow(-1)
+            var button = document.createElement('IMG')
+
+             /*<img src ='<?php echo base_url('ressources/delete.svg') ?>'
+                 id="deleteTask1" width= "10px" height="10px" class="suppIcon" 
+                 style = "display : none" draggable="false" alt="delete"
+                 onclick="deleteThisTask('deleteTask' + 1)">#tache6</div>*/
+
+            ligne.id = "ligne"+valueLigne
+            button.setAttribute("onclick","deleteLigne("+ligne.id+")")
+            button.setAttribute("src",'http://127.0.0.1/CDP/Project/ProjectCDP/mursc/ressources/delete.svg')
+            button.setAttribute('width','10px')
+            button.setAttribute('height','10px')
+            button.setAttribute('id','deleteLigneTab')
 
             var colonne1 = ligne.insertCell(0)
+
+            //add le boutton qui supprime la ligne
+            colonne1.appendChild(button)
             colonne1.innerHTML += document.getElementById("dev").value  //insère le nom du dev dans la première cellule
+           
 
             var i=1
             var length = col[0].cells.length
@@ -115,12 +136,21 @@
         }
     }
     
+    function deleteLigne(id){
+        if(confirm('Voulez vous supprimer cette ligne ?')){
+            if (id.parentNode)
+                id.parentNode.removeChild(id)
+        }
+    }
 
 
     //TODO
 
     function displayTask(){
         //Appel de l'affichage de la vue
+       /* <?php 
+            echo "Je vais bientôt m'afficher mais pas de suite";
+        ?>*/
     }
 
 

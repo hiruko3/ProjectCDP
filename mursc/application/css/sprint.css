@@ -29,3 +29,7 @@ div #taskDrag img:hover{
     border-radius: 10px;
 }
 
+#deleteLigneTab:hover {
+    background-color: #FF8385;
+    border-radius: 10px;
+}
