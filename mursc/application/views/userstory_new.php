@@ -1,6 +1,6 @@
 <html lang="fr">
     <meta charset="utf-8">
-    <div id="container" class="col-lg-offset-2">
+    <div id="container" class="col-lg-offset-1">
 
 
         <fieldset class="col-lg-5 scheduler-border">
@@ -28,7 +28,7 @@
 
 
             <?php
-            echo form_open('userstory/new_userstory', "class='form-horizontal '");
+            echo form_open('userstory/new_userstory', "class='form-horizontal'");
             ?>
 
             <label  class="col-lg-5 " for="userstoryname">Name * : </label>
