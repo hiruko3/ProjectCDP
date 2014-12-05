@@ -9,7 +9,7 @@
     <body onload="addDraggable();addDropper()">
 
         <div class="text-center">
-            <h2> Garrent </h2>
+            <h2> Gantt </h2>
         </div>
 
         <br/>

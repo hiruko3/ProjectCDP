@@ -95,7 +95,6 @@ class User_controller extends My_Controller {
 
         $user = new User();
         $user->where('id', $this->_id)->get();
-
         $projects_list_as_contributor = array();
         $projects_list_as_follower = array();
 
