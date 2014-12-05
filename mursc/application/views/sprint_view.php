@@ -45,11 +45,15 @@
             <tbody id="tbody">
                 <?php
                 $id_task = 0;
-
+                $ligne = 1;
                 if (sizeof($gantt_lines) != 0) {
 
                     foreach ($gantt_lines as $line) {
-                        echo '<td>' . $line['developper_name'] . '</td>';
+                        echo '<tr id="ligne' . $ligne . '" >';
+                        echo '<td>';
+                        echo '<img onclick="deleteLigne(ligne' . $ligne . ')" src="' . base_url() . 'ressources/delete.svg" width="10px" height="10px" id="deleteLigneTab">';
+                        echo $line['developper_name'];
+                        echo '</td>';
                         if ($line['lundi'] == '') {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper"></div>'
@@ -141,6 +145,7 @@
                             . '</div>'
                             . '</td></tr>';
                         }
+                        $ligne++;
                     }
                 }
                 ?>
@@ -152,7 +157,7 @@
 
 
         <fieldset class="col-lg-10">
-        <h4> Tasks of project by US : </h4> 
+            <h4> Tasks of project by US : </h4> 
             <table border="1" class="table table-responsive table-bordered" > 
 
                 <tr> 
@@ -195,8 +200,6 @@
             </button>
             <?php echo anchor(base_url('sprint_controller/delete_gantt/' . $numweek), ' Delete Gantt', 'class="btn btn-danger fa fa-times"'); ?>
         </div>
-
-
 
         <script type="text/javascript" src= '<?php echo base_url('application/js/dragndrop.js') ?>'></script>
         <script type="text/javascript" src= '<?php echo base_url('application/js/get_gantt.js') ?>'></script>
