@@ -7,21 +7,12 @@
 
  <body>
 <div id="container" class="col-lg-offset-1" >
-    
-  <h1><center>My profile </center></h1>
+
+  <h2>My profile </h2>
   
   </br>
   
-  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > <center>Change your password </center></a> 
-
-  <h1><center>Member </center></h1>
-
-  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > <center>Profile Settings </center></a> 
-	<br/>
-  <a href =' <?php echo base_url()."login/logout" ?>' ><center> Logout </center></a>
-  <br/>
-  <a href =' <?php echo base_url() ?>' ><center> Back to my projects </center></a> 
-  <br/>
+  <a href =' <?php echo base_url()."profile_settings/settings" ?>' > Change your password </a> 
 
 </div>
  </body>
