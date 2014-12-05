@@ -3,21 +3,16 @@
 class Project extends DataMapper {
 
     var $has_many = array(
-        'user','userstory', 'task');
-        /*
-        '',
-        'versionproject',
-        'watcher',
-        'contributor');*/
+        'user','userstory', 'task', 'table_gantt');
     
     var $validation = array(
         'projectname' => array(
             'label' => 'Projectname',
-            'rules' => array('required', 'trim', 'min_length' => 5, 'max_length' => 30),
+            'rules' => array('required', 'trim', 'min_length' => 3, 'max_length' => 30),
         ),
         'description' => array(
             'label' => 'Description',
-            'rules' => array('required', 'trim', 'min_length' => 10, 'max_length' => 200),
+            'rules' => array('required', 'trim', 'min_length' => 3, 'max_length' => 200),
         ),
         'type' => array(
             'label' => 'Type',
@@ -25,7 +20,7 @@ class Project extends DataMapper {
         ),
         'giturl' => array(
             'label' => 'Giturl',
-            'rules' => array('trim', 'alpha_slash_dot', 'min_length' => 10),
+            'rules' => array('trim', 'alpha_slash_dot', 'min_length' => 3),
         )
     );
 

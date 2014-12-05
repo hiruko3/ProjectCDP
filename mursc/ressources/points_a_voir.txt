@@ -1,9 +1,6 @@
 http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/login/sign_up
 	si on entre une adresse mail déjà dans mursc.tmp_user => erreur mysql non capturée
 
-http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/login/member
-	afficher réponse formatée
-
 pages affichage tasks et backlogs
 	filtres : recuperer valeurs depuis modèle
 	
@@ -12,19 +9,20 @@ recuperation des enums / sets en bdd
 http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/login/sign_up_validation
 	"The email has been sent ! " et pas de redirection ou lien (page bloquante)
 
-sent email : page bloquante
-
 routage
 
 http://localhost/scripts_php/git/MURSC/ProjectCDP/mursc/task_controller/index/
 	filtres : on ne récupère pas toutes les tâches quand on efface tout (mais c'est géré quand on efface pas tout)
 
-vue tasks / edit tasks
-
 après validation mail inscription, on est invité à tous les projets ?????
 
-il faudrait un acces à "Mursc, makes for your project owner" avant le login
 
 dans le menu deroulant "as contributor / as follower / candidacy / invitation", mettre le nb de projets de chaque entre parentheses ?
 
 design new task
+
+tache dependante d elle meme dans edit
+
+css sur msgs error / success
+
+pb dans design new project ?

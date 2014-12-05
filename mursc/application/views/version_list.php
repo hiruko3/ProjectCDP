@@ -1,3 +1,6 @@
-<html>
-<h3><center>Version 0.5 in progress</center></h3>
-</html>
+
+        <br/>
+
+        <fieldset class="col-lg-offset-1">
+            <h3>Coming soon</h3>
+        </fieldset>

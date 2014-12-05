@@ -81,16 +81,6 @@ class User_controller extends My_Controller {
 
     }
 
-///////////////////////// LISTS PERSONAL OF PROJECTS ////////////////////////////
-
-    /**
-    * @brief : la liste des project dont je suis membre
-    * @return : $data (tableau) contenant :
-    *           'projects_list_as_contributor' : la liste des projets dont je suis contributeur ('id', 'projectname', 'type', 'description', 'giturl')
-    *           'projects_list_as_follower' :  la liste des projets dont je suis contributeur ('id', 'projectname', 'type', 'description', 'giturl')
-    *           'invitations_list' : la liste des projets auquels on m'invite ('id', 'projectname', 'proposed_status', 'type', 'description', 'giturl')
-    *           'candidacy_list' : la liste des projets auquels je candidate ('id', 'projectname', 'type', 'description', 'giturl')
-    */
     function _projectList() {
 
         $user = new User();
@@ -234,7 +224,7 @@ class User_controller extends My_Controller {
             else{ $data['error'] = 'Acception error.'; }
         }
 
-        $this->display_project_list($data);
+        $this->display_project_list_contributor($data);
     }
     
     /**
@@ -258,7 +248,7 @@ class User_controller extends My_Controller {
             else{ $data['error'] = 'Suppression error.'; }
         }
 
-        $this->display_project_list($data);
+        $this->display_project_list_contributor($data);
     }
     
     /**
@@ -305,7 +295,7 @@ class User_controller extends My_Controller {
             else{ $data['error'] = 'Suppression error.'; }
         }
 
-        $this->display_project_list($data);
+        $this->display_project_list_candidature($data);
     }
     
     /**
@@ -329,22 +319,21 @@ class User_controller extends My_Controller {
             else{ $data['error'] = 'Quit error.'; }
         }
 
-        $this->display_project_list($data);
+        $this->display_project_list_contributor($data);
     }
 
 
 ////////////////////////// LIST ALL PROJECT ////////////////////////////
     function all_projects_list($data = array())
     {
+
         $p = new Project();
-        $data['projects'] = $p->get();
+        $publicprojects = new Project();
+        $u = new User();
+        $u->get_by_id($this->_id);
 
-        foreach($data['projects'] as $p)
-        {
-            $j = new Join_Projects_User();
-            $p->contributor_count = $j->where('project_id', $p->id)->where('relationship_type', 'member')->where_not_in('user_status', 'watcher')->get()->result_count();
-        }
-
+        $p->select('id')->where_related_user('id',$this->_id);
+        $data['projects'] = $publicprojects->where('type', 'public')->where_not_in_subquery('id',$p)->get();
 
         $this->load->view('header');
         $this->load->view('all_projects_list', $data);

@@ -1,9 +1,11 @@
 <html lang="fr">
     <meta charset="utf-8">
-    <div id="container" class="col-lg-offset-1">
 
-        <h2> Edit project </h2>
-        <br/>
+    <div id="container" class="col-lg-offset-1 col-lg-11">
+
+        <h2>Edit project</h2>
+
+        <?php echo br(1); ?>
 
         <?php echo anchor('project_controller/index_project/' . $project->id, ' Return to the project', 'class="btn btn-default fa fa-eye "'); ?>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -11,78 +13,78 @@
         &nbsp;&nbsp;&nbsp;
         <?php echo '<a onclick="return confirm(\'Are you sure you want to delete the project ' . $project->projectname . ' ?\');" class="btn btn-danger" href="' . base_url() . 'project/delete_project/' . $project->id . '" ><i class="icon-trash icon-large"></i> Delete this project </a> &nbsp;'; ?>
 
+        <?php echo br(2); ?>
 
-<?php echo br(3); ?>
+        <fieldset class="col-lg-5 scheduler-border">
+            <legend class="scheduler-border">General settings</legend>
 
-        <div class='row'>
-            <?php
-            foreach ($validMsg as $msg) {
-                echo "<i class='fa fa-check-square text-success'" . $msg . "</i>";
-                echo "</br>";
-            }
-            ?>
+            <div class='row'>
+                <?php
+                foreach ($validMsg as $msg) {
+                    echo "<i class='fa fa-check-square text-success'" . $msg . "</i>";
+                    echo "</br>";
+                }
+                ?>
 
-            <?php
-            foreach ($errorMsg1 as $msg) {
-                echo "<i class='fa fa-times-circle text-danger'" . $msg . "</i>";
-                echo "</br>";
-            }
-            ?>
+                <?php
+                foreach ($errorMsg1 as $msg) {
+                    echo "<i class='fa fa-times-circle text-danger'" . $msg . "</i>";
+                    echo "</br>";
+                }
+                ?>
 
-            <?php
-            foreach ($errorMsg2 as $msg) {
-                echo "<i class='fa fa-times-circle text-danger'" . $msg . "</i>";
-            }
-            ?>
+                <?php
+                foreach ($errorMsg2 as $msg) {
+                    echo "<i class='fa fa-times-circle text-danger'" . $msg . "</i>";
+                }
+                ?>
 
 
-            <?php
-            //echo validation_errors();
-            echo form_open(base_url() . "project/edit_project/" . $project->id, "class='col-lg-6 form-horizontal'");
+                <?php
+                //echo validation_errors();
+                echo form_open(base_url() . "project/edit_project/" . $project->id, "class='col-lg-11 form-horizontal'");
+                ?>
+                <label  for="projectname">Project name * :</label>
+                <div>
+                    <p>
+                        <input class="form-control" type="text" name="projectname" id="projectname" value="<?php echo $project->projectname; ?>"</input>
+                    </p>
+                </div>
 
-            echo form_fieldset('General settings');
-            ?>
-            <label  class="col-lg-5" for="projectname">Project name * :</label>
-            <div class="col-lg-5">
-                <p>
-                    <input class="form-control" type="text" name="projectname" id="projectname" value="<?php echo $project->projectname; ?>"</input>
-                </p>
-            </div>
+                <label for="type"  > Type * : </label>
+                <div>
+                    <p>
+                        <select  class="form-control" id="type" name="type">
+                            <option value="public" <?php
+                            if ($project->type == 'public') {
+                                echo 'SELECTED';
+                            }
+                            ?>> Public </option>
+                            <option value="private"  <?php
+                            if ($project->type == 'private') {
+                                echo 'SELECTED';
+                            }
+                            ?>> Private </option>
+                        </select>
+                    </p>
+                </div>
 
-            <label for="type" class="col-lg-5" > Type * : </label>
-            <div class="col-lg-5">
-                <p>
-                    <select  class="form-control" id="type" name="type">
-                        <option value="public" <?php
-                        if ($project->type == 'public') {
-                            echo 'SELECTED';
-                        }
-                        ?>> Public </option>
-                        <option value="private"  <?php
-                        if ($project->type == 'private') {
-                            echo 'SELECTED';
-                        }
-                        ?>> Private </option>
-                    </select>
-                </p>
-            </div>
+                <label   for="giturl">Git url : </label>
+                <div >
+                    <p>
+                        <input class="form-control" type="text" name="giturl" id="giturl" value="<?php echo $project->giturl; ?>"</input>
+                    </p>
+                </div>
 
-            <label  class="col-lg-5" for="giturl">Git url : </label>
-            <div class="col-lg-5">
-                <p>
-                    <input class="form-control" type="text" name="giturl" id="giturl" value="<?php echo $project->giturl; ?>"</input>
-                </p>
-            </div>
+                <label for="description" > Description * : </label>
+                <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ><?php echo $project->description; ?></textarea>
+                <?php echo form_fieldset_close(); ?>
+        </fieldset>
+        <div class="col-lg-5 col-lg-offset-1">
+        <fieldset class="scheduler-border" >
+            <legend class="scheduler-border">Staff</legend>
 
-            <label for="description"  class="col-lg-5" > Description * : </label>
-            <textarea  class="form-control" id="description"  name="description" style="width: 390px; height: 111px; resize: none;" ><?php echo $project->description; ?></textarea>
-            <?php echo form_fieldset_close(); ?>
-
-            <?php echo br(2); ?>
-
-            <?php echo form_fieldset('Staff'); ?>
-            <fieldset class="col-lg-offset-1">
-                <div class="col-lg-11">
+                <div>
                     <?php
                     $tmpl = array('table_open' => '<table border="1"  class="table table-responsive table-bordered">');
                     $this->table->set_template($tmpl);
@@ -97,7 +99,7 @@
                             $content_status = form_dropdown('status_member_' . $m['user_id'], $status_array, $m['status_id']);
                             $content_actions = '<label>' . form_checkbox('dismiss_member_' . $m['user_id'], 1, FALSE) . ' dismiss</label>';
                         }
-                        ////
+
                         $this->table->add_row($m['username'], $content_status, $content_actions);
                     }
                     $this->table->add_row(array('data' => 'Candidates', 'colspan' => 3, 'style' => 'font-weight : bold; text-align : center;'));
@@ -112,20 +114,19 @@
                     echo $this->table->generate();
                     ?>
                 </div>
-            </fieldset>
             <?php echo form_fieldset_close(); ?>
 
-            <br/>
-            <br/>
-            <div class="text-center">
+        </fieldset>
+</div>
+        <div class="text-center col-lg-11">
+            </br>
             <p>
                 <?php
                 echo form_submit("create", "Validate", "class='btn btn-primary'");
-                echo '&nbsp;&nbsp;'.form_reset("reset", "Reset", "class='btn btn-primary'");
+                echo '&nbsp;&nbsp;' . form_reset("reset", "Reset", "class='btn btn-primary'");
                 echo form_close();
                 ?>
             </p>
-            </div>
         </div>
     </div>
 </body>
