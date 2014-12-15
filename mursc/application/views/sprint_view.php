@@ -44,7 +44,7 @@
             </thead>
             <tbody id="tbody">
                 <?php
-                $id_task = 0;
+                $id_task = 100;
                 $ligne = 1;
                 if (sizeof($gantt_lines) != 0) {
 
@@ -61,8 +61,8 @@
                         } else {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper">'
-                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask1' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask1' . $id_task . '\').style.display = \'none\';" draggable="true">'
-                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask1' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 1' . $id_task . ')">'
+                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask1' . $ligne . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask1' . $ligne . $id_task . '\').style.display = \'none\';" draggable="true">'
+                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask1' . $ligne . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 1' . $ligne . $id_task . ')">'
                             . $line['lundi']
                             . '</div>'
                             . '</td>';
@@ -74,8 +74,8 @@
                         } else {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper">'
-                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask2' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask2' . $id_task . '\').style.display = \'none\';"  draggable="true">'
-                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask2' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 2' . $id_task . ')">'
+                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask2' . $ligne . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask2' . $ligne . $id_task . '\').style.display = \'none\';"  draggable="true">'
+                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask2' . $ligne . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 2' . $ligne . $id_task . ')">'
                             . $line['mardi']
                             . '</div>'
                             . '</td>';
@@ -87,8 +87,8 @@
                         } else {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper">'
-                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask3' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask3' . $id_task . '\').style.display = \'none\';"  draggable="true">'
-                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask3' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 3' . $id_task . ')">'
+                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask3' . $ligne . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask3' . $ligne . $id_task . '\').style.display = \'none\';"  draggable="true">'
+                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask3' . $ligne . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 3' . $ligne . $id_task . ')">'
                             . $line['mercredi']
                             . '</div>'
                             . '</td>';
@@ -100,8 +100,8 @@
                         } else {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper">'
-                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask4' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask4' . $id_task . '\').style.display = \'none\';"  draggable="true">'
-                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask4' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 4' . $id_task . ')">'
+                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask4' . $ligne . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask4' . $ligne . $id_task . '\').style.display = \'none\';"  draggable="true">'
+                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask4' . $ligne . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 4' . $ligne . $id_task . ')">'
                             . $line['jeudi']
                             . '</div>'
                             . '</td>';
@@ -113,8 +113,8 @@
                         } else {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper">'
-                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask5' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask5' . $id_task . '\').style.display = \'none\';"  draggable="true">'
-                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask5' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 5' . $id_task . ')">'
+                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask5' . $ligne . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask5' . $ligne . $id_task . '\').style.display = \'none\';"  draggable="true">'
+                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask5' . $ligne . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 5' . $ligne . $id_task . ')">'
                             . $line['vendredi']
                             . '</div>'
                             . '</td>';
@@ -126,8 +126,8 @@
                         } else {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper">'
-                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask6' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask6' . $id_task . '\').style.display = \'none\';"  draggable="true">'
-                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask6' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 6' . $id_task . ')">'
+                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask6' . $ligne . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask6' . $ligne . $id_task . '\').style.display = \'none\';"  draggable="true">'
+                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask6' . $ligne . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 6' . $ligne . $id_task . ')">'
                             . $line['samedi']
                             . '</div>'
                             . '</td>';
@@ -139,8 +139,8 @@
                         } else {
                             echo '<td class="active" id="tobeDropped" height="50px">'
                             . '<div class="dropper">'
-                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask7' . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask7' . $id_task . '\').style.display = \'none\';"  draggable="true">'
-                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask7' . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 7' . $id_task . ')">'
+                            . '<div class="draggable" id="taskDrag" onmouseover="document.getElementById(\'deleteTask7' . $ligne . $id_task . '\').style.display = \'inline\';" onmouseout="document.getElementById(\'deleteTask7' . $ligne . $id_task . '\').style.display = \'none\';"  draggable="true">'
+                            . '<img src="' . base_url() . 'ressources/delete.svg" id="deleteTask7' . $ligne . $id_task . '" width="10px" height="10px" class="suppIcon" style="display: none;" draggable="false" alt="delete" onclick="deleteThisTask(\'deleteTask\' + 7' . $ligne . $id_task . ')">'
                             . $line['dimanche']
                             . '</div>'
                             . '</td></tr>';
@@ -164,12 +164,13 @@
                     <th> US </th> 
                     <th> Tasks </th> 
                 </tr> 
-                <tr> 
+
                     <?php
                     foreach ($userstories as $us_id => $us) {
                         if ($us_id != -1) {
                             $us_bdd = new userstory();
                             $us_bdd->get_by_id($us_id);
+							echo '<tr>';
                             echo'<td>';
                             echo form_label('<a href=' . base_url() . 'userstory_controller/index_userstory/' . $us_bdd->id . '>' . $us_bdd->userstoryname . ' </a>');
                             echo'</td>';
@@ -185,10 +186,10 @@
                                 echo ' ';
                             }
                             echo '</td>';
+							echo '</tr>';
                         }
                     }
                     ?> 
-                </tr> 
             </table>
         </fieldset>
 

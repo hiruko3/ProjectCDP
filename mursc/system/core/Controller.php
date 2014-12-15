@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+define('ERROR_LOG_FILE', 'error.log');
 /**
  * CodeIgniter
  *

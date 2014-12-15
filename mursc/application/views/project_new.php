@@ -56,7 +56,7 @@
             </p>
         </div>
 
-        <label for="description"  class="col-lg-5" > Description * : </label>
+        <label for="description"  class="" > Description * : </label>
         <textarea  class="form-control" id="description"  name="description" style="height: 111px; resize: none;" ></textarea>
 
         <br/>

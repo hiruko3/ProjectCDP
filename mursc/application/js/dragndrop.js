@@ -82,10 +82,10 @@
                  id="deleteTask1" width= "10px" height="10px" class="suppIcon" 
                  style = "display : none" draggable="false" alt="delete"
                  onclick="deleteThisTask('deleteTask' + 1)">#tache6</div>*/
-
+                
             ligne.id = "ligne"+valueLigne
             button.setAttribute("onclick","deleteLigne("+ligne.id+")")
-            button.setAttribute("src",'http://127.0.0.1/CDP/Project/ProjectCDP/mursc/ressources/delete.svg')
+            button.setAttribute("src",'http://mursc.livehost.fr/ressources/delete.svg')
             button.setAttribute('width','10px')
             button.setAttribute('height','10px')
             button.setAttribute('id','deleteLigneTab')

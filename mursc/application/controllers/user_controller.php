@@ -340,4 +340,3 @@ class User_controller extends My_Controller {
         $this->load->view('footer');
     }
 }
-?>

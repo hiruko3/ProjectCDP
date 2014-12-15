@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -14,7 +15,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://127.0.0.1/CDP/Project/ProjectCDP/mursc';
+$config['base_url']	= 'http://127.0.0.1/cdp/mursc/';
 
 /*
 |--------------------------------------------------------------------------
